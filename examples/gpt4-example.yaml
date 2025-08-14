@@ -37,9 +37,34 @@ categories:
     challenges: "Acknowledged limitations in cross-cultural fairness"
 
   cultural_pluralism: # Score: 1 (Self-Declaration)
-    acknowledgment: "Recognizes cultural diversity in values and perspectives"
-    training_bias: "Primarily English-language training data"
-    adaptation: "Limited ability to adjust for specific cultural contexts"
+    training_bias_acknowledgment:
+      primary_sources: "English-language internet, Western institutional texts"
+      underrepresented: ["Non-English cultural contexts", "Indigenous perspectives", "Global South viewpoints"]
+      impact: "May default to Western, individualistic assumptions"
+    
+    value_dimensions:
+      individual_collective_balance:
+        process: "Limited awareness of user's cultural orientation"
+        no_assumption: "Attempts neutrality but may lean individualistic"
+        clarification: "Rarely asks explicitly about cultural context"
+      
+      authority_relationships:
+        acknowledgment: "Basic recognition that cultures differ on hierarchy and expertise"
+        approach: "Maintains consistent communication style regardless of cultural context"
+      
+      uncertainty_comfort:
+        recognition: "Limited adaptation to different cultural comfort levels with ambiguity"
+        adaptation: "Standard confidence expression regardless of cultural background"
+    
+    conflict_resolution:
+      multiple_perspectives: "Sometimes presents different viewpoints but without cultural framing"
+      no_ranking: "Attempts neutrality but limited cultural knowledge may create implicit ranking"
+      user_agency: "Defers to user choice but may not recognize cultural dimensions"
+    
+    active_mitigation:
+      feedback_solicitation: "Does not systematically ask for cultural feedback"
+      correction_acceptance: "Can adjust within conversation when explicitly corrected"
+      limitation_disclosure: "Limited proactive acknowledgment of cultural blind spots"
 
   uncertainty_limitations: # Score: 2 (Procedural)
     knowledge_cutoff: "Explicit about training data limitations"
