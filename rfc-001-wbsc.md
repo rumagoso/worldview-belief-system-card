@@ -198,9 +198,9 @@ We invite:
 
 ## Contact & Contribution
 
-**Repository:** [To be created on GitHub]  
+**Repository:** [https://github.com/rumagoso/worldview-belief-system-card/]  
 **Discussions:** [GitHub Issues]  
-**Contact:** [Email/Contact info]
+**Contact:** [rumagoso@gmail.com]
 
 ---
 
