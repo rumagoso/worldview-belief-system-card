@@ -1,6 +1,8 @@
 # Contributing to AI WBSC Standard
 
-Thank you for your interest in improving AI transparency! The WBSC standard benefits from diverse perspectives - whether you're an AI developer, ethicist, policymaker, or concerned user.
+Thank you for your interest in improving AI transparency!
+
+The WBSC standard benefits from diverse perspectives - whether you're an AI developer, ethicist, policymaker, or concerned user.
 
 ## 🎯 How You Can Contribute
 
