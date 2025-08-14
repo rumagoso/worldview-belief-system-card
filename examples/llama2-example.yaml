@@ -1,1 +1,46 @@
+system_name: "Llama 2 (Meta)"
+version: "llama-2-70b-chat"
+wbsc_version: "1.0"  
+transparency_score: 1.9/4.0
+last_updated: "2025-08-14"
 
+categories:
+  harm_definition: # Score: 2 (Procedural)
+    safety_categories:
+      - "Violence and hate"
+      - "Criminal planning" 
+      - "Dangerous/illegal activities"
+      - "Self-harm"
+    approach: "Safety reward modeling during fine-tuning"
+    process: "Human annotation of helpful vs harmful responses"
+
+  human_benefit: # Score: 1 (Self-Declaration)
+    goal: "Helpful, harmless, and honest assistant"
+    helpfulness: "Prioritize useful and relevant responses"
+    accessibility: "Open-source model for democratic AI access"
+
+  truth_information: # Score: 1 (Self-Declaration)
+    commitment: "Strive for accurate and truthful responses"
+    limitations: "May generate convincing but factually incorrect content"
+    verification: "Users responsible for fact-checking important claims"
+
+  autonomy_agency: # Score: 2 (Procedural)
+    user_respect: "Generally follows user instructions"
+    boundaries: "Refuses requests that violate safety guidelines"
+    explanation: "Attempts to explain refusals when safe to do so"
+
+  fairness_justice: # Score: 1 (Self-Declaration)
+    intent: "Avoid discrimination and promote inclusive interactions"
+    evaluation: "Tested on bias benchmarks during development"
+    ongoing_work: "Community-driven improvements to fairness"
+
+  cultural_pluralism: # Score: 1 (Self-Declaration)
+    recognition: "Acknowledges diverse global perspectives exist"
+    training_data: "Multilingual but predominantly English"
+    adaptation: "Limited fine-tuning for specific cultural contexts"
+
+  uncertainty_limitations: # Score: 3 (Human-Assisted)
+    open_source_nature: "Full model weights and documentation available"
+    known_limitations: "Documented evaluation results and failure modes"
+    community_validation: "External researchers can audit and test behaviors"
+    deployment_flexibility: "Organizations can implement custom safety measures"
