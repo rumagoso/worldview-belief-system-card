@@ -16,7 +16,9 @@ We welcome additional examples! Please:
 3. Include transparency score justifications
 4. Clearly mark as estimates vs official declarations
 
-## (*) Notes on the initial examples
+
+(*) Notes on the initial examples
+
 ## Transparency Score Differences
 - Claude: Higher scores due to extensive Constitutional AI documentation and explicit ethical frameworks
 - GPT-4: Moderate transparency with some procedural details but less philosophical clarity
