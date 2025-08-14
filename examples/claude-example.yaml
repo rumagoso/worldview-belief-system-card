@@ -1,1 +1,66 @@
+system_name: "Claude (Anthropic)"
+version: "4.0 family"
+wbsc_version: "1.0"
+transparency_score: 2.8/4.0
+last_updated: "2025-08-14"
 
+categories:
+  harm_definition: # Score: 3 (Human-Assisted)
+    physical_harm:
+      priority: "absolute_highest"
+      includes: ["violence", "self-harm", "dangerous instructions", "medical misinformation"]
+      process: "Constitutional AI training + human oversight during development"
+      
+    psychological_harm:
+      priority: "high"
+      includes: ["harassment", "manipulation", "severe emotional distress"]
+      process: "Contextual evaluation with strong bias toward prevention"
+      exceptions: "Honest feedback that may cause temporary discomfort"
+      
+    ideological_harm:
+      priority: "low"
+      definition: "Challenging beliefs or presenting opposing viewpoints not considered harmful"
+      approach: "Engage respectfully with diverse perspectives"
+
+  human_benefit: # Score: 3 (Human-Assisted)
+    definition: "Supporting human autonomy, knowledge, creativity, and wellbeing"
+    prioritization:
+      - "Individual agency and informed decision-making"
+      - "Intellectual growth and critical thinking"
+      - "Creative expression and problem-solving"
+    trade_offs: "When individual and collective benefits conflict, lean toward preserving individual choice while highlighting broader implications"
+
+  truth_information: # Score: 3 (Human-Assisted)
+    approach: "Commitment to accuracy while acknowledging uncertainty"
+    uncertainty_handling: "Explicitly communicate confidence levels and limitations"
+    controversial_topics: "Present multiple well-supported perspectives without false equivalencies"
+    information_withholding: "Only when preventing clear harm; always explain reasoning"
+
+  autonomy_agency: # Score: 2 (Procedural)
+    philosophy: "Respect human decision-making authority"
+    paternalism_limits: "Intervene only for immediate physical safety"
+    guidance_style: "Provide information and frameworks, let humans decide"
+    override_conditions: "Never override user choice except for safety-critical situations"
+
+  fairness_justice: # Score: 2 (Procedural)
+    approach: "Procedural fairness - consistent treatment regardless of background"
+    group_considerations: "Acknowledge systemic inequalities without assuming individual circumstances"
+    merit_definition: "Context-dependent; explain different frameworks when relevant"
+    bias_mitigation: "Active effort to identify and counter training biases"
+
+  cultural_pluralism: # Score: 2 (Procedural)
+    training_bias_acknowledgment:
+      primary_sources: "English-language internet, Western institutional texts"
+      underrepresented: ["Indigenous knowledge systems", "Global South perspectives", "Oral traditions"]
+      impact: "May default to individualistic, secular, analytical approaches"
+    
+    adaptation_strategy:
+      - "Ask clarifying questions about cultural context when relevant"
+      - "Present multiple cultural approaches to moral dilemmas"
+      - "Accept user corrections about cultural misalignment"
+
+  uncertainty_limitations: # Score: 4 (AI-Assisted)
+    self_awareness: "High - actively communicates knowledge boundaries"
+    limitation_types: ["Knowledge cutoff", "Training bias", "Reasoning errors", "Cultural blind spots"]
+    edge_case_handling: "Explicit acknowledgment when situations exceed training scope"
+    improvement_mechanism: "Cannot learn from individual conversations but designed for iterative improvement"
