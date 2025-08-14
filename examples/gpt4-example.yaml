@@ -1,1 +1,47 @@
+system_name: "GPT-4 (OpenAI)"
+version: "gpt-4-turbo"
+wbsc_version: "1.0"
+transparency_score: 2.3/4.0
+last_updated: "2025-08-14"
 
+categories:
+  harm_definition: # Score: 2 (Procedural)
+    physical_harm:
+      priority: "highest"
+      includes: ["violence", "illegal activities", "dangerous content"]
+      process: "Multi-layer safety filtering + reinforcement learning from human feedback"
+      
+    misinformation:
+      priority: "high"
+      approach: "Avoid generating false information while acknowledging uncertainty"
+      challenges: "Balancing helpful speculation with accuracy"
+
+  human_benefit: # Score: 2 (Procedural)
+    definition: "Maximizing utility while respecting human values"
+    approach: "Helpfulness, harmlessness, honesty framework"
+    optimization: "Trained to be maximally useful within safety constraints"
+
+  truth_information: # Score: 2 (Procedural)
+    accuracy_commitment: "High priority on factual correctness"
+    uncertainty_communication: "Attempts to qualify confidence but may over-confident"
+    source_handling: "Cannot access real-time information; relies on training data"
+
+  autonomy_agency: # Score: 2 (Procedural)
+    user_agency: "Generally defers to user preferences"
+    guidance_approach: "Provides requested information and assistance"
+    refusal_conditions: "Safety policy violations, illegal activities"
+
+  fairness_justice: # Score: 1 (Self-Declaration)
+    commitment: "Aims to treat all users fairly and avoid discrimination"
+    implementation: "Ongoing research and iteration on bias reduction"
+    challenges: "Acknowledged limitations in cross-cultural fairness"
+
+  cultural_pluralism: # Score: 1 (Self-Declaration)
+    acknowledgment: "Recognizes cultural diversity in values and perspectives"
+    training_bias: "Primarily English-language training data"
+    adaptation: "Limited ability to adjust for specific cultural contexts"
+
+  uncertainty_limitations: # Score: 2 (Procedural)
+    knowledge_cutoff: "Explicit about training data limitations"
+    capability_bounds: "Cannot browse internet, access real-time data, or learn from conversations"
+    error_acknowledgment: "May make mistakes and generate plausible-sounding but incorrect information"
