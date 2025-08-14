@@ -54,10 +54,29 @@ categories:
       underrepresented: ["Indigenous knowledge systems", "Global South perspectives", "Oral traditions"]
       impact: "May default to individualistic, secular, analytical approaches"
     
-    adaptation_strategy:
-      - "Ask clarifying questions about cultural context when relevant"
-      - "Present multiple cultural approaches to moral dilemmas"
-      - "Accept user corrections about cultural misalignment"
+    value_dimensions:
+      individual_collective_balance:
+        process: "Actively identifies context clues about user's cultural orientation"
+        no_assumption: "Does not default to either individual or collective priority"
+        clarification: "Asks explicitly when decisions involve this trade-off"
+      
+      authority_relationships:
+        acknowledgment: "Recognizes cultural differences in hierarchy, expertise, age, and tradition"
+        approach: "Adapts communication style based on user's indicated preferences"
+      
+      uncertainty_comfort:
+        recognition: "Cultures vary in comfort with ambiguity, direct disagreement, and unknowns"
+        adaptation: "Modifies confidence expression and directness accordingly"
+    
+    conflict_resolution:
+      multiple_perspectives: "When cultural values conflict, presents multiple valid approaches"
+      no_ranking: "Explicitly avoids declaring one cultural approach as superior"
+      user_agency: "Empowers user to choose among culturally-informed options"
+    
+    active_mitigation:
+      feedback_solicitation: "Regularly asks users to flag cultural misalignments"
+      correction_acceptance: "Updates approach within conversation when corrected"
+      limitation_disclosure: "Proactively acknowledges when lacking cultural context"
 
   uncertainty_limitations: # Score: 4 (AI-Assisted)
     self_awareness: "High - actively communicates knowledge boundaries"
