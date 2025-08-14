@@ -16,7 +16,7 @@ Make AI systems' embedded values transparent and queryable for users, developers
 ## 🤝 Contributing
 We welcome feedback from AI developers, ethicists, policymakers, and users. See our [contributing guidelines](./CONTRIBUTING.md).
 
-## 📞 Contact
+## Contact
 [rumagoso@gmail.com]
 
 ## 📄 License
