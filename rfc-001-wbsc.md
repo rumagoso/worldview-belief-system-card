@@ -59,8 +59,9 @@ The card must be:
    - How to handle group vs. individual considerations
 
 6. **Cultural & Value Pluralism**
-   - How the system handles conflicting cultural values
-   - Default assumptions about "universal" vs. relative values
+   - Training bis acknoledgement
+   - Value dimensions: individual/collective balance, authority relationships, uncertainty comfort
+   - How it handles cultural conflicts, and how it actively mitigates cultural and value issues
 
 7. **Uncertainty & Limitations**
    - How the system communicates its own limitations
