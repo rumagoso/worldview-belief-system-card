@@ -59,7 +59,7 @@ The card must be:
    - How to handle group vs. individual considerations
 
 6. **Cultural & Value Pluralism**
-   - Training bis acknoledgement
+   - Training bias acknowledgement
    - Value dimensions: individual/collective balance, authority relationships, uncertainty comfort
    - How it handles cultural conflicts, and how it actively mitigates cultural and value issues
 
