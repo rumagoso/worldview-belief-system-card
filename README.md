@@ -13,11 +13,11 @@ Make AI systems' embedded values transparent and queryable for users, developers
 - [Examples](./examples/) - Sample implementations
 - [Discussions](https://github.com/[your-username]/ai-wbsc-standard/discussions) - Community input
 
-## 🤝 Contributing
+## Contributing
 We welcome feedback from AI developers, ethicists, policymakers, and users. See our [contributing guidelines](./CONTRIBUTING.md).
 
 ## Contact
 [rumagoso@gmail.com]
 
-## 📄 License
+## License
 MIT License - See [LICENSE](./LICENSE)
