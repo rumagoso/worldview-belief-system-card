@@ -1,1 +1,28 @@
-
+{
+  "name": "wbsc-generator",
+  "version": "1.0.0",
+  "description": "Interactive tool for creating Worldview Belief System Cards",
+  "main": "dist/index.html",
+  "scripts": {
+    "build": "npm run build:js && npm run build:html && npm run build:assets",
+    "build:js": "esbuild src/index.tsx --bundle --outfile=dist/bundle.js --format=iife --global-name=WBSCGenerator --define:process.env.NODE_ENV=\\\"production\\\" --minify",
+    "build:html": "cp index.html dist/index.html",
+    "build:assets": "mkdir -p dist/assets && cp -r assets/* dist/assets/ 2>/dev/null || true",
+    "dev": "npm run build && python3 -m http.server 8000 -d dist",
+    "clean": "rm -rf dist && mkdir dist",
+    "prebuild": "npm run clean"
+  },
+  "keywords": ["ai", "transparency", "worldview", "belief-system", "ethics"],
+  "author": "rumagoso",
+  "license": "MIT",
+  "dependencies": {
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
+  },
+  "devDependencies": {
+    "esbuild": "^0.19.8",
+    "@types/react": "^18.2.45",
+    "@types/react-dom": "^18.2.18",
+    "typescript": "^5.3.3"
+  }
+}
