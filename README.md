@@ -9,7 +9,7 @@ Make AI systems' embedded values transparent and queryable for users, developers
 **Draft RFC** - Seeking community feedback and contributions
 
 ## Documentation
-- [Main RFC Document](./rfc-001-wbsc.md) - Full specification
+- [Main RFC Document](./rfc-001-wbsc.json) - Full specification
 - [Examples](./examples/) - Sample implementations
 - [Discussions](https://github.com/[your-username]/ai-wbsc-standard/discussions) - Community input
 
