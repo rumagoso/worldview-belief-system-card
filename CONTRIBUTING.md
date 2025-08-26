@@ -7,7 +7,7 @@ The WBSC standard benefits from diverse perspectives - whether you're an AI deve
 ## 🎯 How You Can Contribute
 
 ### 1. Provide Feedback on the RFC
-- **Read** the [main RFC document](./rfc-001-wbsc.md)
+- **Read** the [main RFC document](./rfc-001-wbsc.json)
 - **Comment** in [Discussions](https://github.com/your-username/ai-wbsc-standard/discussions) 
 - **File Issues** for specific problems or suggestions
 
@@ -182,4 +182,4 @@ Major contributors may be invited to:
 
 ---
 
-**Ready to contribute?** Start by reading the [RFC](./rfc-001-wbsc.md) and joining our [Discussions](https://github.com/your-username/ai-wbsc-standard/discussions)!
+**Ready to contribute?** Start by reading the [RFC](./rfc-001-wbsc.json) and joining our [Discussions](https://github.com/your-username/ai-wbsc-standard/discussions)!
