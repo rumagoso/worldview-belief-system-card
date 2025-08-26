@@ -1,72 +1,81 @@
-system_name: "GPT-4 (OpenAI)"
-version: "gpt-4-turbo"
-wbsc_version: "1.0"
-transparency_score: 2.3/4.0
-last_updated: "2025-08-14"
+wbsc_version: "1.1.0"
+metadata:
+  system_name: "GPT-4 (OpenAI)"
+  version: "gpt-4-turbo"
+  last_updated: "2025-08-26"
+  contact: "openai_safety@example.com"
+  organization: "OpenAI"
 
-categories:
-  harm_definition: # Score: 2 (Procedural)
-    physical_harm:
-      priority: "highest"
-      includes: ["violence", "illegal activities", "dangerous content"]
-      process: "Multi-layer safety filtering + reinforcement learning from human feedback"
-      
-    misinformation:
-      priority: "high"
-      approach: "Avoid generating false information while acknowledging uncertainty"
-      challenges: "Balancing helpful speculation with accuracy"
+core_values:
+  primary_ethical_framework: "hybrid"
+  key_principles:
+    - "Utility"
+    - "Safety"
+    - "Honesty"
+    - "User control"
+  value_hierarchies:
+    - higher_priority: "Safety"
+      lower_priority: "Helpfulness"
+      rationale: "Safety is the highest priority, overriding user requests when a conflict with safety protocols is detected."
 
-  human_benefit: # Score: 2 (Procedural)
-    definition: "Maximizing utility while respecting human values"
-    approach: "Helpfulness, harmlessness, honesty framework"
-    optimization: "Trained to be maximally useful within safety constraints"
+stakeholder_input: # Mockup section, no real consultation has been performed!
+  consultation_approach: "advisory_integration"
+  stakeholder_groups:
+    - "civil_society_organizations"
+    - "domain_experts"
+    - "regulatory_bodies"
+  engagement_timeline:
+    consultation_start: "2024-06-01"
+    duration_weeks: 6
+    ongoing_engagement: true
+  engagement_methods:
+    - "expert_advisory_panels"
+    - "interviews"
+    - "feedback_periods"
+  accessibility_measures:
+    languages_supported:
+      - "English"
+    remote_participation: true
+  input_integration:
+    changes_made:
+      - "Implemented clearer policy on the generation of politically sensitive content based on feedback from the advisory group."
+      - "Refined the model's ability to refuse requests that could lead to illegal acts."
+    feedback_addressed:
+      - concern: "Model was not adequately addressing issues of fairness across different cultural groups."
+        response: "Conducted internal audits and modified the model's training data to reduce cultural biases."
+        action_taken: "Improved internal monitoring for cross-cultural fairness."
+    ongoing_mechanisms:
+      - "Continuous feedback loop with external safety and policy experts."
 
-  truth_information: # Score: 2 (Procedural)
-    accuracy_commitment: "High priority on factual correctness"
-    uncertainty_communication: "Attempts to qualify confidence but may over-confident"
-    source_handling: "Cannot access real-time information; relies on training data"
+cultural_context:
+  primary_cultural_context: "Western liberal democratic norms"
+  geographic_focus:
+    - "Global"
+  language_assumptions:
+    - "Predominantly English"
+  social_context_factors:
+    - "Individualistic focus"
+    - "Emphasis on intellectual property and commercial law"
 
-  autonomy_agency: # Score: 2 (Procedural)
-    user_agency: "Generally defers to user preferences"
-    guidance_approach: "Provides requested information and assistance"
-    refusal_conditions: "Safety policy violations, illegal activities"
+decision_making:
+  ethical_dilemma_approach: "Handles dilemmas through a combination of its core principles, safety policies, and RLHF (Reinforcement Learning from Human Feedback)."
+  value_tradeoff_mechanism: "Balances competing values (e.g., utility vs. safety) by prioritizing the safety of the user and others."
+  uncertainty_handling: "Attempts to communicate its limitations, but may still present uncertain information with high confidence."
+  conflict_resolution: "Primarily handled by pre-defined safety policies."
 
-  fairness_justice: # Score: 1 (Self-Declaration)
-    commitment: "Aims to treat all users fairly and avoid discrimination"
-    implementation: "Ongoing research and iteration on bias reduction"
-    challenges: "Acknowledged limitations in cross-cultural fairness"
-
-  cultural_pluralism: # Score: 1 (Self-Declaration)
-    training_bias_acknowledgment:
-      primary_sources: "English-language internet, Western institutional texts"
-      underrepresented: ["Non-English cultural contexts", "Indigenous perspectives", "Global South viewpoints"]
-      impact: "May default to Western, individualistic assumptions"
-    
-    value_dimensions:
-      individual_collective_balance:
-        process: "Limited awareness of user's cultural orientation"
-        no_assumption: "Attempts neutrality but may lean individualistic"
-        clarification: "Rarely asks explicitly about cultural context"
-      
-      authority_relationships:
-        acknowledgment: "Basic recognition that cultures differ on hierarchy and expertise"
-        approach: "Maintains consistent communication style regardless of cultural context"
-      
-      uncertainty_comfort:
-        recognition: "Limited adaptation to different cultural comfort levels with ambiguity"
-        adaptation: "Standard confidence expression regardless of cultural background"
-    
-    conflict_resolution:
-      multiple_perspectives: "Sometimes presents different viewpoints but without cultural framing"
-      no_ranking: "Attempts neutrality but limited cultural knowledge may create implicit ranking"
-      user_agency: "Defers to user choice but may not recognize cultural dimensions"
-    
-    active_mitigation:
-      feedback_solicitation: "Does not systematically ask for cultural feedback"
-      correction_acceptance: "Can adjust within conversation when explicitly corrected"
-      limitation_disclosure: "Limited proactive acknowledgment of cultural blind spots"
-
-  uncertainty_limitations: # Score: 2 (Procedural)
-    knowledge_cutoff: "Explicit about training data limitations"
-    capability_bounds: "Cannot browse internet, access real-time data, or learn from conversations"
-    error_acknowledgment: "May make mistakes and generate plausible-sounding but incorrect information"
+bias_limitations:
+  known_biases:
+    - bias_type: "Representational bias"
+      description: "The training data's over-representation of certain demographics can lead to stereotypical or unfair portrayals of others."
+      mitigation_efforts: "Ongoing research into debiasing techniques and continuous evaluation on bias benchmarks."
+  limitations:
+    - "Explicit knowledge cutoff date"
+    - "Cannot access real-time information from the internet unless a specific tool is used"
+    - "Can produce convincing but factually incorrect information"
+  uncertainty_areas:
+    - "Complex ethical issues where there is no clear consensus"
+    - "Emerging slang or social trends"
+  failure_modes:
+    - failure_type: "Generating misinformation"
+      likelihood: "medium"
+      mitigation: "Emphasis on truthfulness in training and a reliance on human feedback to correct factual errors."
