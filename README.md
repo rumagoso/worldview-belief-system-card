@@ -11,7 +11,7 @@ Make AI systems' embedded values transparent and queryable for users, developers
 ## Documentation
 - [Main RFC Document](./rfc-001-wbsc.json) - Full specification
 - [Examples](./examples/) - Sample implementations
-- [Discussions](https://github.com/rumagoso/ai-wbsc-standard/discussions) - Community input
+- [Discussions](https://github.com/rumagoso/worldview-belief-system-card/discussions) - Community input
 
 ## Contributing
 We welcome feedback from AI developers, ethicists, policymakers, and users. See our [contributing guidelines](./CONTRIBUTING.md).
