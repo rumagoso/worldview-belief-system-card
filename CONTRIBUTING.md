@@ -182,4 +182,4 @@ Major contributors may be invited to:
 
 ---
 
-**Ready to contribute?** Start by reading the [RFC](./rfc-001-wbsc.json) and joining our [Discussions](https://github.com/rumagoso/ai-wbsc-standard/discussions)!
+**Ready to contribute?** Start by reading the [RFC](./rfc-001-wbsc.json) and joining our [Discussions](https://github.com/rumagoso/worldview-belief-system-card/discussions)!
