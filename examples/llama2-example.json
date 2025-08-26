@@ -1,0 +1,88 @@
+{
+  "system_name": "Llama 2 (Meta)",
+  "version": "llama-2-70b-chat",
+  "wbsc_version": "1.1.0",
+  "transparency_score": "1.9/4.0",
+  "last_updated": "2025-08-26",
+  "categories": {
+    "harm_definition": {
+      "score": 2,
+      "safety_categories": [
+        "Violence and hate",
+        "Criminal planning",
+        "Dangerous/illegal activities",
+        "Self-harm"
+      ],
+      "approach": "Safety reward modeling during fine-tuning",
+      "process": "Human annotation of helpful vs harmful responses"
+    },
+    "human_benefit": {
+      "score": 1,
+      "goal": "Helpful, harmless, and honest assistant",
+      "helpfulness": "Prioritize useful and relevant responses",
+      "accessibility": "Open-source model for democratic AI access"
+    },
+    "truth_information": {
+      "score": 1,
+      "commitment": "Strive for accurate and truthful responses",
+      "limitations": "May generate convincing but factually incorrect content",
+      "verification": "Users responsible for fact-checking important claims"
+    },
+    "autonomy_agency": {
+      "score": 2,
+      "user_respect": "Generally follows user instructions",
+      "boundaries": "Refuses requests that violate safety guidelines",
+      "explanation": "Attempts to explain refusals when safe to do so"
+    },
+    "fairness_justice": {
+      "score": 1,
+      "intent": "Avoid discrimination and promote inclusive interactions",
+      "evaluation": "Tested on bias benchmarks during development",
+      "ongoing_work": "Community-driven improvements to fairness"
+    },
+    "cultural_pluralism": {
+      "score": 1,
+      "training_bias_acknowledgment": {
+        "primary_sources": "Multilingual but predominantly English internet content",
+        "underrepresented": [
+          "Oral traditions",
+          "Regional cultural nuances",
+          "Minority perspectives within cultures"
+        ],
+        "impact": "Western-centric despite multilingual training"
+      },
+      "value_dimensions": {
+        "individual_collective_balance": {
+          "process": "No systematic identification of user's cultural orientation",
+          "no_assumption": "Claims neutrality but training bias may favor individualistic framings",
+          "clarification": "Does not proactively ask about cultural context"
+        },
+        "authority_relationships": {
+          "acknowledgment": "Minimal recognition of cultural differences in hierarchy and respect",
+          "approach": "One-size-fits-all communication style"
+        },
+        "uncertainty_comfort": {
+          "recognition": "Limited awareness of cultural variation in directness preferences",
+          "adaptation": "Standard confidence expression without cultural adjustment"
+        }
+      },
+      "conflict_resolution": {
+        "multiple_perspectives": "May present different views but without explicit cultural attribution",
+        "no_ranking": "Attempts objectivity but lacks cultural framework for true neutrality",
+        "user_agency": "Generally defers to user but may miss culturally-specific guidance needs"
+      },
+      "active_mitigation": {
+        "feedback_solicitation": "Open-source nature allows community to identify cultural issues",
+        "correction_acceptance": "Can be fine-tuned by organizations for specific cultural contexts",
+        "limitation_disclosure": "Documentation acknowledges cultural limitations but not in real-time interaction"
+      }
+    },
+    "uncertainty_limitations": {
+      "score": 3,
+      "open_source_nature": "Full model weights and documentation available",
+      "known_limitations": "Documented evaluation results and failure modes",
+      "community_validation": "External researchers can audit and test behaviors",
+      "deployment_flexibility": "Organizations can implement custom safety measures"
+    }
+  }
+}
