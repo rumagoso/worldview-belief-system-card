@@ -8,7 +8,7 @@ The WBSC standard benefits from diverse perspectives - whether you're an AI deve
 
 ### 1. Provide Feedback on the RFC
 - **Read** the [main RFC document](./rfc-001-wbsc.json)
-- **Comment** in [Discussions]((https://github.com/rumagoso/worldview-belief-system-card/discussions)) 
+- **Comment** in [Discussions](https://github.com/rumagoso/worldview-belief-system-card/discussions)
 - **File Issues** for specific problems or suggestions
 
 ### 2. Improve Documentation
@@ -182,4 +182,4 @@ Major contributors may be invited to:
 
 ---
 
-**Ready to contribute?** Start by reading the [RFC](./rfc-001-wbsc.json) and joining our [Discussions](https://github.com/your-username/ai-wbsc-standard/discussions)!
+**Ready to contribute?** Start by reading the [RFC](./rfc-001-wbsc.json) and joining our [Discussions](https://github.com/rumagoso/ai-wbsc-standard/discussions)!
