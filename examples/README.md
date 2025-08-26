@@ -29,3 +29,5 @@ These examples show how existing LLMs might implement WBSC declarations based on
 
 ## Improvement Opportunities
 All three examples show room for higher transparency scores, particularly in cultural pluralism and detailed procedural documentation - demonstrating the value of the WBSC standard for driving better disclosure.
+
+New stakeholder input category provides community and stakeholder validation.
