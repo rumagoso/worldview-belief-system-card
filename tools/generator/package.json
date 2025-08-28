@@ -5,7 +5,7 @@
   "main": "index.html",
   "scripts": {
     "start": "python3 -m http.server 8000",
-    "dev": "python3 -m http.server 8000"
+    "dev": "python3 -m http.server 8000",
     "build": "react-scripts build"
   },
   "keywords": ["ai", "transparency", "worldview", "belief-system", "ethics", "wbsc"],
