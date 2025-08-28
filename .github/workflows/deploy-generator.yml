@@ -25,6 +25,7 @@ jobs:
           node-version: '20'
       - name: Install dependencies
         run: npm ci
+        working-directory: ./tools/generator
       - name: Build
         run: npm run build
       - name: Upload Pages artifact
