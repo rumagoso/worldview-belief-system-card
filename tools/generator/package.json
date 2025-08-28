@@ -5,8 +5,7 @@
   "main": "index.html",
   "scripts": {
     "start": "python3 -m http.server 8000",
-    "dev": "python3 -m http.server 8000",
-    "build": "react-scripts build"
+    "dev": "python3 -m http.server 8000"
   },
   "keywords": ["ai", "transparency", "worldview", "belief-system", "ethics", "wbsc"],
   "author": "rumagoso",
@@ -15,12 +14,5 @@
     "type": "git",
     "url": "https://github.com/rumagoso/worldview-belief-system-card.git"
   },
-  "homepage": "https://rumagoso.github.io/worldview-belief-system-card/tools/generator/",
-  "dependencies": {
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0"
-  },
-  "devDependencies": {
-    "react-scripts": "5.0.1"
-  }
+  "homepage": "https://rumagoso.github.io/worldview-belief-system-card/tools/generator/"
 }
