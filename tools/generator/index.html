@@ -1,5 +1,108 @@
-// Complete WBSC Generator React Component (Embedded in HTML)
-// Place this inside the <script type="text/babel"> tag in index.html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WBSC Generator - Create Your Worldview Belief System Card</title>
+    
+    <!-- React from CDN -->
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    
+    <!-- Babel for JSX transformation -->
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+    
+    <!-- Meta tags for sharing -->
+    <meta name="description" content="Interactive tool for creating Worldview Belief System Cards (WBSC) - making AI transparency effortless">
+    <meta property="og:title" content="WBSC Generator - AI Transparency Made Easy">
+    <meta property="og:description" content="Create comprehensive Worldview Belief System Cards with guided prompts and real-time feedback">
+    <meta property="og:type" content="website">
+    
+    <style>
+        body { 
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            margin: 0;
+            background-color: #f9fafb;
+        }
+        
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+        
+        ::-webkit-scrollbar-thumb {
+            background: #c1c1c1;
+            border-radius: 4px;
+        }
+        
+        ::-webkit-scrollbar-thumb:hover {
+            background: #a8a8a8;
+        }
+        
+        /* Loading spinner */
+        .loading {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid #f3f3f3;
+            border-top: 3px solid #3498db;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header with repository link -->
+    <header class="bg-white shadow-sm border-b">
+        <div class="max-w-4xl mx-auto px-6 py-3">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center space-x-3">
+                    <h1 class="text-xl font-bold text-gray-900">WBSC Generator</h1>
+                    <span class="px-2 py-1 bg-blue-100 text-blue-800 text-xs rounded-full">v1.0</span>
+                </div>
+                <a 
+                    href="https://github.com/rumagoso/worldview-belief-system-card" 
+                    target="_blank"
+                    class="flex items-center space-x-2 text-gray-600 hover:text-gray-900 text-sm"
+                >
+                    <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                        <path fill-rule="evenodd" d="M10 0C4.477 0 0 4.484 0 10.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0110 4.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.203 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.942.359.31.678.921.678 1.856 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0020 10.017C20 4.484 15.522 0 10 0z" clip-rule="evenodd"></path>
+                    </svg>
+                    <span>View on GitHub</span>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Loading indicator -->
+    <div id="loading" class="flex items-center justify-center min-h-screen">
+        <div class="text-center">
+            <div class="loading mx-auto mb-4"></div>
+            <p class="text-gray-600">Loading WBSC Generator...</p>
+        </div>
+    </div>
+
+    <!-- Main application container -->
+    <div id="root" style="display: none;"></div>
+
+    <!-- Load the React component -->
+    <script type="text/babel">
+     // Complete WBSC Generator React Component (Embedded in HTML)
 
 const { useState, useEffect } = React;
 const { Download, Eye, EyeOff, Info, CheckCircle, AlertCircle, Save, FileText } = lucide;
@@ -745,3 +848,25 @@ const WBSCGenerator = () => {
 const container = document.getElementById('root');
 const root = ReactDOM.createRoot(container);
 root.render(React.createElement(WBSCGenerator));
+
+      </script>
+    
+    <!-- Show app, hide loading -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Hide loading, show app after component loads
+            setTimeout(() => {
+                document.getElementById('loading').style.display = 'none';
+                document.getElementById('root').style.display = 'block';
+            }, 1000);
+        });
+        
+        // Error handling
+        window.addEventListener('error', function(e) {
+            console.error('Application error:', e);
+            document.getElementById('loading').innerHTML = 
+                '<div class="text-center"><p class="text-red-600">Error loading application. Please refresh the page.</p></div>';
+        });
+    </script>
+</body>
+</html>
