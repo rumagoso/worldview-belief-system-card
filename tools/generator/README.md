@@ -5,18 +5,17 @@ An interactive web application that makes creating Worldview Belief System Cards
 ## 🎯 Purpose
 
 This tool removes the "blank page" problem by providing:
-- **Guided Process**: Step-by-step walkthrough of all WBSC categories
+- **Guided Process**: Step-by-step walkthrough of all 8 WBSC categories
 - **Smart Prompts**: Context-specific guidance and examples  
 - **Real-time Feedback**: Transparency scoring and progress tracking
-- **Instant Export**: One-click YAML generation
+- **Instant Export**: One-click JSON generation
 
 ## 🚀 Quick Start
 
-### Option 1: Use Online (Recommended)
-Simply open `index.html` in your browser - no setup required!
+### Option 1: Use Online
+**Live Tool**: https://rumagoso.github.io/worldview-belief-system-card/tools/generator/
 
-### Option 2: Local Development
+### Option 2: Run Locally
 ```bash
 cd tools/generator
-npm install
-npm run dev
+python3 -m http.server 8000
