@@ -15,5 +15,8 @@
     "type": "git",
     "url": "https://github.com/rumagoso/worldview-belief-system-card.git"
   },
-  "homepage": "https://rumagoso.github.io/worldview-belief-system-card/tools/generator/"
+  "homepage": "https://rumagoso.github.io/worldview-belief-system-card/tools/generator/",
+  "devDependencies": {
+    "react-scripts": "5.0.1"
+  }
 }
