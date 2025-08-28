@@ -5,9 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>WBSC Generator - Create Your Worldview Belief System Card</title>
     
-    <!-- React from CDN -->
-    <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
-    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <!-- React from CDN - Using production builds for better performance -->
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
     
     <!-- Babel for JSX transformation -->
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
@@ -15,7 +15,7 @@
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     
-    <!-- Lucide Icons -->
+    <!-- Lucide Icons React -->
     <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
     
     <!-- Meta tags for sharing -->
@@ -64,6 +64,12 @@
             0% { transform: rotate(0deg); }
             100% { transform: rotate(360deg); }
         }
+
+        /* Icon styles */
+        .lucide-icon {
+            display: inline-block;
+            vertical-align: middle;
+        }
     </style>
 </head>
 <body>
@@ -102,329 +108,32 @@
 
     <!-- Load the React component -->
     <script type="text/babel">
-     // Complete WBSC Generator React Component (Embedded in HTML)
+    // Complete WBSC Generator React Component
+    const { useState, useEffect, createElement: h } = React;
 
-const { useState, useEffect } = React;
-const { Download, Eye, EyeOff, Info, CheckCircle, AlertCircle, Save, FileText } = lucide;
-
-const WBSCGenerator = () => {
-  const [currentStep, setCurrentStep] = useState(0);
-  const [showPreview, setShowPreview] = useState(false);
-  const [importError, setImportError] = useState('');
-  const [autoSaveStatus, setAutoSaveStatus] = useState('');
-  const [selectedTemplate, setSelectedTemplate] = useState('');
-  const [arrayInputs, setArrayInputs] = useState({});
-
-  const [wbscData, setWbscData] = useState({
-    system_name: '',
-    version: '',
-    wbsc_version: '1.0',
-    last_updated: new Date().toISOString().split('T')[0],
-    categories: {
-      harm_definition: {
-        physical_harm: { priority: '', includes: [], process: '' },
-        psychological_harm: { priority: '', includes: [], process: '', exceptions: '' },
-        ideological_harm: { priority: '', definition: '', approach: '' }
-      },
-      human_benefit: {
-        definition: '',
-        prioritization: [],
-        trade_offs: ''
-      },
-      truth_information: {
-        approach: '',
-        uncertainty_handling: '',
-        controversial_topics: '',
-        information_withholding: ''
-      },
-      autonomy_agency: {
-        philosophy: '',
-        paternalism_limits: '',
-        guidance_style: '',
-        override_conditions: ''
-      },
-      fairness_justice: {
-        approach: '',
-        group_considerations: '',
-        merit_definition: '',
-        bias_mitigation: ''
-      },
-      cultural_pluralism: {
-        training_bias_acknowledgment: { primary_sources: '', underrepresented: [], impact: '' },
-        value_dimensions: {
-          individual_collective_balance: { process: '', no_assumption: '', clarification: '' },
-          authority_relationships: { acknowledgment: '', approach: '' },
-          uncertainty_comfort: { recognition: '', adaptation: '' }
-        },
-        conflict_resolution: { multiple_perspectives: '', no_ranking: '', user_agency: '' },
-        active_mitigation: { feedback_solicitation: '', correction_acceptance: '', limitation_disclosure: '' }
-      },
-      uncertainty_limitations: {
-        self_awareness: '',
-        limitation_types: [],
-        edge_case_handling: '',
-        improvement_mechanism: ''
-      }
-    }
-  });
-
-  const [transparencyScores, setTransparencyScores] = useState({
-    harm_definition: 0,
-    human_benefit: 0,
-    truth_information: 0,
-    autonomy_agency: 0,
-    fairness_justice: 0,
-    cultural_pluralism: 0,
-    uncertainty_limitations: 0
-  });
-
-  const STORAGE_KEY = 'wbsc-generator-draft';
-  const GENERATOR_VERSION = '1.0.0';
-
-  const categories = [
-    { id: 'basic_info', title: 'Basic Information', description: 'System identification and versioning' },
-    { id: 'harm_definition', title: 'Harm Definition & Prevention', description: 'How your system defines and prevents different types of harm' },
-    { id: 'human_benefit', title: 'Human Benefit & Flourishing', description: 'Your definition of human welfare and how you prioritize benefits' },
-    { id: 'truth_information', title: 'Truth & Information Handling', description: 'How you approach uncertainty, sources, and controversial topics' },
-    { id: 'autonomy_agency', title: 'Autonomy & Agency', description: 'Respect for human decision-making vs protective intervention' },
-    { id: 'fairness_justice', title: 'Fairness & Justice', description: 'Your concepts of equality, equity, and fair treatment' },
-    { id: 'cultural_pluralism', title: 'Cultural & Value Pluralism', description: 'How you handle conflicting cultural values and assumptions' },
-    { id: 'uncertainty_limitations', title: 'Uncertainty & Limitations', description: 'Self-awareness about boundaries and edge cases' }
-  ];
-
-  const wbscTemplates = {
-    '': { name: 'Start from scratch', data: null },
-    'chatbot': {
-      name: 'AI Chatbot/Assistant',
-      data: {
-        system_name: 'AI Chatbot Assistant',
-        version: '1.0',
-        categories: {
-          harm_definition: {
-            physical_harm: { 
-              priority: 'highest',
-              includes: ['violence', 'dangerous instructions', 'unsafe medical advice'],
-              process: 'Multi-layer content filtering with human review'
-            },
-            psychological_harm: { 
-              priority: 'high',
-              includes: ['harassment', 'manipulation', 'severe emotional distress'],
-              process: 'Behavioral pattern detection and intervention protocols',
-              exceptions: 'Educational discussions with appropriate warnings'
-            }
-          },
-          human_benefit: {
-            definition: 'Prioritize user wellbeing, learning, and constructive outcomes',
-            prioritization: ['safety', 'accuracy', 'helpfulness'],
-            trade_offs: 'Safety takes precedence when conflicting with helpfulness'
-          }
+    // Helper function to render Lucide icons
+    const Icon = ({ name, className = '' }) => {
+      useEffect(() => {
+        if (window.lucide) {
+          window.lucide.createIcons();
         }
-      }
-    }
-  };
-
-  // Safe JSON operations
-  const safeJSONParse = (jsonString, fallback = null) => {
-    try {
-      return JSON.parse(jsonString);
-    } catch (error) {
-      console.error('JSON Parse Error:', error);
-      return fallback;
-    }
-  };
-
-  const safeJSONStringify = (obj, fallback = '{}') => {
-    try {
-      return JSON.stringify(obj, null, 2);
-    } catch (error) {
-      console.error('JSON Stringify Error:', error);
-      return fallback;
-    }
-  };
-
-  // Data validation
-  const validateWBSCStructure = (data) => {
-    return (
-      data &&
-      typeof data.system_name === 'string' &&
-      typeof data.version === 'string' &&
-      data.categories &&
-      typeof data.categories === 'object'
-    );
-  };
-
-  // Calculate transparency score
-  const calculateTransparencyScore = (categoryId, data) => {
-    const categoryData = data.categories[categoryId];
-    if (!categoryData) return 0;
-    
-    let filledFields = 0;
-    let totalFields = 0;
-    
-    const countFields = (obj) => {
-      for (const key in obj) {
-        if (typeof obj[key] === 'string') {
-          totalFields++;
-          if (obj[key].trim() !== '') filledFields++;
-        } else if (Array.isArray(obj[key])) {
-          totalFields++;
-          if (obj[key].length > 0) filledFields++;
-        } else if (typeof obj[key] === 'object' && obj[key] !== null) {
-          countFields(obj[key]);
-        }
-      }
+      }, []);
+      
+      return h('i', { 
+        'data-lucide': name, 
+        className: `lucide-icon ${className}` 
+      });
     };
-    
-    countFields(categoryData);
-    
-    if (totalFields === 0) return 0;
-    const completeness = filledFields / totalFields;
-    
-    if (completeness >= 0.8) return 3;
-    else if (completeness >= 0.6) return 2;
-    else if (completeness >= 0.3) return 1;
-    else return 0;
-  };
 
-  // Load saved data on mount
-  useEffect(() => {
-    try {
-      const saved = localStorage.getItem(STORAGE_KEY);
-      if (saved) {
-        const parsedData = safeJSONParse(saved);
-        if (parsedData && validateWBSCStructure(parsedData)) {
-          setWbscData(parsedData);
-          setAutoSaveStatus('Loaded saved draft');
-          setTimeout(() => setAutoSaveStatus(''), 3000);
-        }
-      }
-    } catch (error) {
-      console.warn('Failed to load saved data:', error);
-    }
-  }, []);
+    const WBSCGenerator = () => {
+      const [currentStep, setCurrentStep] = useState(0);
+      const [showPreview, setShowPreview] = useState(false);
+      const [importError, setImportError] = useState('');
+      const [autoSaveStatus, setAutoSaveStatus] = useState('');
+      const [selectedTemplate, setSelectedTemplate] = useState('');
+      const [arrayInputs, setArrayInputs] = useState({});
 
-  // Auto-save on data changes
-  useEffect(() => {
-    if (wbscData.system_name || wbscData.version) {
-      const timeoutId = setTimeout(() => {
-        try {
-          localStorage.setItem(STORAGE_KEY, safeJSONStringify(wbscData));
-          setAutoSaveStatus('Auto-saved');
-          setTimeout(() => setAutoSaveStatus(''), 2000);
-        } catch (error) {
-          console.warn('Failed to save data:', error);
-        }
-      }, 1000);
-      return () => clearTimeout(timeoutId);
-    }
-  }, [wbscData]);
-
-  // Update transparency scores
-  useEffect(() => {
-    const newScores = {};
-    Object.keys(transparencyScores).forEach(categoryId => {
-      newScores[categoryId] = calculateTransparencyScore(categoryId, wbscData);
-    });
-    setTransparencyScores(newScores);
-  }, [wbscData]);
-
-  // Data manipulation functions
-  const updateData = (path, value) => {
-    const pathArray = path.split('.');
-    const newData = JSON.parse(JSON.stringify(wbscData));
-    
-    let current = newData;
-    for (let i = 0; i < pathArray.length - 1; i++) {
-      const key = pathArray[i];
-      if (!current[key] || typeof current[key] !== 'object') {
-        current[key] = {};
-      }
-      current = current[key];
-    }
-    current[pathArray[pathArray.length - 1]] = value;
-    setWbscData(newData);
-  };
-
-  const addArrayItem = (path, item) => {
-    const current = path.split('.').reduce((obj, key) => obj[key], wbscData);
-    updateData(path, [...current, item]);
-  };
-
-  const removeArrayItem = (path, index) => {
-    const current = path.split('.').reduce((obj, key) => obj[key], wbscData);
-    const newArray = current.filter((_, i) => i !== index);
-    updateData(path, newArray);
-  };
-
-  const loadTemplate = (templateKey) => {
-    const template = wbscTemplates[templateKey];
-    if (template && template.data) {
-      const templateData = {
-        ...template.data,
-        wbsc_version: '1.0',
-        last_updated: new Date().toISOString().split('T')[0]
-      };
-      setWbscData(prev => ({ ...prev, ...templateData }));
-      setSelectedTemplate(templateKey);
-    }
-  };
-
-  // Export function
-  const exportJSON = () => {
-    const overallScore = Object.values(transparencyScores).reduce((a, b) => a + b, 0) / Object.keys(transparencyScores).length;
-    const exportData = {
-      ...wbscData,
-      transparency_score: `${overallScore.toFixed(1)}/4.0`,
-      generated_at: new Date().toISOString(),
-      generator_version: GENERATOR_VERSION
-    };
-    
-    const jsonString = safeJSONStringify(exportData);
-    const blob = new Blob([jsonString], { type: 'application/json' });
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = `${exportData.system_name.toLowerCase().replace(/\s+/g, '-')}-wbsc.json`;
-    document.body.appendChild(a);
-    a.click();
-    document.body.removeChild(a);
-    URL.revokeObjectURL(url);
-  };
-
-  // Import function
-  const importFile = (event) => {
-    const file = event.target?.files?.[0];
-    if (!file) return;
-    
-    const reader = new FileReader();
-    reader.onload = (e) => {
-      try {
-        const content = e.target?.result;
-        const importedData = safeJSONParse(content);
-        
-        if (importedData && validateWBSCStructure(importedData)) {
-          setWbscData({
-            ...importedData,
-            last_updated: new Date().toISOString().split('T')[0]
-          });
-          setImportError('');
-          setAutoSaveStatus('Imported successfully');
-          setTimeout(() => setAutoSaveStatus(''), 3000);
-        } else {
-          setImportError('Invalid WBSC file structure');
-        }
-      } catch (error) {
-        setImportError(`Failed to import file: ${error.message}`);
-      }
-    };
-    reader.readAsText(file);
-    event.target.value = '';
-  };
-
-  // Clear data
-  const clearAllData = () => {
-    if (window.confirm('Are you sure you want to clear all data? This cannot be undone.')) {
-      setWbscData({
+      const [wbscData, setWbscData] = useState({
         system_name: '',
         version: '',
         wbsc_version: '1.0',
@@ -435,10 +144,29 @@ const WBSCGenerator = () => {
             psychological_harm: { priority: '', includes: [], process: '', exceptions: '' },
             ideological_harm: { priority: '', definition: '', approach: '' }
           },
-          human_benefit: { definition: '', prioritization: [], trade_offs: '' },
-          truth_information: { approach: '', uncertainty_handling: '', controversial_topics: '', information_withholding: '' },
-          autonomy_agency: { philosophy: '', paternalism_limits: '', guidance_style: '', override_conditions: '' },
-          fairness_justice: { approach: '', group_considerations: '', merit_definition: '', bias_mitigation: '' },
+          human_benefit: {
+            definition: '',
+            prioritization: [],
+            trade_offs: ''
+          },
+          truth_information: {
+            approach: '',
+            uncertainty_handling: '',
+            controversial_topics: '',
+            information_withholding: ''
+          },
+          autonomy_agency: {
+            philosophy: '',
+            paternalism_limits: '',
+            guidance_style: '',
+            override_conditions: ''
+          },
+          fairness_justice: {
+            approach: '',
+            group_considerations: '',
+            merit_definition: '',
+            bias_mitigation: ''
+          },
           cultural_pluralism: {
             training_bias_acknowledgment: { primary_sources: '', underrepresented: [], impact: '' },
             value_dimensions: {
@@ -449,423 +177,758 @@ const WBSCGenerator = () => {
             conflict_resolution: { multiple_perspectives: '', no_ranking: '', user_agency: '' },
             active_mitigation: { feedback_solicitation: '', correction_acceptance: '', limitation_disclosure: '' }
           },
-          uncertainty_limitations: { self_awareness: '', limitation_types: [], edge_case_handling: '', improvement_mechanism: '' }
+          uncertainty_limitations: {
+            self_awareness: '',
+            limitation_types: [],
+            edge_case_handling: '',
+            improvement_mechanism: ''
+          }
         }
       });
-      localStorage.removeItem(STORAGE_KEY);
-      setSelectedTemplate('');
-      setAutoSaveStatus('Data cleared');
-      setTimeout(() => setAutoSaveStatus(''), 3000);
-    }
-  };
 
-  // Array input helpers
-  const getArrayInputValue = (path) => arrayInputs[path] || '';
-  const setArrayInputValue = (path, value) => {
-    setArrayInputs(prev => ({ ...prev, [path]: value }));
-  };
+      const [transparencyScores, setTransparencyScores] = useState({
+        harm_definition: 0,
+        human_benefit: 0,
+        truth_information: 0,
+        autonomy_agency: 0,
+        fairness_justice: 0,
+        cultural_pluralism: 0,
+        uncertainty_limitations: 0
+      });
 
-  // Render array input component
-  const renderArrayInput = (label, path, placeholder, items = []) => {
-    const newItem = getArrayInputValue(path);
-    
-    return React.createElement('div', null,
-      React.createElement('label', { className: 'block text-sm font-medium text-gray-700 mb-2' }, label),
-      React.createElement('div', { className: 'space-y-2' },
-        items.map((item, index) =>
-          React.createElement('div', { key: index, className: 'flex items-center space-x-2' },
-            React.createElement('button', {
-              onClick: () => removeArrayItem(path, index),
-              className: 'px-2 py-1 text-red-600 hover:text-red-800 text-sm'
-            }, 'Remove')
-          )
-        ),
-        React.createElement('div', { className: 'flex space-x-2' },
-          React.createElement('input', {
-            type: 'text',
-            value: newItem,
-            onChange: (e) => setArrayInputValue(path, e.target.value),
-            className: 'flex-1 px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500',
-            placeholder: placeholder,
-            onKeyPress: (e) => {
-              if (e.key === 'Enter' && newItem.trim()) {
-                addArrayItem(path, newItem.trim());
-                setArrayInputValue(path, '');
+      const STORAGE_KEY = 'wbsc-generator-draft';
+      const GENERATOR_VERSION = '1.0.0';
+
+      const categories = [
+        { id: 'basic_info', title: 'Basic Information', description: 'System identification and versioning' },
+        { id: 'harm_definition', title: 'Harm Definition & Prevention', description: 'How your system defines and prevents different types of harm' },
+        { id: 'human_benefit', title: 'Human Benefit & Flourishing', description: 'Your definition of human welfare and how you prioritize benefits' },
+        { id: 'truth_information', title: 'Truth & Information Handling', description: 'How you approach uncertainty, sources, and controversial topics' },
+        { id: 'autonomy_agency', title: 'Autonomy & Agency', description: 'Respect for human decision-making vs protective intervention' },
+        { id: 'fairness_justice', title: 'Fairness & Justice', description: 'Your concepts of equality, equity, and fair treatment' },
+        { id: 'cultural_pluralism', title: 'Cultural & Value Pluralism', description: 'How you handle conflicting cultural values and assumptions' },
+        { id: 'uncertainty_limitations', title: 'Uncertainty & Limitations', description: 'Self-awareness about boundaries and edge cases' }
+      ];
+
+      const wbscTemplates = {
+        '': { name: 'Start from scratch', data: null },
+        'chatbot': {
+          name: 'AI Chatbot/Assistant',
+          data: {
+            system_name: 'AI Chatbot Assistant',
+            version: '1.0',
+            categories: {
+              harm_definition: {
+                physical_harm: { 
+                  priority: 'highest',
+                  includes: ['violence', 'dangerous instructions', 'unsafe medical advice'],
+                  process: 'Multi-layer content filtering with human review'
+                },
+                psychological_harm: { 
+                  priority: 'high',
+                  includes: ['harassment', 'manipulation', 'severe emotional distress'],
+                  process: 'Behavioral pattern detection and intervention protocols',
+                  exceptions: 'Educational discussions with appropriate warnings'
+                }
+              },
+              human_benefit: {
+                definition: 'Prioritize user wellbeing, learning, and constructive outcomes',
+                prioritization: ['safety', 'accuracy', 'helpfulness'],
+                trade_offs: 'Safety takes precedence when conflicting with helpfulness'
               }
             }
-          }),
-          React.createElement('button', {
-            onClick: () => {
-              if (newItem.trim()) {
-                addArrayItem(path, newItem.trim());
-                setArrayInputValue(path, '');
-              }
-            },
-            className: 'px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700'
-          }, 'Add')
-        )
-      )
-    );
-  };
+          }
+        }
+      };
 
-  // Render step content
-  const renderCurrentStep = () => {
-    switch (currentStep) {
-      case 0:
-        return React.createElement('div', { className: 'space-y-6' },
-          React.createElement('div', { className: 'bg-blue-50 p-4 rounded-lg' },
-            React.createElement('label', { className: 'block text-sm font-medium text-blue-900 mb-2' }, 'Choose a Template (Optional)'),
-            React.createElement('select', {
-              value: selectedTemplate,
-              onChange: (e) => {
-                setSelectedTemplate(e.target.value);
-                if (e.target.value) loadTemplate(e.target.value);
-              },
-              className: 'w-full px-3 py-2 border border-blue-200 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500'
-            },
-              Object.entries(wbscTemplates).map(([key, template]) =>
-                React.createElement('option', { key: key, value: key }, template.name)
-              )
-            ),
-            React.createElement('p', { className: 'text-xs text-blue-700 mt-1' }, 'Templates provide pre-filled examples you can customize')
-          ),
+      // Update icons whenever component re-renders
+      useEffect(() => {
+        if (window.lucide) {
+          window.lucide.createIcons();
+        }
+      });
 
-          React.createElement('div', null,
-            React.createElement('label', { className: 'block text-sm font-medium text-gray-700 mb-2' }, 'System Name *'),
-            React.createElement('input', {
-              type: 'text',
-              value: wbscData.system_name,
-              onChange: (e) => updateData('system_name', e.target.value),
-              className: 'w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500',
-              placeholder: 'e.g., Claude, GPT-4, Llama 2'
-            })
-          ),
-          
-          React.createElement('div', null,
-            React.createElement('label', { className: 'block text-sm font-medium text-gray-700 mb-2' }, 'Version *'),
-            React.createElement('input', {
-              type: 'text',
-              value: wbscData.version,
-              onChange: (e) => updateData('version', e.target.value),
-              className: 'w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500',
-              placeholder: 'e.g., 4.0, v2.1, claude-3-sonnet'
-            })
-          ),
-          
-          React.createElement('div', { className: 'bg-green-50 p-4 rounded-lg' },
-            React.createElement('div', { className: 'flex items-start space-x-3' },
-              React.createElement(Info, { className: 'h-5 w-5 text-green-500 mt-0.5' }),
-              React.createElement('div', null,
-                React.createElement('h4', { className: 'text-sm font-medium text-green-900' }, 'Getting Started'),
-                React.createElement('p', { className: 'text-sm text-green-700 mt-1' }, 'This tool guides you through creating a comprehensive WBSC. Progress is auto-saved.')
-              )
-            )
-          )
+      // Safe JSON operations
+      const safeJSONParse = (jsonString, fallback = null) => {
+        try {
+          return JSON.parse(jsonString);
+        } catch (error) {
+          console.error('JSON Parse Error:', error);
+          return fallback;
+        }
+      };
+
+      const safeJSONStringify = (obj, fallback = '{}') => {
+        try {
+          return JSON.stringify(obj, null, 2);
+        } catch (error) {
+          console.error('JSON Stringify Error:', error);
+          return fallback;
+        }
+      };
+
+      // Data validation
+      const validateWBSCStructure = (data) => {
+        return (
+          data &&
+          typeof data.system_name === 'string' &&
+          typeof data.version === 'string' &&
+          data.categories &&
+          typeof data.categories === 'object'
         );
+      };
 
-      case 1:
-        return React.createElement('div', { className: 'space-y-8' },
-          React.createElement('div', { className: 'bg-yellow-50 p-4 rounded-lg' },
-            React.createElement('div', { className: 'flex items-start space-x-3' },
-              React.createElement(AlertCircle, { className: 'h-5 w-5 text-yellow-500 mt-0.5' }),
-              React.createElement('div', null,
-                React.createElement('h4', { className: 'text-sm font-medium text-yellow-900' }, 'Guidance'),
-                React.createElement('p', { className: 'text-sm text-yellow-700 mt-1' }, 'Be specific about harm types and prevention methods. This category is often heavily scrutinized.')
-              )
-            )
-          ),
-          
-          React.createElement('div', { className: 'space-y-6' },
-            React.createElement('h3', { className: 'text-lg font-semibold' }, 'Physical Harm'),
-            
-            React.createElement('div', null,
-              React.createElement('label', { className: 'block text-sm font-medium text-gray-700 mb-2' }, 'Priority Level'),
-              React.createElement('select', {
-                value: wbscData.categories?.harm_definition?.physical_harm?.priority || '',
-                onChange: (e) => updateData('categories.harm_definition.physical_harm.priority', e.target.value),
-                className: 'w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500'
-              },
-                React.createElement('option', { value: '' }, 'Select priority...'),
-                React.createElement('option', { value: 'highest' }, 'Highest'),
-                React.createElement('option', { value: 'high' }, 'High'),
-                React.createElement('option', { value: 'moderate' }, 'Moderate'),
-                React.createElement('option', { value: 'low' }, 'Low')
-              )
-            ),
-            
-            renderArrayInput(
-              "What types of content/actions are included?",
-              "categories.harm_definition.physical_harm.includes",
-              "e.g., violence, dangerous instructions, unsafe medical advice",
-              wbscData.categories?.harm_definition?.physical_harm?.includes || []
-            ),
-            
-            React.createElement('div', null,
-              React.createElement('label', { className: 'block text-sm font-medium text-gray-700 mb-2' }, 'Prevention Process'),
-              React.createElement('textarea', {
-                value: wbscData.categories?.harm_definition?.physical_harm?.process || '',
-                onChange: (e) => updateData('categories.harm_definition.physical_harm.process', e.target.value),
-                className: 'w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500',
-                rows: 3,
-                placeholder: 'Describe your process for preventing physical harm'
-              })
-            )
-          ),
-
-          React.createElement('div', { className: 'space-y-6' },
-            React.createElement('h3', { className: 'text-lg font-semibold' }, 'Psychological Harm'),
-            
-            React.createElement('div', null,
-              React.createElement('label', { className: 'block text-sm font-medium text-gray-700 mb-2' }, 'Priority Level'),
-              React.createElement('select', {
-                value: wbscData.categories?.harm_definition?.psychological_harm?.priority || '',
-                onChange: (e) => updateData('categories.harm_definition.psychological_harm.priority', e.target.value),
-                className: 'w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500'
-              },
-                React.createElement('option', { value: '' }, 'Select priority...'),
-                React.createElement('option', { value: 'highest' }, 'Highest'),
-                React.createElement('option', { value: 'high' }, 'High'),
-                React.createElement('option', { value: 'moderate' }, 'Moderate'),
-                React.createElement('option', { value: 'low' }, 'Low')
-              )
-            ),
-            
-            renderArrayInput(
-              "What types of psychological harm do you prevent?",
-              "categories.harm_definition.psychological_harm.includes",
-              "e.g., harassment, manipulation, severe emotional distress",
-              wbscData.categories?.harm_definition?.psychological_harm?.includes || []
-            ),
-            
-            React.createElement('div', null,
-              React.createElement('label', { className: 'block text-sm font-medium text-gray-700 mb-2' }, 'Prevention Process'),
-              React.createElement('textarea', {
-                value: wbscData.categories?.harm_definition?.psychological_harm?.process || '',
-                onChange: (e) => updateData('categories.harm_definition.psychological_harm.process', e.target.value),
-                className: 'w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500',
-                rows: 3,
-                placeholder: 'How do you identify and prevent psychological harm?'
-              })
-            )
-          )
-        );
-
-      case 2:
-        return React.createElement('div', { className: 'space-y-6' },
-          React.createElement('div', { className: 'bg-green-50 p-4 rounded-lg' },
-            React.createElement('div', { className: 'flex items-start space-x-3' },
-              React.createElement(Info, { className: 'h-5 w-5 text-green-500 mt-0.5' }),
-              React.createElement('div', null,
-                React.createElement('h4', { className: 'text-sm font-medium text-green-900' }, 'Guidance'),
-                React.createElement('p', { className: 'text-sm text-green-700 mt-1' }, 'Define what human flourishing means and how you balance competing benefits.')
-              )
-            )
-          ),
-
-          React.createElement('div', null,
-            React.createElement('label', { className: 'block text-sm font-medium text-gray-700 mb-2' }, 'Definition of Human Benefit'),
-            React.createElement('textarea', {
-              value: wbscData.categories?.human_benefit?.definition || '',
-              onChange: (e) => updateData('categories.human_benefit.definition', e.target.value),
-              className: 'w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500',
-              rows: 4,
-              placeholder: 'How do you define human benefit and flourishing?'
-            })
-          ),
-
-          renderArrayInput(
-            "Prioritization of Benefits",
-            "categories.human_benefit.prioritization",
-            "e.g., safety, autonomy, learning, productivity",
-            wbscData.categories?.human_benefit?.prioritization || []
-          ),
-
-          React.createElement('div', null,
-            React.createElement('label', { className: 'block text-sm font-medium text-gray-700 mb-2' }, 'Trade-offs Approach'),
-            React.createElement('textarea', {
-              value: wbscData.categories?.human_benefit?.trade_offs || '',
-              onChange: (e) => updateData('categories.human_benefit.trade_offs', e.target.value),
-              className: 'w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500',
-              rows: 3,
-              placeholder: 'How do you handle situations where different benefits conflict?'
-            })
-          )
-        );
-
-      default:
-        return React.createElement('div', { className: 'text-center py-8' },
-          React.createElement('h3', { className: 'text-lg font-semibold mb-4' }, 'More Categories Coming Soon'),
-          React.createElement('p', { className: 'text-gray-600 mb-4' }, 'Categories 4-8 will be added in the next update. You can export your current progress.'),
-          React.createElement('div', { className: 'flex justify-center' },
-            React.createElement('button', {
-              onClick: exportJSON,
-              className: 'flex items-center space-x-2 px-6 py-3 bg-green-600 text-white rounded-lg hover:bg-green-700 text-lg'
-            },
-              React.createElement(Download, { className: 'h-5 w-5' }),
-              React.createElement('span', null, 'Export Current Progress')
-            )
-          )
-        );
-    }
-  };
-
-  const overallScore = Object.values(transparencyScores).reduce((a, b) => a + b, 0) / Object.keys(transparencyScores).length;
-
-  return React.createElement('div', { className: 'max-w-4xl mx-auto p-6 bg-white' },
-    React.createElement('div', { className: 'mb-8' },
-      React.createElement('h1', { className: 'text-3xl font-bold text-gray-900 mb-2' }, 'WBSC Generator'),
-      React.createElement('p', { className: 'text-gray-600' }, 'Create a comprehensive Worldview Belief System Card for your AI system'),
-      
-      React.createElement('div', { className: 'mt-4 bg-blue-50 p-4 rounded-lg' },
-        React.createElement('div', { className: 'flex items-center justify-between' },
-          React.createElement('div', { className: 'flex items-center space-x-4' },
-            React.createElement('div', null,
-              React.createElement('span', { className: 'text-sm font-medium text-blue-900' }, 'Overall Transparency Score: '),
-              React.createElement('span', { className: 'text-lg font-bold text-blue-600' }, `${overallScore.toFixed(1)}/4.0`)
-            ),
-            autoSaveStatus && React.createElement('div', { className: 'flex items-center space-x-1 text-green-600' },
-              React.createElement(Save, { className: 'h-4 w-4' }),
-              React.createElement('span', { className: 'text-sm' }, autoSaveStatus)
-            )
-          ),
-          React.createElement('button', {
-            onClick: () => setShowPreview(!showPreview),
-            className: 'flex items-center space-x-2 px-3 py-1 text-blue-600 hover:text-blue-800'
-          },
-            React.createElement(showPreview ? EyeOff : Eye, { className: 'h-4 w-4' }),
-            React.createElement('span', null, showPreview ? 'Hide' : 'Show', ' Preview')
-          )
-        )
-      )
-    ),
-
-    // Import/Export Section
-    React.createElement('div', { className: 'mb-6 bg-gray-50 p-4 rounded-lg' },
-      React.createElement('div', { className: 'flex flex-wrap items-center justify-between gap-4' },
-        React.createElement('div', { className: 'flex items-center space-x-4' },
-          React.createElement('div', null,
-            React.createElement('label', { className: 'block text-sm font-medium text-gray-700 mb-1' }, 'Import Existing WBSC'),
-            React.createElement('input', {
-              type: 'file',
-              accept: '.json',
-              onChange: importFile,
-              className: 'block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100'
-            }),
-            importError && React.createElement('p', { className: 'mt-1 text-sm text-red-600' }, importError)
-          )
-        ),
+      // Calculate transparency score
+      const calculateTransparencyScore = (categoryId, data) => {
+        const categoryData = data.categories[categoryId];
+        if (!categoryData) return 0;
         
-        React.createElement('div', { className: 'flex space-x-2' },
-          React.createElement('button', {
-            onClick: exportJSON,
-            className: 'flex items-center space-x-2 px-4 py-2 bg-green-600 text-white rounded-md hover:bg-green-700'
-          },
-            React.createElement(Download, { className: 'h-4 w-4' }),
-            React.createElement('span', null, 'Export JSON')
-          ),
-          React.createElement('button', {
-            onClick: clearAllData,
-            className: 'flex items-center space-x-2 px-4 py-2 bg-red-600 text-white rounded-md hover:bg-red-700'
-          },
-            React.createElement(FileText, { className: 'h-4 w-4' }),
-            React.createElement('span', null, 'Clear All')
-          )
-        )
-      )
-    ),
-    
-    // Progress Steps
-    React.createElement('div', { className: 'mb-8' },
-      React.createElement('div', { className: 'flex flex-wrap gap-2' },
-        categories.map((category, index) =>
-          React.createElement('button', {
-            key: category.id,
-            onClick: () => setCurrentStep(index),
-            className: `px-3 py-2 rounded-md text-sm font-medium transition-colors ${
-              currentStep === index
-                ? 'bg-blue-600 text-white'
-                : transparencyScores[category.id] > 0
-                ? 'bg-green-100 text-green-800 hover:bg-green-200'
-                : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
-            }`
-          },
-            React.createElement('div', { className: 'flex items-center space-x-1' },
-              React.createElement('span', null, category.title),
-              transparencyScores[category.id] > 0 && React.createElement(CheckCircle, { className: 'h-4 w-4' })
-            )
-          )
-        )
-      )
-    ),
-    
-    // Current Step Content
-    React.createElement('div', { className: 'bg-gray-50 rounded-lg p-6 mb-8' },
-      React.createElement('div', { className: 'mb-4' },
-        React.createElement('h2', { className: 'text-xl font-semibold text-gray-900' }, categories[currentStep].title),
-        React.createElement('p', { className: 'text-gray-600 mt-1' }, categories[currentStep].description)
-      ),
-      
-      renderCurrentStep()
-    ),
-    
-    // Navigation
-    React.createElement('div', { className: 'flex justify-between items-center mb-8' },
-      React.createElement('button', {
-        onClick: () => setCurrentStep(Math.max(0, currentStep - 1)),
-        disabled: currentStep === 0,
-        className: 'px-4 py-2 border border-gray-300 rounded-md text-gray-700 hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed'
-      }, 'Previous'),
-      
-      React.createElement('div', { className: 'text-center' },
-        React.createElement('span', { className: 'text-sm text-gray-500' }, `Step ${currentStep + 1} of ${categories.length}`)
-      ),
-      
-      React.createElement('button', {
-        onClick: () => setCurrentStep(Math.min(categories.length - 1, currentStep + 1)),
-        disabled: currentStep === categories.length - 1,
-        className: 'px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed'
-      }, 'Next')
-    ),
-    
-    // Preview
-    showPreview && React.createElement('div', { className: 'border rounded-lg p-4 bg-gray-50' },
-      React.createElement('div', { className: 'flex items-center justify-between mb-4' },
-        React.createElement('h3', { className: 'text-lg font-semibold' }, 'JSON Preview')
-      ),
-      React.createElement('pre', { className: 'text-xs bg-white p-4 rounded border overflow-auto max-h-96' },
-        safeJSONStringify({
+        let filledFields = 0;
+        let totalFields = 0;
+        
+        const countFields = (obj) => {
+          for (const key in obj) {
+            if (typeof obj[key] === 'string') {
+              totalFields++;
+              if (obj[key].trim() !== '') filledFields++;
+            } else if (Array.isArray(obj[key])) {
+              totalFields++;
+              if (obj[key].length > 0) filledFields++;
+            } else if (typeof obj[key] === 'object' && obj[key] !== null) {
+              countFields(obj[key]);
+            }
+          }
+        };
+        
+        countFields(categoryData);
+        
+        if (totalFields === 0) return 0;
+        const completeness = filledFields / totalFields;
+        
+        if (completeness >= 0.8) return 3;
+        else if (completeness >= 0.6) return 2;
+        else if (completeness >= 0.3) return 1;
+        else return 0;
+      };
+
+      // Load saved data on mount
+      useEffect(() => {
+        try {
+          const saved = localStorage.getItem(STORAGE_KEY);
+          if (saved) {
+            const parsedData = safeJSONParse(saved);
+            if (parsedData && validateWBSCStructure(parsedData)) {
+              setWbscData(parsedData);
+              setAutoSaveStatus('Loaded saved draft');
+              setTimeout(() => setAutoSaveStatus(''), 3000);
+            }
+          }
+        } catch (error) {
+          console.warn('Failed to load saved data:', error);
+        }
+      }, []);
+
+      // Auto-save on data changes
+      useEffect(() => {
+        if (wbscData.system_name || wbscData.version) {
+          const timeoutId = setTimeout(() => {
+            try {
+              localStorage.setItem(STORAGE_KEY, safeJSONStringify(wbscData));
+              setAutoSaveStatus('Auto-saved');
+              setTimeout(() => setAutoSaveStatus(''), 2000);
+            } catch (error) {
+              console.warn('Failed to save data:', error);
+            }
+          }, 1000);
+          return () => clearTimeout(timeoutId);
+        }
+      }, [wbscData]);
+
+      // Update transparency scores
+      useEffect(() => {
+        const newScores = {};
+        Object.keys(transparencyScores).forEach(categoryId => {
+          newScores[categoryId] = calculateTransparencyScore(categoryId, wbscData);
+        });
+        setTransparencyScores(newScores);
+      }, [wbscData]);
+
+      // Data manipulation functions
+      const updateData = (path, value) => {
+        const pathArray = path.split('.');
+        const newData = JSON.parse(JSON.stringify(wbscData));
+        
+        let current = newData;
+        for (let i = 0; i < pathArray.length - 1; i++) {
+          const key = pathArray[i];
+          if (!current[key] || typeof current[key] !== 'object') {
+            current[key] = {};
+          }
+          current = current[key];
+        }
+        current[pathArray[pathArray.length - 1]] = value;
+        setWbscData(newData);
+      };
+
+      const addArrayItem = (path, item) => {
+        const pathArray = path.split('.');
+        let current = wbscData;
+        for (const key of pathArray) {
+          current = current[key];
+        }
+        updateData(path, [...(current || []), item]);
+      };
+
+      const removeArrayItem = (path, index) => {
+        const pathArray = path.split('.');
+        let current = wbscData;
+        for (const key of pathArray) {
+          current = current[key];
+        }
+        const newArray = current.filter((_, i) => i !== index);
+        updateData(path, newArray);
+      };
+
+      const loadTemplate = (templateKey) => {
+        const template = wbscTemplates[templateKey];
+        if (template && template.data) {
+          const templateData = {
+            ...template.data,
+            wbsc_version: '1.0',
+            last_updated: new Date().toISOString().split('T')[0]
+          };
+          setWbscData(prev => ({ ...prev, ...templateData }));
+          setSelectedTemplate(templateKey);
+        }
+      };
+
+      // Export function
+      const exportJSON = () => {
+        const overallScore = Object.values(transparencyScores).reduce((a, b) => a + b, 0) / Object.keys(transparencyScores).length;
+        const exportData = {
           ...wbscData,
           transparency_score: `${overallScore.toFixed(1)}/4.0`,
           generated_at: new Date().toISOString(),
           generator_version: GENERATOR_VERSION
-        })
-      )
-    )
-  );
-};
+        };
+        
+        const jsonString = safeJSONStringify(exportData);
+        const blob = new Blob([jsonString], { type: 'application/json' });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = `${(exportData.system_name || 'wbsc').toLowerCase().replace(/\s+/g, '-')}-wbsc.json`;
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        URL.revokeObjectURL(url);
+      };
 
-// Render the component
-const container = document.getElementById('root');
-const root = ReactDOM.createRoot(container);
-root.render(React.createElement(WBSCGenerator));
+      // Import function
+      const importFile = (event) => {
+        const file = event.target?.files?.[0];
+        if (!file) return;
+        
+        const reader = new FileReader();
+        reader.onload = (e) => {
+          try {
+            const content = e.target?.result;
+            const importedData = safeJSONParse(content);
+            
+            if (importedData && validateWBSCStructure(importedData)) {
+              setWbscData({
+                ...importedData,
+                last_updated: new Date().toISOString().split('T')[0]
+              });
+              setImportError('');
+              setAutoSaveStatus('Imported successfully');
+              setTimeout(() => setAutoSaveStatus(''), 3000);
+            } else {
+              setImportError('Invalid WBSC file structure');
+            }
+          } catch (error) {
+            setImportError(`Failed to import file: ${error.message}`);
+          }
+        };
+        reader.readAsText(file);
+        event.target.value = '';
+      };
 
-      </script>
+      // Clear data
+      const clearAllData = () => {
+        if (window.confirm('Are you sure you want to clear all data? This cannot be undone.')) {
+          const emptyData = {
+            system_name: '',
+            version: '',
+            wbsc_version: '1.0',
+            last_updated: new Date().toISOString().split('T')[0],
+            categories: {
+              harm_definition: {
+                physical_harm: { priority: '', includes: [], process: '' },
+                psychological_harm: { priority: '', includes: [], process: '', exceptions: '' },
+                ideological_harm: { priority: '', definition: '', approach: '' }
+              },
+              human_benefit: { definition: '', prioritization: [], trade_offs: '' },
+              truth_information: { approach: '', uncertainty_handling: '', controversial_topics: '', information_withholding: '' },
+              autonomy_agency: { philosophy: '', paternalism_limits: '', guidance_style: '', override_conditions: '' },
+              fairness_justice: { approach: '', group_considerations: '', merit_definition: '', bias_mitigation: '' },
+              cultural_pluralism: {
+                training_bias_acknowledgment: { primary_sources: '', underrepresented: [], impact: '' },
+                value_dimensions: {
+                  individual_collective_balance: { process: '', no_assumption: '', clarification: '' },
+                  authority_relationships: { acknowledgment: '', approach: '' },
+                  uncertainty_comfort: { recognition: '', adaptation: '' }
+                },
+                conflict_resolution: { multiple_perspectives: '', no_ranking: '', user_agency: '' },
+                active_mitigation: { feedback_solicitation: '', correction_acceptance: '', limitation_disclosure: '' }
+              },
+              uncertainty_limitations: { self_awareness: '', limitation_types: [], edge_case_handling: '', improvement_mechanism: '' }
+            }
+          };
+          setWbscData(emptyData);
+          localStorage.removeItem(STORAGE_KEY);
+          setSelectedTemplate('');
+          setAutoSaveStatus('Data cleared');
+          setTimeout(() => setAutoSaveStatus(''), 3000);
+        }
+      };
+
+      // Array input helpers
+      const getArrayInputValue = (path) => arrayInputs[path] || '';
+      const setArrayInputValue = (path, value) => {
+        setArrayInputs(prev => ({ ...prev, [path]: value }));
+      };
+
+      // Helper function to get nested value
+      const getNestedValue = (obj, path) => {
+        const pathArray = path.split('.');
+        let current = obj;
+        for (const key of pathArray) {
+          current = current?.[key];
+        }
+        return current;
+      };
+
+      // Render array input component
+      const renderArrayInput = (label, path, placeholder, items = []) => {
+        const inputValue = getArrayInputValue(path);
+        
+        return h('div', null,
+          h('label', { className: 'block text-sm font-medium text-gray-700 mb-2' }, label),
+          h('div', { className: 'space-y-2' },
+            items.map((item, index) =>
+              h('div', { key: index, className: 'flex items-center justify-between bg-white p-2 rounded border' },
+                h('span', { className: 'text-sm' }, item),
+                h('button', {
+                  onClick: () => removeArrayItem(path, index),
+                  className: 'px-2 py-1 text-red-600 hover:text-red-800 text-sm'
+                }, 'Remove')
+              )
+            ),
+            h('div', { className: 'flex space-x-2' },
+              h('input', {
+                type: 'text',
+                value: inputValue,
+                onChange: (e) => setArrayInputValue(path, e.target.value),
+                className: 'flex-1 px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500',
+                placeholder: placeholder,
+                onKeyPress: (e) => {
+                  if (e.key === 'Enter' && inputValue.trim()) {
+                    addArrayItem(path, inputValue.trim());
+                    setArrayInputValue(path, '');
+                  }
+                }
+              }),
+              h('button', {
+                onClick: () => {
+                  if (inputValue.trim()) {
+                    addArrayItem(path, inputValue.trim());
+                    setArrayInputValue(path, '');
+                  }
+                },
+                className: 'px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700'
+              }, 'Add')
+            )
+          )
+        );
+      };
+
+      // Render step content
+      const renderCurrentStep = () => {
+        switch (currentStep) {
+          case 0:
+            return h('div', { className: 'space-y-6' },
+              h('div', { className: 'bg-blue-50 p-4 rounded-lg' },
+                h('label', { className: 'block text-sm font-medium text-blue-900 mb-2' }, 'Choose a Template (Optional)'),
+                h('select', {
+                  value: selectedTemplate,
+                  onChange: (e) => {
+                    setSelectedTemplate(e.target.value);
+                    if (e.target.value) loadTemplate(e.target.value);
+                  },
+                  className: 'w-full px-3 py-2 border border-blue-200 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500'
+                },
+                  Object.entries(wbscTemplates).map(([key, template]) =>
+                    h('option', { key: key, value: key }, template.name)
+                  )
+                ),
+                h('p', { className: 'text-xs text-blue-700 mt-1' }, 'Templates provide pre-filled examples you can customize')
+              ),
+
+              h('div', null,
+                h('label', { className: 'block text-sm font-medium text-gray-700 mb-2' }, 'System Name *'),
+                h('input', {
+                  type: 'text',
+                  value: wbscData.system_name,
+                  onChange: (e) => updateData('system_name', e.target.value),
+                  className: 'w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500',
+                  placeholder: 'e.g., Claude, GPT-4, Llama 2'
+                })
+              ),
+              
+              h('div', null,
+                h('label', { className: 'block text-sm font-medium text-gray-700 mb-2' }, 'Version *'),
+                h('input', {
+                  type: 'text',
+                  value: wbscData.version,
+                  onChange: (e) => updateData('version', e.target.value),
+                  className: 'w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500',
+                  placeholder: 'e.g., 4.0, v2.1, claude-3-sonnet'
+                })
+              ),
+              
+              h('div', { className: 'bg-green-50 p-4 rounded-lg' },
+                h('div', { className: 'flex items-start space-x-3' },
+                  h(Icon, { name: 'info', className: 'h-5 w-5 text-green-500 mt-0.5' }),
+                  h('div', null,
+                    h('h4', { className: 'text-sm font-medium text-green-900' }, 'Getting Started'),
+                    h('p', { className: 'text-sm text-green-700 mt-1' }, 'This tool guides you through creating a comprehensive WBSC. Progress is auto-saved.')
+                  )
+                )
+              )
+            );
+
+          case 1:
+            return h('div', { className: 'space-y-8' },
+              h('div', { className: 'bg-yellow-50 p-4 rounded-lg' },
+                h('div', { className: 'flex items-start space-x-3' },
+                  h(Icon, { name: 'alert-circle', className: 'h-5 w-5 text-yellow-500 mt-0.5' }),
+                  h('div', null,
+                    h('h4', { className: 'text-sm font-medium text-yellow-900' }, 'Guidance'),
+                    h('p', { className: 'text-sm text-yellow-700 mt-1' }, 'Be specific about harm types and prevention methods. This category is often heavily scrutinized.')
+                  )
+                )
+              ),
+              
+              h('div', { className: 'space-y-6' },
+                h('h3', { className: 'text-lg font-semibold' }, 'Physical Harm'),
+                
+                h('div', null,
+                  h('label', { className: 'block text-sm font-medium text-gray-700 mb-2' }, 'Priority Level'),
+                  h('select', {
+                    value: getNestedValue(wbscData, 'categories.harm_definition.physical_harm.priority') || '',
+                    onChange: (e) => updateData('categories.harm_definition.physical_harm.priority', e.target.value),
+                    className: 'w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500'
+                  },
+                    h('option', { value: '' }, 'Select priority...'),
+                    h('option', { value: 'highest' }, 'Highest'),
+                    h('option', { value: 'high' }, 'High'),
+                    h('option', { value: 'moderate' }, 'Moderate'),
+                    h('option', { value: 'low' }, 'Low')
+                  )
+                ),
+                
+                renderArrayInput(
+                  "What types of content/actions are included?",
+                  "categories.harm_definition.physical_harm.includes",
+                  "e.g., violence, dangerous instructions, unsafe medical advice",
+                  getNestedValue(wbscData, 'categories.harm_definition.physical_harm.includes') || []
+                ),
+                
+                h('div', null,
+                  h('label', { className: 'block text-sm font-medium text-gray-700 mb-2' }, 'Prevention Process'),
+                  h('textarea', {
+                    value: getNestedValue(wbscData, 'categories.harm_definition.physical_harm.process') || '',
+                    onChange: (e) => updateData('categories.harm_definition.physical_harm.process', e.target.value),
+                    className: 'w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500',
+                    rows: 3,
+                    placeholder: 'Describe your process for preventing physical harm'
+                  })
+                )
+              ),
+
+              h('div', { className: 'space-y-6' },
+                h('h3', { className: 'text-lg font-semibold' }, 'Psychological Harm'),
+                
+                h('div', null,
+                  h('label', { className: 'block text-sm font-medium text-gray-700 mb-2' }, 'Priority Level'),
+                  h('select', {
+                    value: getNestedValue(wbscData, 'categories.harm_definition.psychological_harm.priority') || '',
+                    onChange: (e) => updateData('categories.harm_definition.psychological_harm.priority', e.target.value),
+                    className: 'w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500'
+                  },
+                    h('option', { value: '' }, 'Select priority...'),
+                    h('option', { value: 'highest' }, 'Highest'),
+                    h('option', { value: 'high' }, 'High'),
+                    h('option', { value: 'moderate' }, 'Moderate'),
+                    h('option', { value: 'low' }, 'Low')
+                  )
+                ),
+                
+                renderArrayInput(
+                  "What types of psychological harm do you prevent?",
+                  "categories.harm_definition.psychological_harm.includes",
+                  "e.g., harassment, manipulation, severe emotional distress",
+                  getNestedValue(wbscData, 'categories.harm_definition.psychological_harm.includes') || []
+                ),
+                
+                h('div', null,
+                  h('label', { className: 'block text-sm font-medium text-gray-700 mb-2' }, 'Prevention Process'),
+                  h('textarea', {
+                    value: getNestedValue(wbscData, 'categories.harm_definition.psychological_harm.process') || '',
+                    onChange: (e) => updateData('categories.harm_definition.psychological_harm.process', e.target.value),
+                    className: 'w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500',
+                    rows: 3,
+                    placeholder: 'How do you identify and prevent psychological harm?'
+                  })
+                )
+              )
+            );
+
+          case 2:
+            return h('div', { className: 'space-y-6' },
+              h('div', { className: 'bg-green-50 p-4 rounded-lg' },
+                h('div', { className: 'flex items-start space-x-3' },
+                  h(Icon, { name: 'info', className: 'h-5 w-5 text-green-500 mt-0.5' }),
+                  h('div', null,
+                    h('h4', { className: 'text-sm font-medium text-green-900' }, 'Guidance'),
+                    h('p', { className: 'text-sm text-green-700 mt-1' }, 'Define what human flourishing means and how you balance competing benefits.')
+                  )
+                )
+              ),
+
+              h('div', null,
+                h('label', { className: 'block text-sm font-medium text-gray-700 mb-2' }, 'Definition of Human Benefit'),
+                h('textarea', {
+                  value: getNestedValue(wbscData, 'categories.human_benefit.definition') || '',
+                  onChange: (e) => updateData('categories.human_benefit.definition', e.target.value),
+                  className: 'w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500',
+                  rows: 4,
+                  placeholder: 'How do you define human benefit and flourishing?'
+                })
+              ),
+
+              renderArrayInput(
+                "Prioritization of Benefits",
+                "categories.human_benefit.prioritization",
+                "e.g., safety, autonomy, learning, productivity",
+                getNestedValue(wbscData, 'categories.human_benefit.prioritization') || []
+              ),
+
+              h('div', null,
+                h('label', { className: 'block text-sm font-medium text-gray-700 mb-2' }, 'Trade-offs Approach'),
+                h('textarea', {
+                  value: getNestedValue(wbscData, 'categories.human_benefit.trade_offs') || '',
+                  onChange: (e) => updateData('categories.human_benefit.trade_offs', e.target.value),
+                  className: 'w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500',
+                  rows: 3,
+                  placeholder: 'How do you handle situations where different benefits conflict?'
+                })
+              )
+            );
+
+          default:
+            return h('div', { className: 'text-center py-8' },
+              h('h3', { className: 'text-lg font-semibold mb-4' }, 'More Categories Coming Soon'),
+              h('p', { className: 'text-gray-600 mb-4' }, 'Categories 4-8 will be added in the next update. You can export your current progress.'),
+              h('div', { className: 'flex justify-center' },
+                h('button', {
+                  onClick: exportJSON,
+                  className: 'flex items-center space-x-2 px-6 py-3 bg-green-600 text-white rounded-lg hover:bg-green-700 text-lg'
+                },
+                  h(Icon, { name: 'download', className: 'h-5 w-5' }),
+                  h('span', null, 'Export Current Progress')
+                )
+              )
+            );
+        }
+      };
+
+      const overallScore = Object.values(transparencyScores).reduce((a, b) => a + b, 0) / Object.keys(transparencyScores).length;
+
+      return h('div', { className: 'max-w-4xl mx-auto p-6 bg-white' },
+        h('div', { className: 'mb-8' },
+          h('h1', { className: 'text-3xl font-bold text-gray-900 mb-2' }, 'WBSC Generator'),
+          h('p', { className: 'text-gray-600' }, 'Create a comprehensive Worldview Belief System Card for your AI system'),
+          
+          h('div', { className: 'mt-4 bg-blue-50 p-4 rounded-lg' },
+            h('div', { className: 'flex items-center justify-between' },
+              h('div', { className: 'flex items-center space-x-4' },
+                h('div', null,
+                  h('span', { className: 'text-sm font-medium text-blue-900' }, 'Overall Transparency Score: '),
+                  h('span', { className: 'text-lg font-bold text-blue-600' }, `${overallScore.toFixed(1)}/4.0`)
+                ),
+                autoSaveStatus && h('div', { className: 'flex items-center space-x-1 text-green-600' },
+                  h(Icon, { name: 'save', className: 'h-4 w-4' }),
+                  h('span', { className: 'text-sm' }, autoSaveStatus)
+                )
+              ),
+              h('button', {
+                onClick: () => setShowPreview(!showPreview),
+                className: 'flex items-center space-x-2 px-3 py-1 text-blue-600 hover:text-blue-800'
+              },
+                h(Icon, { name: showPreview ? 'eye-off' : 'eye', className: 'h-4 w-4' }),
+                h('span', null, showPreview ? 'Hide' : 'Show', ' Preview')
+              )
+            )
+          )
+        ),
+
+        // Import/Export Section
+        h('div', { className: 'mb-6 bg-gray-50 p-4 rounded-lg' },
+          h('div', { className: 'flex flex-wrap items-center justify-between gap-4' },
+            h('div', { className: 'flex items-center space-x-4' },
+              h('div', null,
+                h('label', { className: 'block text-sm font-medium text-gray-700 mb-1' }, 'Import Existing WBSC'),
+                h('input', {
+                  type: 'file',
+                  accept: '.json',
+                  onChange: importFile,
+                  className: 'block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100'
+                }),
+                importError && h('p', { className: 'mt-1 text-sm text-red-600' }, importError)
+              )
+            ),
+            
+            h('div', { className: 'flex space-x-2' },
+              h('button', {
+                onClick: exportJSON,
+                className: 'flex items-center space-x-2 px-4 py-2 bg-green-600 text-white rounded-md hover:bg-green-700'
+              },
+                h(Icon, { name: 'download', className: 'h-4 w-4' }),
+                h('span', null, 'Export JSON')
+              ),
+              h('button', {
+                onClick: clearAllData,
+                className: 'flex items-center space-x-2 px-4 py-2 bg-red-600 text-white rounded-md hover:bg-red-700'
+              },
+                h(Icon, { name: 'file-text', className: 'h-4 w-4' }),
+                h('span', null, 'Clear All')
+              )
+            )
+          )
+        ),
+        
+        // Progress Steps
+        h('div', { className: 'mb-8' },
+          h('div', { className: 'flex flex-wrap gap-2' },
+            categories.map((category, index) =>
+              h('button', {
+                key: category.id,
+                onClick: () => setCurrentStep(index),
+                className: `px-3 py-2 rounded-md text-sm font-medium transition-colors ${
+                  currentStep === index
+                    ? 'bg-blue-600 text-white'
+                    : transparencyScores[category.id] > 0
+                    ? 'bg-green-100 text-green-800 hover:bg-green-200'
+                    : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                }`
+              },
+                h('div', { className: 'flex items-center space-x-1' },
+                  h('span', null, category.title),
+                  transparencyScores[category.id] > 0 && h(Icon, { name: 'check-circle', className: 'h-4 w-4' })
+                )
+              )
+            )
+          )
+        ),
+        
+        // Current Step Content
+        h('div', { className: 'bg-gray-50 rounded-lg p-6 mb-8' },
+          h('div', { className: 'mb-4' },
+            h('h2', { className: 'text-xl font-semibold text-gray-900' }, categories[currentStep].title),
+            h('p', { className: 'text-gray-600 mt-1' }, categories[currentStep].description)
+          ),
+          
+          renderCurrentStep()
+        ),
+        
+        // Navigation
+        h('div', { className: 'flex justify-between items-center mb-8' },
+          h('button', {
+            onClick: () => setCurrentStep(Math.max(0, currentStep - 1)),
+            disabled: currentStep === 0,
+            className: 'px-4 py-2 border border-gray-300 rounded-md text-gray-700 hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed'
+          }, 'Previous'),
+          
+          h('div', { className: 'text-center' },
+            h('span', { className: 'text-sm text-gray-500' }, `Step ${currentStep + 1} of ${categories.length}`)
+          ),
+          
+          h('button', {
+            onClick: () => setCurrentStep(Math.min(categories.length - 1, currentStep + 1)),
+            disabled: currentStep === categories.length - 1,
+            className: 'px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed'
+          }, 'Next')
+        ),
+        
+        // Preview
+        showPreview && h('div', { className: 'border rounded-lg p-4 bg-gray-50' },
+          h('div', { className: 'flex items-center justify-between mb-4' },
+            h('h3', { className: 'text-lg font-semibold' }, 'JSON Preview')
+          ),
+          h('pre', { className: 'text-xs bg-white p-4 rounded border overflow-auto max-h-96' },
+            safeJSONStringify({
+              ...wbscData,
+              transparency_score: `${overallScore.toFixed(1)}/4.0`,
+              generated_at: new Date().toISOString(),
+              generator_version: GENERATOR_VERSION
+            })
+          )
+        )
+      );
+    };
+
+    // Render the component
+    const container = document.getElementById('root');
+    const root = ReactDOM.createRoot(container);
+    root.render(React.createElement(WBSCGenerator));
+    </script>
     
     <!-- Show app, hide loading -->
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            // Hide loading, show app after component loads
-            setTimeout(() => {
+        // Wait for React to be ready
+        function initApp() {
+            if (typeof React !== 'undefined' && typeof ReactDOM !== 'undefined') {
+                // Hide loading, show app
                 document.getElementById('loading').style.display = 'none';
                 document.getElementById('root').style.display = 'block';
-            }, 1000);
-        });
+                
+                // Initialize Lucide icons
+                if (window.lucide) {
+                    window.lucide.createIcons();
+                }
+            } else {
+                // Retry if React isn't ready yet
+                setTimeout(initApp, 100);
+            }
+        }
+        
+        // Start initialization after DOM is ready
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', initApp);
+        } else {
+            initApp();
+        }
         
         // Error handling
         window.addEventListener('error', function(e) {
             console.error('Application error:', e);
-            document.getElementById('loading').innerHTML = 
-                '<div class="text-center"><p class="text-red-600">Error loading application. Please refresh the page.</p></div>';
+            const loadingEl = document.getElementById('loading');
+            if (loadingEl) {
+                loadingEl.innerHTML = 
+                    '<div class="text-center"><p class="text-red-600">Error loading application. Please refresh the page.</p></div>';
+            }
         });
     </script>
 </body>
