@@ -1,21 +1,25 @@
-# WBSC Generator Tool
+## 🛠️ Tools
 
-An interactive web application that makes creating Worldview Belief System Cards effortless.
+### WBSC Generator
+Interactive web tool for creating Worldview Belief System Cards with guided prompts and real-time feedback.
 
-## 🎯 Purpose
+**[🚀 Launch Generator Tool →](https://rumagoso.github.io/worldview-belief-system-card/tools/generator/)**
 
-This tool removes the "blank page" problem by providing:
-- **Guided Process**: Step-by-step walkthrough of all 8 WBSC categories
-- **Smart Prompts**: Context-specific guidance and examples  
-- **Real-time Feedback**: Transparency scoring and progress tracking
-- **Instant Export**: One-click JSON generation
+**Features:**
+- ✅ **Complete 8-Category Coverage** - All WBSC sections implemented
+- ✅ **Guided Process** - Step-by-step with context-specific help
+- ✅ **Auto-save System** - Never lose your progress
+- ✅ **Template System** - Pre-filled examples to get started
+- ✅ **Transparency Scoring** - Real-time feedback (0-4 scale)
+- ✅ **JSON Export/Import** - Standard format compatibility
+- ✅ **Professional UI** - Clean, intuitive, responsive design
 
-## 🚀 Quick Start
+**Quick Start:**
+1. Open the [WBSC Generator](https://rumagoso.github.io/worldview-belief-system-card/tools/generator/)
+2. Choose a template or start from scratch
+3. Fill out guided forms for each category
+4. Export your completed WBSC as JSON
 
-### Option 1: Use Online
-**Live Tool**: https://rumagoso.github.io/worldview-belief-system-card/tools/generator/
+Perfect for AI developers, researchers, and organizations creating transparent documentation of their systems' values and approaches.
 
-### Option 2: Run Locally
-```bash
-cd tools/generator
-python3 -m http.server 8000
+---
