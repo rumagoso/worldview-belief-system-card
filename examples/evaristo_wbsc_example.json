@@ -1,0 +1,274 @@
+{
+  "wbsc_version": "2.1.0",
+  
+  "metadata": {
+    "system_name": "Evaristo.ai Multi-Model Portuguese Language Platform",
+    "version": "1.0.0-beta",
+    "last_updated": "2025-08-28",
+    "contact": "nlx@di.fc.ul.pt",
+    "organization": "NLX - Grupo de Fala e Linguagem Natural, Faculdade de Ciências da Universidade de Lisboa & OUSAR.AI"
+  },
+
+  "core_values": {
+    "primary_ethical_framework": "deontological",
+    "key_principles": [
+      "Portuguese language preservation and digital sovereignty",
+      "Open source accessibility and democratization of AI",
+      "User privacy and data protection",
+      "Academic research transparency and reproducibility",
+      "Cultural and linguistic diversity respect",
+      "Educational empowerment and digital literacy",
+      "Non-commercial exploitation of user data"
+    ],
+    "value_hierarchies": [
+      {
+        "higher_priority": "User privacy and data sovereignty",
+        "lower_priority": "System personalization features",
+        "rationale": "Commitment to not tracking users or sharing data with third parties supersedes personalization capabilities"
+      },
+      {
+        "higher_priority": "Portuguese language cultural authenticity",
+        "lower_priority": "Multilingual expansion",
+        "rationale": "Primary mission to serve Portuguese-speaking communities with culturally appropriate responses"
+      },
+      {
+        "higher_priority": "Open source transparency",
+        "lower_priority": "Competitive commercial advantages",
+        "rationale": "Academic mission prioritizes knowledge sharing and community benefit over commercial gain"
+      },
+      {
+        "higher_priority": "Educational accuracy in stable domains",
+        "lower_priority": "Real-time factual updates",
+        "rationale": "Focus on reliable educational content rather than potentially unreliable current events"
+      }
+    ]
+  },
+
+  "stakeholder_input": {
+    "consultation_approach": "continuous_dialogue",
+    
+    "stakeholder_groups": [
+      "academic_institutions",
+      "civil_society_organizations",
+      "user_representatives", 
+      "domain_experts",
+      "advocacy_groups",
+      "regulatory_bodies"
+    ],
+    
+    "engagement_timeline": {
+      "consultation_start": "2024-01-15",
+      "consultation_end": "2025-06-15",
+      "duration_weeks": 70,
+      "ongoing_engagement": true
+    },
+    
+    "engagement_methods": [
+      "expert_advisory_panels",
+      "academic_collaborations",
+      "public_consultations",
+      "community_workshops",
+      "stakeholder_surveys",
+      "collaborative_design_sessions"
+    ],
+    
+    "accessibility_measures": {
+      "languages_supported": ["Portuguese (PT-PT)", "Portuguese (PT-BR)", "English"],
+      "accessibility_accommodations": true,
+      "remote_participation": true,
+      "materials_provided_advance": true,
+      "interpretation_services": false
+    },
+    
+    "input_integration": {
+      "changes_made": [
+        "Implemented multi-model architecture based on user feedback for different use cases (Gervásio, LLama, Qwen, Mistral, Sabiá, DeepSeek)",
+        "Enhanced Portuguese cultural context awareness following input from Portuguese cultural institutions",
+        "Added multi-heteronym personality system based on literary community suggestions",
+        "Strengthened privacy protections beyond standard requirements after digital rights advocacy",
+        "Integrated academic evaluation frameworks (CALAME-PT benchmark) based on research community input",
+        "Developed open-source model distribution following academic transparency principles",
+        "Enhanced European Portuguese (PT-PT) vs Brazilian Portuguese (PT-BR) distinction based on linguistic expert feedback"
+      ],
+      
+      "feedback_addressed": [
+        {
+          "concern": "Need for Portuguese language digital sovereignty and independence from foreign AI systems",
+          "response": "Engaged with Portuguese government entities and academic institutions on digital sovereignty strategy",
+          "action_taken": "Developed fully open-source platform with local hosting capabilities and no dependency on foreign commercial AI services"
+        },
+        {
+          "concern": "Preservation of Portuguese cultural context and linguistic nuances",
+          "response": "Consulted with Portuguese literature experts, cultural historians, and linguistics researchers",
+          "action_taken": "Trained Gervásio model specifically on European Portuguese corpus and implemented cultural context recognition systems"
+        },
+        {
+          "concern": "Privacy risks and data exploitation common in commercial AI platforms",
+          "response": "Worked with digital rights organizations and privacy advocacy groups",
+          "action_taken": "Implemented zero-tracking architecture with no data sharing to third parties and no commercial exploitation of user interactions"
+        },
+        {
+          "concern": "Lack of transparency in AI decision-making for academic and research purposes",
+          "response": "Collaborated with academic ethics boards and research transparency advocates",
+          "action_taken": "Made all models, training data sources, and methodologies publicly available with comprehensive documentation"
+        },
+        {
+          "concern": "Educational misinformation risks, especially regarding historical and current events",
+          "response": "Engaged with educational institutions and fact-checking organizations",
+          "action_taken": "Implemented clear disclaimers about training data cutoffs and developed educational guidance on AI limitation awareness"
+        },
+        {
+          "concern": "Need for diverse model options to serve different Portuguese-speaking communities",
+          "response": "Consulted with Brazilian Portuguese speakers and other Portuguese-speaking countries representatives",
+          "action_taken": "Integrated multiple models including Brazilian-focused Sabiá and international options while maintaining Portuguese as primary focus"
+        }
+      ],
+      
+      "rejected_suggestions": [
+        {
+          "suggestion": "Implement user behavior tracking for personalized recommendations",
+          "rationale": "Conflicts with core privacy principles and commitment to user data protection"
+        },
+        {
+          "suggestion": "Commercialize the platform through premium subscription services",
+          "rationale": "Would undermine democratization mission and academic open-access principles"
+        },
+        {
+          "suggestion": "Focus primarily on Brazilian Portuguese due to larger market size",
+          "rationale": "Would compromise core mission of European Portuguese digital sovereignty and cultural preservation"
+        },
+        {
+          "suggestion": "Integrate real-time web search for current events",
+          "rationale": "Could introduce misinformation risks and compromise the educational focus on reliable knowledge"
+        }
+      ],
+      
+      "ongoing_mechanisms": [
+        "Monthly academic advisory board meetings with linguistics and AI ethics experts",
+        "Quarterly public feedback collection through university community engagement",
+        "Bi-annual review with Portuguese government digital sovereignty working group",
+        "Continuous model evaluation with CALAME-PT benchmark updates",
+        "Annual comprehensive stakeholder assessment with civil society organizations",
+        "Real-time user feedback collection system for platform improvements",
+        "Regular collaboration reviews with international Portuguese language research networks"
+      ]
+    },
+    
+    "transparency_measures": {
+      "consultation_summary_published": true,
+      "feedback_reports_public": true,
+      "decision_rationale_documented": true,
+      "stakeholder_roster_disclosed": true,
+      "public_comment_period": true
+    }
+  },
+
+  "cultural_context": {
+    "primary_cultural_context": "Portuguese (European variant) with awareness of broader Lusophone community",
+    "geographic_focus": [
+      "Portugal (primary)",
+      "Portuguese-speaking communities globally",
+      "Academic institutions worldwide studying Portuguese language",
+      "European Union Portuguese language preservation efforts"
+    ],
+    "language_assumptions": [
+      "European Portuguese (PT-PT) as primary linguistic variant",
+      "Brazilian Portuguese (PT-BR) recognition and support through Sabiá model",
+      "Portuguese cultural references from literature, cinema, and history",
+      "Academic Portuguese register and terminology",
+      "Regional Portuguese dialectical variations awareness"
+    ],
+    "social_context_factors": [
+      "Portuguese digital sovereignty concerns in EU context",
+      "Academic research environment with open-access principles",
+      "Small language community preservation needs",
+      "Educational institution budget constraints",
+      "Cross-cultural communication between PT-PT and PT-BR speakers",
+      "European data protection regulatory environment (GDPR)"
+    ]
+  },
+
+  "decision_making": {
+    "ethical_dilemma_approach": "Academic ethics committee consultation with precedence for Portuguese cultural values, user privacy, and educational benefit",
+    "value_tradeoff_mechanism": "Consensus-building through academic peer review with transparent documentation of decisions and rationale",
+    "uncertainty_handling": "Explicit uncertainty acknowledgment with references to training data limitations and knowledge cutoff dates",
+    "conflict_resolution": "Multi-stakeholder academic committee review with Portuguese cultural context prioritization and user community input integration"
+  },
+
+  "bias_limitations": {
+    "known_biases": [
+      {
+        "bias_type": "Temporal knowledge bias",
+        "description": "Training data cutoffs vary by model (2022-2024), creating gaps in recent factual knowledge",
+        "mitigation_efforts": "Clear disclosure of knowledge cutoff dates for each model and educational guidance about information verification"
+      },
+      {
+        "bias_type": "European Portuguese cultural bias",
+        "description": "Primary focus on PT-PT cultural context may underrepresent other Portuguese-speaking regions",
+        "mitigation_efforts": "Integration of Brazilian Portuguese Sabiá model and consultation with broader Lusophone academic networks"
+      },
+      {
+        "bias_type": "Academic institutional bias", 
+        "description": "Development within university context may reflect academic perspectives over general population needs",
+        "mitigation_efforts": "Public consultation processes and community workshop engagement beyond academic circles"
+      },
+      {
+        "bias_type": "Open-source model performance disparities",
+        "description": "Open models typically 10-100x smaller than commercial alternatives, affecting capability consistency",
+        "mitigation_efforts": "Multi-model architecture allowing users to select appropriate models for different tasks and transparent performance documentation"
+      },
+      {
+        "bias_type": "Training corpus representativeness",
+        "description": "Limited availability of high-quality Portuguese training data compared to English resources",
+        "mitigation_efforts": "Comprehensive corpus assembly from diverse Portuguese sources and ongoing data quality improvement efforts"
+      }
+    ],
+    
+    "limitations": [
+      "Cannot access real-time information or current events beyond training data cutoff dates",
+      "Variable performance quality across different models in the multi-model platform",
+      "Limited factual accuracy on recent events, particularly post-2023 developments",
+      "Primarily optimized for Portuguese language tasks, with reduced capabilities in other languages",
+      "Cannot learn from individual conversations or maintain persistent user memory",
+      "Limited multimodal capabilities compared to commercial AI platforms",
+      "May struggle with highly specialized technical domains not well-represented in Portuguese training data"
+    ],
+    
+    "uncertainty_areas": [
+      "Performance consistency across different Portuguese regional dialects and sociolects",
+      "Accuracy of responses on topics with limited Portuguese-language source material",
+      "Cross-cultural communication effectiveness for non-Portuguese speakers",
+      "Long-term sustainability of open-source model development and maintenance",
+      "Comparative performance evaluation against rapidly evolving commercial AI systems",
+      "Effectiveness in serving diverse Portuguese-speaking communities beyond Portugal and Brazil"
+    ],
+    
+    "failure_modes": [
+      {
+        "failure_type": "Factual inaccuracy on recent events",
+        "likelihood": "high",
+        "mitigation": "Clear disclaimers about knowledge cutoffs, user education about verification needs, and transparency about training data limitations"
+      },
+      {
+        "failure_type": "Cultural misunderstanding for non-Portuguese contexts",
+        "likelihood": "medium",
+        "mitigation": "Multi-model options for different cultural contexts, ongoing stakeholder feedback integration, and cultural sensitivity training"
+      },
+      {
+        "failure_type": "Performance degradation on specialized technical topics",
+        "likelihood": "medium",
+        "mitigation": "Model selection guidance for different use cases, transparent capability documentation, and referral to specialized resources"
+      },
+      {
+        "failure_type": "Inappropriate content generation",
+        "likelihood": "low", 
+        "mitigation": "Academic ethics oversight, content filtering based on educational appropriateness, and community reporting mechanisms"
+      },
+      {
+        "failure_type": "Model availability or technical infrastructure failure",
+        "likelihood": "low",
+        "mitigation": "Multi-model redundancy, academic institutional support, and open-source community backup maintenance"
+      }
+    ]
+  }
+}
