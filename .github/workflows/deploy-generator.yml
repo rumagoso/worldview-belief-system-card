@@ -3,6 +3,7 @@ name: Deploy to GitHub Pages
 on:
   push:
     branches: [ main ]
+    paths: [ 'tools/generator/**' ]
   workflow_dispatch:
 
 permissions:
@@ -12,6 +13,9 @@ permissions:
 
 jobs:
   deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}tools/generator/
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -23,7 +27,8 @@ jobs:
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: tools/generator
+          path: ./tools/generator
           
       - name: Deploy to GitHub Pages
+        id: deployment
         uses: actions/deploy-pages@v4
