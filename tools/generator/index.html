@@ -30,6 +30,17 @@
             margin: 0;
             background-color: #f3f4f6;
         }
+        .main-container {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+        @media (min-width: 768px) {
+            .main-container {
+                flex-direction: row;
+                height: 100vh;
+            }
+        }
     </style>
 </head>
 <body class="bg-gray-100 flex items-center justify-center min-h-screen p-4">
@@ -41,7 +52,7 @@
     </div>
 
     <!-- Main App Container -->
-    <div id="root" class="hidden w-full max-w-4xl bg-white rounded-xl shadow-2xl p-6 md:p-10 transform transition-all duration-300 ease-in-out"></div>
+    <div id="root" class="hidden w-full max-w-4xl md:max-w-7xl bg-white rounded-xl shadow-2xl p-6 md:p-10 transform transition-all duration-300 ease-in-out main-container"></div>
     
     <script type="text/babel">
         const { useState, useEffect, useMemo } = React;
@@ -76,6 +87,7 @@
         // Main React Component
         const WBSCGenerator = () => {
             const [step, setStep] = useState(0);
+            const [showPreview, setShowPreview] = useState(false);
             const [wbscData, setWbscData] = useState({
                 wbsc_version: GENERATOR_VERSION,
                 system_name: "",
@@ -119,6 +131,45 @@
             const handleArrayChange = (path) => (e) => {
                 const value = e.target.value.split(',').map(item => item.trim());
                 updateWbscData(path, value);
+            };
+
+            const handleImport = (e) => {
+                const file = e.target.files[0];
+                if (!file) return;
+
+                const reader = new FileReader();
+                reader.onload = (event) => {
+                    try {
+                        const importedData = JSON.parse(event.target.result);
+                        setWbscData(importedData);
+                        setStep(0); // Reset to the first step after import
+                        setShowPreview(false);
+                    } catch (error) {
+                        console.error("Failed to parse JSON file:", error);
+                        // Implement a user-facing error message
+                        alert("Error: The file is not a valid JSON. Please try again.");
+                    }
+                };
+                reader.readAsText(file);
+            };
+
+            const handleExport = () => {
+                const results = {
+                    ...wbscData,
+                    transparency_score: `${overallScore.toFixed(1)}/4.0`,
+                    generated_at: new Date().toISOString(),
+                    generator_version: GENERATOR_VERSION
+                };
+                const jsonString = safeJSONStringify(results);
+                const blob = new Blob([jsonString], { type: 'application/json' });
+                const url = URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = `wbsc-card-${wbscData.system_name || 'generated'}.json`;
+                document.body.appendChild(a);
+                a.click();
+                document.body.removeChild(a);
+                URL.revokeObjectURL(url);
             };
 
             const renderInput = (label, path, type = 'text', placeholder = '', score = false, isArray = false) => {
@@ -207,11 +258,6 @@
                 </div>
             );
 
-            // TODO: Add the code for steps 4-7 based on the user's request.
-            // The existing renderStep4 function is for cultural awareness, so I'll create new render functions
-            // for the remaining steps and adjust the numbering. The user's original file was mis-numbered.
-
-            // Here's the corrected implementation for the remaining steps.
             const renderStep4 = () => (
                 <div>
                     <h2 className="text-2xl font-bold mb-4">Step 5: Uncertainty & Limitations</h2>
@@ -276,6 +322,10 @@
                         <pre className="bg-gray-800 text-white p-4 rounded-lg overflow-x-auto text-sm w-full max-w-full h-auto max-h-96">
                             {safeJSONStringify(results)}
                         </pre>
+                        <button onClick={handleExport} className="mt-4 flex items-center px-4 py-2 rounded-lg bg-orange-500 text-white font-medium hover:bg-orange-600 transition-colors duration-200">
+                            Download JSON
+                            <span data-lucide="download" className="w-5 h-5 ml-2"></span>
+                        </button>
                     </div>
                 );
             };
@@ -303,14 +353,20 @@
                 "Ethical Principles",
                 "Data Privacy & Security",
                 "Transparency & Explainability",
-                "Review & Export"
             ];
 
-            const handleNext = () => setStep(prev => Math.min(prev + 1, stepTitles.length - 1));
+            const handleNext = () => {
+                if (step < stepTitles.length - 1) {
+                    setStep(prev => prev + 1);
+                } else {
+                    setStep(stepTitles.length); // Final step is review/export
+                }
+            };
             const handleBack = () => setStep(prev => Math.max(prev - 1, 0));
+            const handleStepClick = (index) => setStep(index);
 
             const totalSteps = stepTitles.length;
-            const progress = (step / (totalSteps - 1)) * 100;
+            const progress = (step / totalSteps) * 100;
 
             useEffect(() => {
                 // Initialize Lucide icons
@@ -318,53 +374,88 @@
             }, [step]);
             
             return (
-                <div className="flex flex-col h-full">
-                    {/* Header */}
-                    <header className="flex items-center justify-between mb-8 pb-4 border-b border-gray-200">
-                        <div className="flex items-center space-x-2">
-                            <span data-lucide="sparkles" className="text-orange-500"></span>
-                            <h1 className="text-xl font-semibold text-gray-800">WBSC Generator</h1>
+                <div className="flex flex-col md:flex-row h-full">
+                    {/* Sidebar Navigation */}
+                    <aside className="w-full md:w-64 bg-gray-50 p-4 md:p-6 rounded-xl md:rounded-r-none border-b md:border-b-0 md:border-r border-gray-200 mb-6 md:mb-0">
+                        <h3 className="text-lg font-bold text-gray-800 mb-4 flex items-center">
+                            <span data-lucide="list-checks" className="w-5 h-5 mr-2"></span>
+                            Categories
+                        </h3>
+                        <nav>
+                            <ul>
+                                {stepTitles.map((title, index) => (
+                                    <li key={index} className="mb-2">
+                                        <button 
+                                            onClick={() => { handleStepClick(index); setShowPreview(false); }}
+                                            className={`w-full text-left p-3 rounded-lg transition-colors duration-200 ${step === index ? 'bg-orange-100 text-orange-600 font-semibold' : 'text-gray-700 hover:bg-gray-200'}`}
+                                        >
+                                            {title}
+                                        </button>
+                                    </li>
+                                ))}
+                            </ul>
+                        </nav>
+                        <div className="mt-6 pt-6 border-t border-gray-200">
+                             <label className="w-full flex items-center px-4 py-2 rounded-lg bg-gray-200 text-gray-700 font-medium hover:bg-gray-300 transition-colors duration-200 cursor-pointer mb-2">
+                                <span data-lucide="upload" className="w-5 h-5 mr-2"></span>
+                                Import JSON
+                                <input type="file" className="hidden" accept=".json" onChange={handleImport} />
+                             </label>
                         </div>
-                        <div className="flex items-center space-x-4">
-                            <span className="text-sm font-medium text-gray-500 hidden md:block">{stepTitles[step]}</span>
-                            <div className="relative w-24 md:w-32 bg-gray-200 rounded-full h-2">
-                                <div className="absolute top-0 left-0 h-2 bg-orange-500 rounded-full" style={{ width: `${progress}%` }}></div>
+                    </aside>
+
+                    {/* Main Content Area */}
+                    <div className="flex-grow p-4 md:p-6 flex flex-col">
+                        {/* Header with Progress Bar and Actions */}
+                        <header className="flex flex-col md:flex-row items-center justify-between mb-8 pb-4 border-b border-gray-200">
+                            <div className="flex items-center space-x-4 mb-4 md:mb-0 w-full md:w-auto">
+                                <span className="text-sm font-medium text-gray-500 block">Progress: {Math.round(progress)}%</span>
+                                <div className="relative w-full md:w-48 bg-gray-200 rounded-full h-2">
+                                    <div className="absolute top-0 left-0 h-2 bg-orange-500 rounded-full" style={{ width: `${progress}%` }}></div>
+                                </div>
                             </div>
-                        </div>
-                    </header>
+                            <div className="flex space-x-4 w-full md:w-auto justify-between">
+                                <button onClick={() => setShowPreview(!showPreview)} className="flex-1 md:flex-none flex items-center justify-center px-4 py-2 rounded-lg bg-gray-100 text-gray-700 font-medium hover:bg-gray-200 transition-colors duration-200">
+                                    <span data-lucide={showPreview ? "file-pen" : "eye"} className="w-5 h-5 mr-2"></span>
+                                    {showPreview ? "Edit Card" : "Preview JSON"}
+                                </button>
+                            </div>
+                        </header>
 
-                    {/* Main Content */}
-                    <main className="flex-grow overflow-y-auto">
-                        {renderCurrentStep()}
-                    </main>
+                        {/* Main Content */}
+                        <main className="flex-grow overflow-y-auto">
+                            {showPreview ? renderResults() : renderCurrentStep()}
+                        </main>
 
-                    {/* Footer / Navigation */}
-                    <footer className="mt-8 pt-4 border-t border-gray-200 flex justify-between items-center">
-                        <button 
-                            onClick={handleBack} 
-                            disabled={step === 0} 
-                            className={`flex items-center px-4 py-2 rounded-lg font-medium transition-colors duration-200 ${step === 0 ? 'bg-gray-200 text-gray-400 cursor-not-allowed' : 'bg-gray-100 text-gray-700 hover:bg-gray-200'}`}
-                        >
-                            <span data-lucide="arrow-left" className="w-5 h-5 mr-2"></span>
-                            Back
-                        </button>
-                        <button 
-                            onClick={handleNext} 
-                            className="flex items-center px-4 py-2 rounded-lg bg-orange-500 text-white font-medium hover:bg-orange-600 transition-colors duration-200"
-                        >
-                            {step < totalSteps - 1 ? (
-                                <>
-                                    Next
-                                    <span data-lucide="arrow-right" className="w-5 h-5 ml-2"></span>
-                                </>
-                            ) : (
-                                <>
-                                    Generate WBSC
-                                    <span data-lucide="check" className="w-5 h-5 ml-2"></span>
-                                </>
-                            )}
-                        </button>
-                    </footer>
+                        {/* Footer / Navigation */}
+                        <footer className="mt-8 pt-4 border-t border-gray-200 flex justify-between items-center">
+                            <button 
+                                onClick={handleBack} 
+                                disabled={step === 0 || showPreview} 
+                                className={`flex items-center px-4 py-2 rounded-lg font-medium transition-colors duration-200 ${step === 0 || showPreview ? 'bg-gray-200 text-gray-400 cursor-not-allowed' : 'bg-gray-100 text-gray-700 hover:bg-gray-200'}`}
+                            >
+                                <span data-lucide="arrow-left" className="w-5 h-5 mr-2"></span>
+                                Back
+                            </button>
+                            <button 
+                                onClick={handleNext} 
+                                disabled={showPreview}
+                                className={`flex items-center px-4 py-2 rounded-lg font-medium transition-colors duration-200 ${showPreview ? 'bg-gray-200 text-gray-400 cursor-not-allowed' : 'bg-orange-500 text-white hover:bg-orange-600'}`}
+                            >
+                                {step < totalSteps - 1 ? (
+                                    <>
+                                        Next
+                                        <span data-lucide="arrow-right" className="w-5 h-5 ml-2"></span>
+                                    </>
+                                ) : (
+                                    <>
+                                        Review & Export
+                                        <span data-lucide="check" className="w-5 h-5 ml-2"></span>
+                                    </>
+                                )}
+                            </button>
+                        </footer>
+                    </div>
                 </div>
             );
         };
@@ -381,7 +472,7 @@
             // Hide loading, show app after component loads
             setTimeout(() => {
                 document.getElementById('loading').style.display = 'none';
-                document.getElementById('root').style.display = 'block';
+                document.getElementById('root').style.display = 'flex';
             }, 1000);
         });
         
