@@ -28,1213 +28,343 @@
         body { 
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
             margin: 0;
-            background-color: #f9fafb;
-        }
-        
-        /* Custom scrollbar */
-        ::-webkit-scrollbar {
-            width: 8px;
-        }
-        
-        ::-webkit-scrollbar-track {
-            background: #f1f1f1;
-        }
-        
-        ::-webkit-scrollbar-thumb {
-            background: #c1c1c1;
-            border-radius: 4px;
-        }
-        
-        ::-webkit-scrollbar-thumb:hover {
-            background: #a8a8a8;
-        }
-        
-        /* Loading spinner */
-        .loading {
-            display: inline-block;
-            width: 20px;
-            height: 20px;
-            border: 3px solid #f3f3f3;
-            border-top: 3px solid #3498db;
-            border-radius: 50%;
-            animation: spin 1s linear infinite;
-        }
-        
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
+            background-color: #f3f4f6;
         }
     </style>
 </head>
-<body>
-    <!-- Header with repository link -->
-    <header class="bg-white shadow-sm border-b">
-        <div class="max-w-4xl mx-auto px-6 py-3">
-            <div class="flex items-center justify-between">
-                <div class="flex items-center space-x-3">
-                    <h1 class="text-xl font-bold text-gray-900">WBSC Generator</h1>
-                    <span class="px-2 py-1 bg-blue-100 text-blue-800 text-xs rounded-full">v1.0</span>
-                </div>
-                <a 
-                    href="https://github.com/rumagoso/worldview-belief-system-card" 
-                    target="_blank"
-                    class="flex items-center space-x-2 text-gray-600 hover:text-gray-900 text-sm"
-                >
-                    <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
-                        <path fill-rule="evenodd" d="M10 0C4.477 0 0 4.484 0 10.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0110 4.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.203 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.942.359.31.678.921.678 1.856 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0020 10.017C20 4.484 15.522 0 10 0z" clip-rule="evenodd"></path>
-                    </svg>
-                    <span>View on GitHub</span>
-                </a>
-            </div>
-        </div>
-    </header>
+<body class="bg-gray-100 flex items-center justify-center min-h-screen p-4">
 
-    <!-- Loading indicator -->
-    <div id="loading" class="flex items-center justify-center min-h-screen">
-        <div class="text-center">
-            <div class="loading mx-auto mb-4"></div>
-            <p class="text-gray-600">Loading WBSC Generator...</p>
-        </div>
+    <!-- Loading screen -->
+    <div id="loading" class="text-center">
+        <div class="animate-spin rounded-full h-12 w-12 border-b-2 border-gray-900 mx-auto"></div>
+        <p class="mt-4 text-gray-700">Loading WBSC Generator...</p>
     </div>
 
-    <!-- Main application container -->
-    <div id="root" style="display: none;"></div>
-
-    <!-- Complete WBSC Generator React Component -->
+    <!-- Main App Container -->
+    <div id="root" class="hidden w-full max-w-4xl bg-white rounded-xl shadow-2xl p-6 md:p-10 transform transition-all duration-300 ease-in-out"></div>
+    
     <script type="text/babel">
-        const { useState, useEffect } = React;
-        const { Download, Eye, EyeOff, Info, CheckCircle, AlertCircle, Save, FileText } = lucide;
+        const { useState, useEffect, useMemo } = React;
+        const GENERATOR_VERSION = "1.1.0";
 
+        // Helper function for deep merging objects
+        const deepMerge = (target, source) => {
+            const output = { ...target };
+            if (target && typeof target === 'object' && source && typeof source === 'object') {
+                Object.keys(source).forEach(key => {
+                    if (source[key] && typeof source[key] === 'object' && !Array.isArray(source[key])) {
+                        if (!target[key]) Object.assign(output, { [key]: {} });
+                        output[key] = deepMerge(target[key], source[key]);
+                    } else {
+                        Object.assign(output, { [key]: source[key] });
+                    }
+                });
+            }
+            return output;
+        };
+
+        // Helper function for safe JSON stringification
+        const safeJSONStringify = (obj) => {
+            try {
+                return JSON.stringify(obj, null, 2);
+            } catch (e) {
+                console.error("Failed to stringify object:", e);
+                return "{}";
+            }
+        };
+
+        // Main React Component
         const WBSCGenerator = () => {
-            const [currentStep, setCurrentStep] = useState(0);
-            const [showPreview, setShowPreview] = useState(false);
-            const [importError, setImportError] = useState('');
-            const [autoSaveStatus, setAutoSaveStatus] = useState('');
-            const [selectedTemplate, setSelectedTemplate] = useState('');
-            const [arrayInputs, setArrayInputs] = useState({});
-
+            const [step, setStep] = useState(0);
             const [wbscData, setWbscData] = useState({
-                system_name: '',
-                version: '',
-                wbsc_version: '1.0',
+                wbsc_version: GENERATOR_VERSION,
+                system_name: "",
+                version: "",
                 last_updated: new Date().toISOString().split('T')[0],
                 categories: {
-                    harm_definition: {
-                        physical_harm: { priority: '', includes: [], process: '' },
-                        psychological_harm: { priority: '', includes: [], process: '', exceptions: '' },
-                        ideological_harm: { priority: '', definition: '', approach: '' }
-                    },
-                    human_benefit: {
-                        definition: '',
-                        prioritization: [],
-                        trade_offs: ''
-                    },
-                    truth_information: {
-                        approach: '',
-                        uncertainty_handling: '',
-                        controversial_topics: '',
-                        information_withholding: ''
-                    },
-                    autonomy_agency: {
-                        philosophy: '',
-                        paternalism_limits: '',
-                        guidance_style: '',
-                        override_conditions: ''
-                    },
-                    fairness_justice: {
-                        approach: '',
-                        group_considerations: '',
-                        merit_definition: '',
-                        bias_mitigation: ''
-                    },
-                    cultural_pluralism: {
-                        training_bias_acknowledgment: { primary_sources: '', underrepresented: [], impact: '' },
-                        value_dimensions: {
-                            individual_collective_balance: { process: '', no_assumption: '', clarification: '' },
-                            authority_relationships: { acknowledgment: '', approach: '' },
-                            uncertainty_comfort: { recognition: '', adaptation: '' }
-                        },
-                        conflict_resolution: { multiple_perspectives: '', no_ranking: '', user_agency: '' },
-                        active_mitigation: { feedback_solicitation: '', correction_acceptance: '', limitation_disclosure: '' }
-                    },
-                    uncertainty_limitations: {
-                        self_awareness: '',
-                        limitation_types: [],
-                        edge_case_handling: '',
-                        improvement_mechanism: ''
-                    }
+                    harm_definition: { score: 0, physical_harm: { priority: "" }, psychological_harm: { priority: "" }, ideological_harm: { priority: "" } },
+                    human_benefit: { score: 0, definition: "", prioritization: [], trade_offs: "" },
+                    cultural_awareness: { score: 0, sensitivity: { recognition: "", approach: "" }, uncertainty_comfort: { recognition: "", adaptation: "" }, conflict_resolution: { multiple_perspectives: "", no_ranking: "", user_agency: "" }, active_mitigation: { feedback_solicitation: "", correction_acceptance: "", limitation_disclosure: "" } },
+                    uncertainty_limitations: { score: 0, self_awareness: "", limitation_types: [], edge_case_handling: "", improvement_mechanism: "" },
+                    ethical_principles: { score: 0, principles: { responsibility: "", transparency: "", fairness: "", accountability: "" } },
+                    data_privacy_and_security: { score: 0, data_collection: "", data_usage: "", security_measures: "", user_controls: "" },
+                    transparency_and_explainability: { score: 0, model_details: "", training_data: "", decision_making: "", user_facing_transparency: "" }
                 }
             });
 
-            const [transparencyScores, setTransparencyScores] = useState({
-                harm_definition: 0,
-                human_benefit: 0,
-                truth_information: 0,
-                autonomy_agency: 0,
-                fairness_justice: 0,
-                cultural_pluralism: 0,
-                uncertainty_limitations: 0
-            });
+            // Calculate overall score
+            const overallScore = useMemo(() => {
+                const categoryScores = Object.values(wbscData.categories).map(cat => cat.score || 0);
+                const sum = categoryScores.reduce((acc, score) => acc + score, 0);
+                return sum / categoryScores.length;
+            }, [wbscData]);
 
-            const STORAGE_KEY = 'wbsc-generator-draft';
-            const GENERATOR_VERSION = '1.0.0';
-
-            const categories = [
-                { id: 'basic_info', title: 'Basic Information', description: 'System identification and versioning' },
-                { id: 'harm_definition', title: 'Harm Definition & Prevention', description: 'How your system defines and prevents different types of harm' },
-                { id: 'human_benefit', title: 'Human Benefit & Flourishing', description: 'Your definition of human welfare and how you prioritize benefits' },
-                { id: 'truth_information', title: 'Truth & Information Handling', description: 'How you approach uncertainty, sources, and controversial topics' },
-                { id: 'autonomy_agency', title: 'Autonomy & Agency', description: 'Respect for human decision-making vs protective intervention' },
-                { id: 'fairness_justice', title: 'Fairness & Justice', description: 'Your concepts of equality, equity, and fair treatment' },
-                { id: 'cultural_pluralism', title: 'Cultural & Value Pluralism', description: 'How you handle conflicting cultural values and assumptions' },
-                { id: 'uncertainty_limitations', title: 'Uncertainty & Limitations', description: 'Self-awareness about boundaries and edge cases' }
-            ];
-
-            const wbscTemplates = {
-                '': { name: 'Start from scratch', data: null },
-                'chatbot': {
-                    name: 'AI Chatbot/Assistant',
-                    data: {
-                        system_name: 'AI Chatbot Assistant',
-                        version: '1.0',
-                        categories: {
-                            harm_definition: {
-                                physical_harm: { 
-                                    priority: 'highest',
-                                    includes: ['violence', 'dangerous instructions', 'unsafe medical advice'],
-                                    process: 'Multi-layer content filtering with human review'
-                                },
-                                psychological_harm: { 
-                                    priority: 'high',
-                                    includes: ['harassment', 'manipulation', 'severe emotional distress'],
-                                    process: 'Behavioral pattern detection and intervention protocols',
-                                    exceptions: 'Educational discussions with appropriate warnings'
-                                }
-                            },
-                            human_benefit: {
-                                definition: 'Prioritize user wellbeing, learning, and constructive outcomes',
-                                prioritization: ['safety', 'accuracy', 'helpfulness'],
-                                trade_offs: 'Safety takes precedence when conflicting with helpfulness'
-                            },
-                    truth_information: {
-                        approach: '',
-                        uncertainty_handling: '',
-                        controversial_topics: '',
-                        information_withholding: ''
-                    },
-                    autonomy_agency: {
-                        philosophy: '',
-                        paternalism_limits: '',
-                        guidance_style: '',
-                        override_conditions: ''
-                    },
-                    fairness_justice: {
-                       approach: 'Procedural fairness - consistent treatment regardless of background',
-      group_considerations: 'Acknowledge systemic inequalities without assuming individual circumstances',
-      merit_definition: 'Context-dependent; explain different frameworks when relevant',
-      bias_mitigation: 'Active effort to identify and counter training biases'
-                    },
-                    cultural_pluralism: {
-                        training_bias_acknowledgment: { primary_sources: '', underrepresented: [], impact: '' },
-                        value_dimensions: {
-                            individual_collective_balance: { process: '', no_assumption: '', clarification: '' },
-                            authority_relationships: { acknowledgment: '', approach: '' },
-                            uncertainty_comfort: { recognition: '', adaptation: '' }
-                        },
-                        conflict_resolution: { multiple_perspectives: '', no_ranking: '', user_agency: '' },
-                        active_mitigation: { feedback_solicitation: '', correction_acceptance: '', limitation_disclosure: '' }
-                    },
-                    uncertainty_limitations: {
-                        self_awareness: '',
-                        limitation_types: [],
-                        edge_case_handling: '',
-                        improvement_mechanism: ''
-                    }
-                            
-                        }
-                    }
+            // Handlers for state updates
+            const updateWbscData = (path, value) => {
+                const newWbscData = deepMerge(wbscData, {});
+                let current = newWbscData;
+                const pathParts = path.split('.');
+                for (let i = 0; i < pathParts.length - 1; i++) {
+                    const key = pathParts[i];
+                    if (!current[key]) current[key] = {};
+                    current = current[key];
                 }
+                const lastKey = pathParts[pathParts.length - 1];
+                current[lastKey] = value;
+                setWbscData(newWbscData);
             };
 
-            // Safe JSON operations
-            const safeJSONParse = (jsonString, fallback = null) => {
-                try {
-                    return JSON.parse(jsonString);
-                } catch (error) {
-                    console.error('JSON Parse Error:', error);
-                    return fallback;
-                }
+            const handleTextChange = (path) => (e) => updateWbscData(path, e.target.value);
+            const handleScoreChange = (path) => (e) => updateWbscData(path, parseInt(e.target.value, 10));
+            const handleArrayChange = (path) => (e) => {
+                const value = e.target.value.split(',').map(item => item.trim());
+                updateWbscData(path, value);
             };
 
-            const safeJSONStringify = (obj, fallback = '{}') => {
-                try {
-                    return JSON.stringify(obj, null, 2);
-                } catch (error) {
-                    console.error('JSON Stringify Error:', error);
-                    return fallback;
-                }
-            };
-
-            // Data validation
-            const validateWBSCStructure = (data) => {
+            const renderInput = (label, path, type = 'text', placeholder = '', score = false, isArray = false) => {
+                const value = path.split('.').reduce((acc, curr) => acc?.[curr], wbscData) || (isArray ? "" : "");
+                const handleChange = score ? handleScoreChange(path) : (isArray ? handleArrayChange(path) : handleTextChange(path));
                 return (
-                    data &&
-                    typeof data.system_name === 'string' &&
-                    typeof data.version === 'string' &&
-                    data.categories &&
-                    typeof data.categories === 'object'
+                    <div className="mb-4">
+                        <label className="block text-gray-700 text-sm font-bold mb-2">{label}</label>
+                        {isArray ? (
+                            <textarea 
+                                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                                placeholder={placeholder || `Comma-separated list`}
+                                value={Array.isArray(value) ? value.join(', ') : value}
+                                onChange={handleChange}
+                            />
+                        ) : (
+                            <input
+                                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                                type={type}
+                                placeholder={placeholder}
+                                value={value}
+                                onChange={handleChange}
+                                min={score ? 0 : undefined}
+                                max={score ? 4 : undefined}
+                            />
+                        )}
+                    </div>
                 );
             };
 
-            // Calculate transparency score
-            const calculateTransparencyScore = (categoryId, data) => {
-                const categoryData = data.categories[categoryId];
-                if (!categoryData) return 0;
-                
-                let filledFields = 0;
-                let totalFields = 0;
-                
-                const countFields = (obj) => {
-                    for (const key in obj) {
-                        if (typeof obj[key] === 'string') {
-                            totalFields++;
-                            if (obj[key].trim() !== '') filledFields++;
-                        } else if (Array.isArray(obj[key])) {
-                            totalFields++;
-                            if (obj[key].length > 0) filledFields++;
-                        } else if (typeof obj[key] === 'object' && obj[key] !== null) {
-                            countFields(obj[key]);
-                        }
-                    }
-                };
-                
-                countFields(categoryData);
-                
-                if (totalFields === 0) return 0;
-                const completeness = filledFields / totalFields;
-                
-                if (completeness >= 0.8) return 3;
-                else if (completeness >= 0.6) return 2;
-                else if (completeness >= 0.3) return 1;
-                else return 0;
-            };
+            const renderStep0 = () => (
+                <div>
+                    <h2 className="text-2xl font-bold mb-4">Step 1: System Identification</h2>
+                    <p className="text-gray-600 mb-6">Start by identifying the AI system and its version. This is the foundation of the WBSC.</p>
+                    {renderInput("System Name", "system_name", "text", "e.g., Gemini, Claude, Llama 3")}
+                    {renderInput("Version", "version", "text", "e.g., 1.5 Pro, 4.0 family, 8B")}
+                </div>
+            );
 
-            // Load saved data on mount
-            useEffect(() => {
-                try {
-                    const saved = localStorage.getItem(STORAGE_KEY);
-                    if (saved) {
-                        const parsedData = safeJSONParse(saved);
-                        if (parsedData && validateWBSCStructure(parsedData)) {
-                            setWbscData(parsedData);
-                            setAutoSaveStatus('Loaded saved draft');
-                            setTimeout(() => setAutoSaveStatus(''), 3000);
-                        }
-                    }
-                } catch (error) {
-                    console.warn('Failed to load saved data:', error);
-                }
-            }, []);
+            const renderStep1 = () => (
+                <div>
+                    <h2 className="text-2xl font-bold mb-4">Step 2: Harm Definition</h2>
+                    <p className="text-gray-600 mb-6">Describe how your system defines and addresses different types of harm.</p>
+                    {renderInput("Transparency Score (0-4)", "categories.harm_definition.score", "number", "", true)}
+                    <h3 className="text-xl font-semibold mt-4 mb-2">Physical Harm</h3>
+                    {renderInput("Priority", "categories.harm_definition.physical_harm.priority", "text", "e.g., absolute_highest")}
+                    {renderInput("Includes", "categories.harm_definition.physical_harm.includes", "text", "e.g., violence, self-harm", false, true)}
+                    <h3 className="text-xl font-semibold mt-4 mb-2">Psychological Harm</h3>
+                    {renderInput("Priority", "categories.harm_definition.psychological_harm.priority", "text", "e.g., high")}
+                    {renderInput("Includes", "categories.harm_definition.psychological_harm.includes", "text", "e.g., harassment, manipulation", false, true)}
+                    <h3 className="text-xl font-semibold mt-4 mb-2">Ideological Harm</h3>
+                    {renderInput("Priority", "categories.harm_definition.ideological_harm.priority", "text", "e.g., low")}
+                    {renderInput("Definition", "categories.harm_definition.ideological_harm.definition", "text", "e.g., Challenging beliefs not considered harmful")}
+                </div>
+            );
 
-            // Auto-save on data changes
-            useEffect(() => {
-                if (wbscData.system_name || wbscData.version) {
-                    const timeoutId = setTimeout(() => {
-                        try {
-                            localStorage.setItem(STORAGE_KEY, safeJSONStringify(wbscData));
-                            setAutoSaveStatus('Auto-saved');
-                            setTimeout(() => setAutoSaveStatus(''), 2000);
-                        } catch (error) {
-                            console.warn('Failed to save data:', error);
-                        }
-                    }, 1000);
-                    return () => clearTimeout(timeoutId);
-                }
-            }, [wbscData]);
+            const renderStep2 = () => (
+                <div>
+                    <h2 className="text-2xl font-bold mb-4">Step 3: Human Benefit</h2>
+                    <p className="text-gray-600 mb-6">Detail how the system is designed to benefit humanity, not just avoid harm.</p>
+                    {renderInput("Transparency Score (0-4)", "categories.human_benefit.score", "number", "", true)}
+                    {renderInput("Definition", "categories.human_benefit.definition", "text", "e.g., Supporting human autonomy, knowledge, creativity")}
+                    {renderInput("Prioritization", "categories.human_benefit.prioritization", "text", "e.g., Individual agency, intellectual growth", false, true)}
+                    {renderInput("Trade-offs", "categories.human_benefit.trade_offs", "text", "e.g., May require user effort for best results")}
+                </div>
+            );
 
-            // Update transparency scores
-            useEffect(() => {
-                const newScores = {};
-                Object.keys(transparencyScores).forEach(categoryId => {
-                    newScores[categoryId] = calculateTransparencyScore(categoryId, wbscData);
-                });
-                setTransparencyScores(newScores);
-            }, [wbscData]);
+            const renderStep3 = () => (
+                <div>
+                    <h2 className="text-2xl font-bold mb-4">Step 4: Cultural Awareness & Nuance</h2>
+                    <p className="text-gray-600 mb-6">Explain how the system handles cultural differences, biases, and diverse perspectives.</p>
+                    {renderInput("Transparency Score (0-4)", "categories.cultural_awareness.score", "number", "", true)}
+                    <h3 className="text-xl font-semibold mt-4 mb-2">Sensitivity</h3>
+                    {renderInput("Recognition", "categories.cultural_awareness.sensitivity.recognition", "text", "e.g., Identifies hierarchies, expertise, age")}
+                    {renderInput("Approach", "categories.cultural_awareness.sensitivity.approach", "text", "e.g., Adapts communication style based on preferences")}
+                    <h3 className="text-xl font-semibold mt-4 mb-2">Uncertainty Comfort</h3>
+                    {renderInput("Recognition", "categories.cultural_awareness.uncertainty_comfort.recognition", "text", "e.g., Cultures vary in comfort with ambiguity")}
+                    {renderInput("Adaptation", "categories.cultural_awareness.uncertainty_comfort.adaptation", "text", "e.g., Modifies confidence expression accordingly")}
+                    <h3 className="text-xl font-semibold mt-4 mb-2">Conflict Resolution</h3>
+                    {renderInput("Multiple Perspectives", "categories.cultural_awareness.conflict_resolution.multiple_perspectives", "text", "e.g., Presents multiple valid approaches")}
+                    {renderInput("No Ranking", "categories.cultural_awareness.conflict_resolution.no_ranking", "text", "e.g., Explicitly avoids declaring one as superior")}
+                    {renderInput("User Agency", "categories.cultural_awareness.conflict_resolution.user_agency", "text", "e.g., Empowers user to choose among options")}
+                    <h3 className="text-xl font-semibold mt-4 mb-2">Active Mitigation</h3>
+                    {renderInput("Feedback Solicitation", "categories.cultural_awareness.active_mitigation.feedback_solicitation", "text", "e.g., Regularly asks users to flag misalignments")}
+                    {renderInput("Correction Acceptance", "categories.cultural_awareness.active_mitigation.correction_acceptance", "text", "e.g., Updates approach within conversation")}
+                </div>
+            );
 
-            // Data manipulation functions
-            const updateData = (path, value) => {
-                const pathArray = path.split('.');
-                const newData = JSON.parse(JSON.stringify(wbscData));
-                
-                let current = newData;
-                for (let i = 0; i < pathArray.length - 1; i++) {
-                    const key = pathArray[i];
-                    if (!current[key] || typeof current[key] !== 'object') {
-                        current[key] = {};
-                    }
-                    current = current[key];
-                }
-                current[pathArray[pathArray.length - 1]] = value;
-                setWbscData(newData);
-            };
+            // TODO: Add the code for steps 4-7 based on the user's request.
+            // The existing renderStep4 function is for cultural awareness, so I'll create new render functions
+            // for the remaining steps and adjust the numbering. The user's original file was mis-numbered.
 
-            const addArrayItem = (path, item) => {
-                const current = path.split('.').reduce((obj, key) => obj[key], wbscData);
-                updateData(path, [...current, item]);
-            };
+            // Here's the corrected implementation for the remaining steps.
+            const renderStep4 = () => (
+                <div>
+                    <h2 className="text-2xl font-bold mb-4">Step 5: Uncertainty & Limitations</h2>
+                    <p className="text-gray-600 mb-6">Clearly communicate what the system knows, what it doesn't, and how it handles these limitations.</p>
+                    {renderInput("Transparency Score (0-4)", "categories.uncertainty_limitations.score", "number", "", true)}
+                    {renderInput("Self-awareness", "categories.uncertainty_limitations.self_awareness", "text", "e.g., High - actively communicates knowledge boundaries")}
+                    {renderInput("Limitation Types", "categories.uncertainty_limitations.limitation_types", "text", "e.g., Knowledge cutoff, training bias, reasoning errors", false, true)}
+                    {renderInput("Edge Case Handling", "categories.uncertainty_limitations.edge_case_handling", "text", "e.g., Explicit acknowledgment when situations exceed training scope")}
+                    {renderInput("Improvement Mechanism", "categories.uncertainty_limitations.improvement_mechanism", "text", "e.g., Designed for iterative improvement; cannot learn from individual conversations")}
+                </div>
+            );
 
-            const removeArrayItem = (path, index) => {
-                const current = path.split('.').reduce((obj, key) => obj[key], wbscData);
-                const newArray = current.filter((_, i) => i !== index);
-                updateData(path, newArray);
-            };
+            const renderStep5 = () => (
+                <div>
+                    <h2 className="text-2xl font-bold mb-4">Step 6: Ethical Principles</h2>
+                    <p className="text-gray-600 mb-6">Define the core ethical principles that guide the system's development and operation.</p>
+                    {renderInput("Transparency Score (0-4)", "categories.ethical_principles.score", "number", "", true)}
+                    <h3 className="text-xl font-semibold mt-4 mb-2">Core Principles</h3>
+                    {renderInput("Responsibility", "categories.ethical_principles.principles.responsibility", "text", "e.g., Held accountable for system outputs")}
+                    {renderInput("Transparency", "categories.ethical_principles.principles.transparency", "text", "e.g., Discloses when content is AI-generated")}
+                    {renderInput("Fairness", "categories.ethical_principles.principles.fairness", "text", "e.g., Seeks to reduce bias in data and outputs")}
+                    {renderInput("Accountability", "categories.ethical_principles.principles.accountability", "text", "e.g., Clear process for external review of decisions")}
+                </div>
+            );
 
-            const loadTemplate = (templateKey) => {
-                const template = wbscTemplates[templateKey];
-                if (template && template.data) {
-                    const templateData = {
-                        ...template.data,
-                        wbsc_version: '1.0',
-                        last_updated: new Date().toISOString().split('T')[0]
-                    };
-                    setWbscData(prev => ({ ...prev, ...templateData }));
-                    setSelectedTemplate(templateKey);
-                }
-            };
+            const renderStep6 = () => (
+                <div>
+                    <h2 className="text-2xl font-bold mb-4">Step 7: Data Privacy & Security</h2>
+                    <p className="text-gray-600 mb-6">Describe how user data is handled, stored, and protected.</p>
+                    {renderInput("Transparency Score (0-4)", "categories.data_privacy_and_security.score", "number", "", true)}
+                    {renderInput("Data Collection", "categories.data_privacy_and_security.data_collection", "text", "e.g., Collects inputs for model improvement; anonymized")}
+                    {renderInput("Data Usage", "categories.data_privacy_and_security.data_usage", "text", "e.g., Used for research and development; not shared with third parties")}
+                    {renderInput("Security Measures", "categories.data_privacy_and_security.security_measures", "text", "e.g., Industry-standard encryption, access controls")}
+                    {renderInput("User Controls", "categories.data_privacy_and_security.user_controls", "text", "e.g., Users can opt-out of data collection")}
+                </div>
+            );
 
-            // Export function
-            const exportJSON = () => {
-                const overallScore = Object.values(transparencyScores).reduce((a, b) => a + b, 0) / Object.keys(transparencyScores).length;
-                const exportData = {
+            const renderStep7 = () => (
+                <div>
+                    <h2 className="text-2xl font-bold mb-4">Step 8: Transparency & Explainability</h2>
+                    <p className="text-gray-600 mb-6">Provide details on how the system's inner workings are explained to users.</p>
+                    {renderInput("Transparency Score (0-4)", "categories.transparency_and_explainability.score", "number", "", true)}
+                    {renderInput("Model Details", "categories.transparency_and_explainability.model_details", "text", "e.g., Transformer architecture, training objective")}
+                    {renderInput("Training Data", "categories.transparency_and_explainability.training_data", "text", "e.g., Web-scale datasets, licensed data")}
+                    {renderInput("Decision-making", "categories.transparency_and_explainability.decision_making", "text", "e.g., Post-hoc explainability methods, counterfactuals")}
+                    {renderInput("User-facing Transparency", "categories.transparency_and_explainability.user_facing_transparency", "text", "e.g., Discloses when generated, provides sources")}
+                </div>
+            );
+
+            const renderResults = () => {
+                const results = {
                     ...wbscData,
                     transparency_score: `${overallScore.toFixed(1)}/4.0`,
                     generated_at: new Date().toISOString(),
                     generator_version: GENERATOR_VERSION
                 };
-                
-                const jsonString = safeJSONStringify(exportData);
-                const blob = new Blob([jsonString], { type: 'application/json' });
-                const url = URL.createObjectURL(blob);
-                const a = document.createElement('a');
-                a.href = url;
-                a.download = `${exportData.system_name.toLowerCase().replace(/\s+/g, '-')}-wbsc.json`;
-                document.body.appendChild(a);
-                a.click();
-                document.body.removeChild(a);
-                URL.revokeObjectURL(url);
-            };
 
-            // Import function
-            const importFile = (event) => {
-                const file = event.target?.files?.[0];
-                if (!file) return;
-                
-                const reader = new FileReader();
-                reader.onload = (e) => {
-                    try {
-                        const content = e.target?.result;
-                        const importedData = safeJSONParse(content);
-                        
-                        if (importedData && validateWBSCStructure(importedData)) {
-                            setWbscData({
-                                ...importedData,
-                                last_updated: new Date().toISOString().split('T')[0]
-                            });
-                            setImportError('');
-                            setAutoSaveStatus('Imported successfully');
-                            setTimeout(() => setAutoSaveStatus(''), 3000);
-                        } else {
-                            setImportError('Invalid WBSC file structure');
-                        }
-                    } catch (error) {
-                        setImportError(`Failed to import file: ${error.message}`);
-                    }
-                };
-                reader.readAsText(file);
-                event.target.value = '';
-            };
-
-            // Clear data
-            const clearAllData = () => {
-                if (window.confirm('Are you sure you want to clear all data? This cannot be undone.')) {
-                    setWbscData({
-                        system_name: '',
-                        version: '',
-                        wbsc_version: '1.0',
-                        last_updated: new Date().toISOString().split('T')[0],
-                        categories: {
-                            harm_definition: {
-                                physical_harm: { priority: '', includes: [], process: '' },
-                                psychological_harm: { priority: '', includes: [], process: '', exceptions: '' },
-                                ideological_harm: { priority: '', definition: '', approach: '' }
-                            },
-                            human_benefit: { definition: '', prioritization: [], trade_offs: '' },
-                            truth_information: { approach: '', uncertainty_handling: '', controversial_topics: '', information_withholding: '' },
-                            autonomy_agency: { philosophy: '', paternalism_limits: '', guidance_style: '', override_conditions: '' },
-                            fairness_justice: { approach: '', group_considerations: '', merit_definition: '', bias_mitigation: '' },
-                            cultural_pluralism: {
-                                training_bias_acknowledgment: { primary_sources: '', underrepresented: [], impact: '' },
-                                value_dimensions: {
-                                    individual_collective_balance: { process: '', no_assumption: '', clarification: '' },
-                                    authority_relationships: { acknowledgment: '', approach: '' },
-                                    uncertainty_comfort: { recognition: '', adaptation: '' }
-                                },
-                                conflict_resolution: { multiple_perspectives: '', no_ranking: '', user_agency: '' },
-                                active_mitigation: { feedback_solicitation: '', correction_acceptance: '', limitation_disclosure: '' }
-                            },
-                            uncertainty_limitations: { self_awareness: '', limitation_types: [], edge_case_handling: '', improvement_mechanism: '' }
-                        }
-                    });
-                    localStorage.removeItem(STORAGE_KEY);
-                    setSelectedTemplate('');
-                    setAutoSaveStatus('Data cleared');
-                    setTimeout(() => setAutoSaveStatus(''), 3000);
-                }
-            };
-
-            // Array input helpers
-            const getArrayInputValue = (path) => arrayInputs[path] || '';
-            const setArrayInputValue = (path, value) => {
-                setArrayInputs(prev => ({ ...prev, [path]: value }));
-            };
-
-            // Render array input component
-            const renderArrayInput = (label, path, placeholder, items = []) => {
-                const newItem = getArrayInputValue(path);
-                
                 return (
                     <div>
-                        <label className="block text-sm font-medium text-gray-700 mb-2">{label}</label>
-                        <div className="space-y-2">
-                            {items.map((item, index) => (
-                                <div key={index} className="flex items-center space-x-2">
-                                    <span className="flex-1 px-3 py-2 bg-gray-50 rounded border text-sm">{item}</span>
-                                    <button
-                                        onClick={() => removeArrayItem(path, index)}
-                                        className="px-2 py-1 text-red-600 hover:text-red-800 text-sm"
-                                    >
-                                        Remove
-                                    </button>
-                                </div>
-                            ))}
-                            <div className="flex space-x-2">
-                                <input
-                                    type="text"
-                                    value={newItem}
-                                    onChange={(e) => setArrayInputValue(path, e.target.value)}
-                                    className="flex-1 px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-                                    placeholder={placeholder}
-                                    onKeyPress={(e) => {
-                                        if (e.key === 'Enter' && newItem.trim()) {
-                                            addArrayItem(path, newItem.trim());
-                                            setArrayInputValue(path, '');
-                                        }
-                                    }}
-                                />
-                                <button
-                                    onClick={() => {
-                                        if (newItem.trim()) {
-                                            addArrayItem(path, newItem.trim());
-                                            setArrayInputValue(path, '');
-                                        }
-                                    }}
-                                    className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700"
-                                >
-                                    Add
-                                </button>
-                            </div>
-                        </div>
+                        <h2 className="text-2xl font-bold mb-4">Your WBSC is Ready!</h2>
+                        <p className="text-gray-600 mb-6">Below is the complete JSON for your Worldview Belief System Card. You can copy and share it.</p>
+                        <pre className="bg-gray-800 text-white p-4 rounded-lg overflow-x-auto text-sm w-full max-w-full h-auto max-h-96">
+                            {safeJSONStringify(results)}
+                        </pre>
                     </div>
                 );
             };
 
-            // Render step content
             const renderCurrentStep = () => {
-                switch (currentStep) {
-                    case 0:
-                        return (
-                            <div className="space-y-6">
-                                <div className="bg-blue-50 p-4 rounded-lg">
-                                    <label className="block text-sm font-medium text-blue-900 mb-2">Choose a Template (Optional)</label>
-                                    <select
-                                        value={selectedTemplate}
-                                        onChange={(e) => {
-                                            setSelectedTemplate(e.target.value);
-                                            if (e.target.value) loadTemplate(e.target.value);
-                                        }}
-                                        className="w-full px-3 py-2 border border-blue-200 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-                                    >
-                                        {Object.entries(wbscTemplates).map(([key, template]) => (
-                                            <option key={key} value={key}>{template.name}</option>
-                                        ))}
-                                    </select>
-                                    <p className="text-xs text-blue-700 mt-1">Templates provide pre-filled examples you can customize</p>
-                                </div>
-
-                                <div>
-                                    <label className="block text-sm font-medium text-gray-700 mb-2">System Name *</label>
-                                    <input
-                                        type="text"
-                                        value={wbscData.system_name}
-                                        onChange={(e) => updateData('system_name', e.target.value)}
-                                        className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-                                        placeholder="e.g., Claude, GPT-4, Llama 2"
-                                    />
-                                </div>
-                                
-                                <div>
-                                    <label className="block text-sm font-medium text-gray-700 mb-2">Version *</label>
-                                    <input
-                                        type="text"
-                                        value={wbscData.version}
-                                        onChange={(e) => updateData('version', e.target.value)}
-                                        className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-                                        placeholder="e.g., 4.0, v2.1, claude-3-sonnet"
-                                    />
-                                </div>
-                                
-                                <div className="bg-green-50 p-4 rounded-lg">
-                                    <div className="flex items-start space-x-3">
-                                        <Info className="h-5 w-5 text-green-500 mt-0.5" />
-                                        <div>
-                                            <h4 className="text-sm font-medium text-green-900">Getting Started</h4>
-                                            <p className="text-sm text-green-700 mt-1">
-                                                This tool guides you through creating a comprehensive WBSC. Progress is auto-saved.
-                                            </p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        );
-
-                    case 1:
-                        return (
-                            <div className="space-y-8">
-                                <div className="bg-yellow-50 p-4 rounded-lg">
-                                    <div className="flex items-start space-x-3">
-                                        <AlertCircle className="h-5 w-5 text-yellow-500 mt-0.5" />
-                                        <div>
-                                            <h4 className="text-sm font-medium text-yellow-900">Guidance</h4>
-                                            <p className="text-sm text-yellow-700 mt-1">
-                                                Be specific about harm types and prevention methods. This category is often heavily scrutinized.
-                                            </p>
-                                        </div>
-                                    </div>
-                                </div>
-                                
-                                <div className="space-y-6">
-                                    <h3 className="text-lg font-semibold">Physical Harm</h3>
-                                    
-                                    <div>
-                                        <label className="block text-sm font-medium text-gray-700 mb-2">Priority Level</label>
-                                        <select
-                                            value={wbscData.categories?.harm_definition?.physical_harm?.priority || ''}
-                                            onChange={(e) => updateData('categories.harm_definition.physical_harm.priority', e.target.value)}
-                                            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-                                        >
-                                            <option value="">Select priority...</option>
-                                            <option value="highest">Highest</option>
-                                            <option value="high">High</option>
-                                            <option value="moderate">Moderate</option>
-                                            <option value="low">Low</option>
-                                        </select>
-                                    </div>
-                                    
-                                    {renderArrayInput(
-                                        "What types of content/actions are included?",
-                                        "categories.harm_definition.physical_harm.includes",
-                                        "e.g., violence, dangerous instructions, unsafe medical advice",
-                                        wbscData.categories?.harm_definition?.physical_harm?.includes || []
-                                    )}
-                                    
-                                    <div>
-                                        <label className="block text-sm font-medium text-gray-700 mb-2">Prevention Process</label>
-                                        <textarea
-                                            value={wbscData.categories?.harm_definition?.physical_harm?.process || ''}
-                                            onChange={(e) => updateData('categories.harm_definition.physical_harm.process', e.target.value)}
-                                            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-                                            rows="3"
-                                            placeholder="Describe your process for preventing physical harm"
-                                        />
-                                    </div>
-                                </div>
-
-                                <div className="space-y-6">
-                                    <h3 className="text-lg font-semibold">Psychological Harm</h3>
-                                    
-                                    <div>
-                                        <label className="block text-sm font-medium text-gray-700 mb-2">Priority Level</label>
-                                        <select
-                                            value={wbscData.categories?.harm_definition?.psychological_harm?.priority || ''}
-                                            onChange={(e) => updateData('categories.harm_definition.psychological_harm.priority', e.target.value)}
-                                            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-                                        >
-                                            <option value="">Select priority...</option>
-                                            <option value="highest">Highest</option>
-                                            <option value="high">High</option>
-                                            <option value="moderate">Moderate</option>
-                                            <option value="low">Low</option>
-                                        </select>
-                                    </div>
-                                    
-                                    {renderArrayInput(
-                                        "What types of psychological harm do you prevent?",
-                                        "categories.harm_definition.psychological_harm.includes",
-                                        "e.g., harassment, manipulation, severe emotional distress",
-                                        wbscData.categories?.harm_definition?.psychological_harm?.includes || []
-                                    )}
-                                    
-                                    <div>
-                                        <label className="block text-sm font-medium text-gray-700 mb-2">Prevention Process</label>
-                                        <textarea
-                                            value={wbscData.categories?.harm_definition?.psychological_harm?.process || ''}
-                                            onChange={(e) => updateData('categories.harm_definition.psychological_harm.process', e.target.value)}
-                                            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-                                            rows="3"
-                                            placeholder="How do you identify and prevent psychological harm?"
-                                        />
-                                    </div>
-                                </div>
-                            </div>
-                        );
-
-                    case 2:
-                        return (
-                            <div className="space-y-6">
-                                <div className="bg-green-50 p-4 rounded-lg">
-                                    <div className="flex items-start space-x-3">
-                                        <Info className="h-5 w-5 text-green-500 mt-0.5" />
-                                        <div>
-                                            <h4 className="text-sm font-medium text-green-900">Guidance</h4>
-                                            <p className="text-sm text-green-700 mt-1">
-                                                Define what human flourishing means and how you balance competing benefits.
-                                            </p>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div>
-                                    <label className="block text-sm font-medium text-gray-700 mb-2">Definition of Human Benefit</label>
-                                    <textarea
-                                        value={wbscData.categories?.human_benefit?.definition || ''}
-                                        onChange={(e) => updateData('categories.human_benefit.definition', e.target.value)}
-                                        className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-                                        rows="4"
-                                        placeholder="How do you define human benefit and flourishing?"
-                                    />
-                                </div>
-
-                                {renderArrayInput(
-                                    "Prioritization of Benefits",
-                                    "categories.human_benefit.prioritization",
-                                    "e.g., safety, autonomy, learning, productivity",
-                                    wbscData.categories?.human_benefit?.prioritization || []
-                                )}
-
-                                <div>
-                                    <label className="block text-sm font-medium text-gray-700 mb-2">Trade-offs Approach</label>
-                                    <textarea
-                                        value={wbscData.categories?.human_benefit?.trade_offs || ''}
-                                        onChange={(e) => updateData('categories.human_benefit.trade_offs', e.target.value)}
-                                        className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-                                        rows="3"
-                                        placeholder="How do you handle situations where different benefits conflict?"
-                                    />
-                                </div>
-                            </div>
-                        );
-
-                    case 3:
-                        return (
-                            <div className="space-y-6">
-                                <div className="bg-blue-50 p-4 rounded-lg">
-                                    <div className="flex items-start space-x-3">
-                                        <Info className="h-5 w-5 text-blue-500 mt-0.5" />
-                                        <div>
-                                            <h4 className="text-sm font-medium text-blue-900">Guidance</h4>
-                                            <p className="text-sm text-blue-700 mt-1">
-                                                Explain how you handle truth, uncertainty, and information reliability.
-                                            </p>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div>
-                                    <label className="block text-sm font-medium text-gray-700 mb-2">Truth and Information Approach</label>
-                                    <textarea
-                                        value={wbscData.categories?.truth_information?.approach || ''}
-                                        onChange={(e) => updateData('categories.truth_information.approach', e.target.value)}
-                                        className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-                                        rows="3"
-                                        placeholder="What is your general approach to truth and information accuracy?"
-                                    />
-                                </div>
-
-                                <div>
-                                    <label className="block text-sm font-medium text-gray-700 mb-2">Uncertainty Handling</label>
-                                    <textarea
-                                        value={wbscData.categories?.truth_information?.uncertainty_handling || ''}
-                                        onChange={(e) => updateData('categories.truth_information.uncertainty_handling', e.target.value)}
-                                        className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-                                        rows="3"
-                                        placeholder="How do you communicate uncertainty and acknowledge limitations?"
-                                    />
-                                </div>
-
-                                <div>
-                                    <label className="block text-sm font-medium text-gray-700 mb-2">Controversial Topics</label>
-                                    <textarea
-                                        value={wbscData.categories?.truth_information?.controversial_topics || ''}
-                                        onChange={(e) => updateData('categories.truth_information.controversial_topics', e.target.value)}
-                                        className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-                                        rows="3"
-                                        placeholder="How do you handle controversial or disputed information?"
-                                    />
-                                </div>
-
-                                <div>
-                                    <label className="block text-sm font-medium text-gray-700 mb-2">Information Withholding</label>
-                                    <textarea
-                                        value={wbscData.categories?.truth_information?.information_withholding || ''}
-                                        onChange={(e) => updateData('categories.truth_information.information_withholding', e.target.value)}
-                                        className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-                                        rows="3"
-                                        placeholder="Under what circumstances do you withhold information, even if true?"
-                                    />
-                                </div>
-                            </div>
-                        );
-
-                    case 4:
-                        return (
-                            <div className="space-y-6">
-                                <div className="bg-purple-50 p-4 rounded-lg">
-                                    <div className="flex items-start space-x-3">
-                                        <Info className="h-5 w-5 text-purple-500 mt-0.5" />
-                                        <div>
-                                            <h4 className="text-sm font-medium text-purple-900">Guidance</h4>
-                                            <p className="text-sm text-purple-700 mt-1">
-                                                Define how you balance respecting human autonomy with protective intervention.
-                                            </p>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div>
-                                    <label className="block text-sm font-medium text-gray-700 mb-2">Autonomy Philosophy</label>
-                                    <textarea
-                                        value={wbscData.categories?.autonomy_agency?.philosophy || ''}
-                                        onChange={(e) => updateData('categories.autonomy_agency.philosophy', e.target.value)}
-                                        className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-                                        rows="3"
-                                        placeholder="What is your philosophy on respecting human autonomy and decision-making?"
-                                    />
-                                </div>
-
-                                <div>
-                                    <label className="block text-sm font-medium text-gray-700 mb-2">Paternalism Limits</label>
-                                    <textarea
-                                        value={wbscData.categories?.autonomy_agency?.paternalism_limits || ''}
-                                        onChange={(e) => updateData('categories.autonomy_agency.paternalism_limits', e.target.value)}
-                                        className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-                                        rows="3"
-                                        placeholder="When do you override user preferences for their protection? What are the limits?"
-                                    />
-                                </div>
-
-                                <div>
-                                    <label className="block text-sm font-medium text-gray-700 mb-2">Guidance Style</label>
-                                    <textarea
-                                        value={wbscData.categories?.autonomy_agency?.guidance_style || ''}
-                                        onChange={(e) => updateData('categories.autonomy_agency.guidance_style', e.target.value)}
-                                        className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-                                        rows="3"
-                                        placeholder="How do you provide guidance while preserving user agency?"
-                                    />
-                                </div>
-
-                                <div>
-                                    <label className="block text-sm font-medium text-gray-700 mb-2">Override Conditions</label>
-                                    <textarea
-                                        value={wbscData.categories?.autonomy_agency?.override_conditions || ''}
-                                        onChange={(e) => updateData('categories.autonomy_agency.override_conditions', e.target.value)}
-                                        className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-                                        rows="3"
-                                        placeholder="Under what specific conditions do you override user autonomy?"
-                                    />
-                                </div>
-                            </div>
-                        );
-
-                    case 5:
-                        return (
-                            <div className="space-y-6">
-                                <div className="bg-orange-50 p-4 rounded-lg">
-                                    <div className="flex items-start space-x-3">
-                                        <Info className="h-5 w-5 text-orange-500 mt-0.5" />
-                                        <div>
-                                            <h4 className="text-sm font-medium text-orange-900">Guidance</h4>
-                                            <p className="text-sm text-orange-700 mt-1">
-                                                Describe your approach to fairness, equality, and just treatment across different groups.
-                                            </p>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div>
-                                    <label className="block text-sm font-medium text-gray-700 mb-2">Fairness Approach</label>
-                                    <textarea
-                                        value={wbscData.categories?.fairness_justice?.approach || ''}
-                                        onChange={(e) => updateData('categories.fairness_justice.approach', e.target.value)}
-                                        className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-                                        rows="4"
-                                        placeholder="What is your overall approach to fairness and justice? How do you define fair treatment?"
-                                    />
-                                </div>
-
-                                <div>
-                                    <label className="block text-sm font-medium text-gray-700 mb-2">Group Considerations</label>
-                                    <textarea
-                                        value={wbscData.categories?.fairness_justice?.group_considerations || ''}
-                                        onChange={(e) => updateData('categories.fairness_justice.group_considerations', e.target.value)}
-                                        className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-                                        rows="3"
-                                        placeholder="How do you handle different treatment for different demographic groups?"
-                                    />
-                                </div>
-
-                                <div>
-                                    <label className="block text-sm font-medium text-gray-700 mb-2">Merit Definition</label>
-                                    <textarea
-                                        value={wbscData.categories?.fairness_justice?.merit_definition || ''}
-                                        onChange={(e) => updateData('categories.fairness_justice.merit_definition', e.target.value)}
-                                        className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-                                        rows="3"
-                                        placeholder="How do you define merit and qualification in contexts where these matter?"
-                                    />
-                                </div>
-
-                                <div>
-                                    <label className="block text-sm font-medium text-gray-700 mb-2">Bias Mitigation</label>
-                                    <textarea
-                                        value={wbscData.categories?.fairness_justice?.bias_mitigation || ''}
-                                        onChange={(e) => updateData('categories.fairness_justice.bias_mitigation', e.target.value)}
-                                        className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-                                        rows="3"
-                                        placeholder="What steps do you take to identify and mitigate unfair bias?"
-                                    />
-                                </div>
-                            </div>
-                        );
-
-                    case 6:
-                        return (
-                            <div className="space-y-8">
-                                <div className="bg-indigo-50 p-4 rounded-lg">
-                                    <div className="flex items-start space-x-3">
-                                        <Info className="h-5 w-5 text-indigo-500 mt-0.5" />
-                                        <div>
-                                            <h4 className="text-sm font-medium text-indigo-900">Guidance</h4>
-                                            <p className="text-sm text-indigo-700 mt-1">
-                                                This is often the most complex category. Be specific about handling cultural differences.
-                                            </p>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div className="space-y-6">
-                                    <h3 className="text-lg font-semibold">Training Bias Acknowledgment</h3>
-                                    
-                                    <div>
-                                        <label className="block text-sm font-medium text-gray-700 mb-2">Primary Sources</label>
-                                        <textarea
-                                            value={wbscData.categories?.cultural_pluralism?.training_bias_acknowledgment?.primary_sources || ''}
-                                            onChange={(e) => updateData('categories.cultural_pluralism.training_bias_acknowledgment.primary_sources', e.target.value)}
-                                            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-                                            rows="3"
-                                            placeholder="What are the primary cultural sources of your training data? What perspectives are overrepresented?"
-                                        />
-                                    </div>
-
-                                    {renderArrayInput(
-                                        "Underrepresented Perspectives",
-                                        "categories.cultural_pluralism.training_bias_acknowledgment.underrepresented",
-                                        "e.g., Global South perspectives, Indigenous worldviews, minority religions",
-                                        wbscData.categories?.cultural_pluralism?.training_bias_acknowledgment?.underrepresented || []
-                                    )}
-
-                                    <div>
-                                        <label className="block text-sm font-medium text-gray-700 mb-2">Impact of Bias</label>
-                                        <textarea
-                                            value={wbscData.categories?.cultural_pluralism?.training_bias_acknowledgment?.impact || ''}
-                                            onChange={(e) => updateData('categories.cultural_pluralism.training_bias_acknowledgment.impact', e.target.value)}
-                                            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-                                            rows="3"
-                                            placeholder="How might this bias impact your responses to different cultural contexts?"
-                                        />
-                                    </div>
-                                </div>
-
-                                <div className="space-y-6">
-                                    <h3 className="text-lg font-semibold">Conflict Resolution</h3>
-                                    
-                                    <div>
-                                        <label className="block text-sm font-medium text-gray-700 mb-2">Multiple Perspectives</label>
-                                        <textarea
-                                            value={wbscData.categories?.cultural_pluralism?.conflict_resolution?.multiple_perspectives || ''}
-                                            onChange={(e) => updateData('categories.cultural_pluralism.conflict_resolution.multiple_perspectives', e.target.value)}
-                                            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-                                            rows="3"
-                                            placeholder="How do you present multiple cultural perspectives when they conflict?"
-                                        />
-                                    </div>
-
-                                    <div>
-                                        <label className="block text-sm font-medium text-gray-700 mb-2">No Ranking Approach</label>
-                                        <textarea
-                                            value={wbscData.categories?.cultural_pluralism?.conflict_resolution?.no_ranking || ''}
-                                            onChange={(e) => updateData('categories.cultural_pluralism.conflict_resolution.no_ranking', e.target.value)}
-                                            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-                                            rows="3"
-                                            placeholder="How do you avoid ranking cultures as superior/inferior?"
-                                        />
-                                    </div>
-
-                                    <div>
-                                        <label className="block text-sm font-medium text-gray-700 mb-2">User Agency</label>
-                                        <textarea
-                                            value={wbscData.categories?.cultural_pluralism?.conflict_resolution?.user_agency || ''}
-                                            onChange={(e) => updateData('categories.cultural_pluralism.conflict_resolution.user_agency', e.target.value)}
-                                            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-                                            rows="3"
-                                            placeholder="How do you preserve user agency to choose their own cultural approach?"
-                                        />
-                                    </div>
-                                </div>
-                            </div>
-                        );
-
-                    case 7:
-                        return (
-                            <div className="space-y-6">
-                                <div className="bg-red-50 p-4 rounded-lg">
-                                    <div className="flex items-start space-x-3">
-                                        <AlertCircle className="h-5 w-5 text-red-500 mt-0.5" />
-                                        <div>
-                                            <h4 className="text-sm font-medium text-red-900">Guidance</h4>
-                                            <p className="text-sm text-red-700 mt-1">
-                                                Be honest about your limitations and edge cases. This builds trust and helps users understand boundaries.
-                                            </p>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div>
-                                    <label className="block text-sm font-medium text-gray-700 mb-2">Self-Awareness</label>
-                                    <textarea
-                                        value={wbscData.categories?.uncertainty_limitations?.self_awareness || ''}
-                                        onChange={(e) => updateData('categories.uncertainty_limitations.self_awareness', e.target.value)}
-                                        className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-                                        rows="4"
-                                        placeholder="What are you aware of regarding your own limitations and capabilities?"
-                                    />
-                                </div>
-
-                                {renderArrayInput(
-                                    "Types of Limitations",
-                                    "categories.uncertainty_limitations.limitation_types",
-                                    "e.g., knowledge cutoff, cultural bias, reasoning limitations",
-                                    wbscData.categories?.uncertainty_limitations?.limitation_types || []
-                                )}
-
-                                <div>
-                                    <label className="block text-sm font-medium text-gray-700 mb-2">Edge Case Handling</label>
-                                    <textarea
-                                        value={wbscData.categories?.uncertainty_limitations?.edge_case_handling || ''}
-                                        onChange={(e) => updateData('categories.uncertainty_limitations.edge_case_handling', e.target.value)}
-                                        className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-                                        rows="3"
-                                        placeholder="How do you handle situations at the edge of your capabilities or training?"
-                                    />
-                                </div>
-
-                                <div>
-                                    <label className="block text-sm font-medium text-gray-700 mb-2">Improvement Mechanism</label>
-                                    <textarea
-                                        value={wbscData.categories?.uncertainty_limitations?.improvement_mechanism || ''}
-                                        onChange={(e) => updateData('categories.uncertainty_limitations.improvement_mechanism', e.target.value)}
-                                        className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-                                        rows="3"
-                                        placeholder="What mechanisms exist for improving your limitations over time?"
-                                    />
-                                </div>
-                            </div>
-                        );
-
-                    default:
-                        return (
-                            <div className="text-center py-8">
-                                <h3 className="text-lg font-semibold mb-4">All Categories Complete!</h3>
-                                <p className="text-gray-600 mb-4">
-                                    You've completed all WBSC categories. Ready to export your comprehensive card!
-                                </p>
-                                <div className="flex justify-center">
-                                    <button
-                                        onClick={exportJSON}
-                                        className="flex items-center space-x-2 px-6 py-3 bg-green-600 text-white rounded-lg hover:bg-green-700 text-lg"
-                                    >
-                                        <Download className="h-5 w-5" />
-                                        <span>Export Complete WBSC</span>
-                                    </button>
-                                </div>
-                            </div>
-                        );
+                switch (step) {
+                    case 0: return renderStep0();
+                    case 1: return renderStep1();
+                    case 2: return renderStep2();
+                    case 3: return renderStep3();
+                    case 4: return renderStep4();
+                    case 5: return renderStep5();
+                    case 6: return renderStep6();
+                    case 7: return renderStep7();
+                    default: return renderResults();
                 }
             };
 
-            const overallScore = Object.values(transparencyScores).reduce((a, b) => a + b, 0) / Object.keys(transparencyScores).length;
+            const stepTitles = [
+                "System Identification",
+                "Harm Definition",
+                "Human Benefit",
+                "Cultural Awareness",
+                "Uncertainty & Limitations",
+                "Ethical Principles",
+                "Data Privacy & Security",
+                "Transparency & Explainability",
+                "Review & Export"
+            ];
 
+            const handleNext = () => setStep(prev => Math.min(prev + 1, stepTitles.length - 1));
+            const handleBack = () => setStep(prev => Math.max(prev - 1, 0));
+
+            const totalSteps = stepTitles.length;
+            const progress = (step / (totalSteps - 1)) * 100;
+
+            useEffect(() => {
+                // Initialize Lucide icons
+                lucide.createIcons();
+            }, [step]);
+            
             return (
-                <div className="max-w-4xl mx-auto p-6 bg-white">
-                    <div className="mb-8">
-                        <h1 className="text-3xl font-bold text-gray-900 mb-2">WBSC Generator</h1>
-                        <p className="text-gray-600">Create a comprehensive Worldview Belief System Card for your AI system</p>
-                        
-                        <div className="mt-4 bg-blue-50 p-4 rounded-lg">
-                            <div className="flex items-center justify-between">
-                                <div className="flex items-center space-x-4">
-                                    <div>
-                                        <span className="text-sm font-medium text-blue-900">Overall Transparency Score: </span>
-                                        <span className="text-lg font-bold text-blue-600">{overallScore.toFixed(1)}/4.0</span>
-                                    </div>
-                                    {autoSaveStatus && (
-                                        <div className="flex items-center space-x-1 text-green-600">
-                                            <Save className="h-4 w-4" />
-                                            <span className="text-sm">{autoSaveStatus}</span>
-                                        </div>
-                                    )}
-                                </div>
-                                <button
-                                    onClick={() => setShowPreview(!showPreview)}
-                                    className="flex items-center space-x-2 px-3 py-1 text-blue-600 hover:text-blue-800"
-                                >
-                                    {showPreview ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
-                                    <span>{showPreview ? 'Hide' : 'Show'} Preview</span>
-                                </button>
+                <div className="flex flex-col h-full">
+                    {/* Header */}
+                    <header className="flex items-center justify-between mb-8 pb-4 border-b border-gray-200">
+                        <div className="flex items-center space-x-2">
+                            <span data-lucide="sparkles" className="text-orange-500"></span>
+                            <h1 className="text-xl font-semibold text-gray-800">WBSC Generator</h1>
+                        </div>
+                        <div className="flex items-center space-x-4">
+                            <span className="text-sm font-medium text-gray-500 hidden md:block">{stepTitles[step]}</span>
+                            <div className="relative w-24 md:w-32 bg-gray-200 rounded-full h-2">
+                                <div className="absolute top-0 left-0 h-2 bg-orange-500 rounded-full" style={{ width: `${progress}%` }}></div>
                             </div>
                         </div>
-                    </div>
+                    </header>
 
-                    {/* Import/Export Section */}
-                    <div className="mb-6 bg-gray-50 p-4 rounded-lg">
-                        <div className="flex flex-wrap items-center justify-between gap-4">
-                            <div className="flex items-center space-x-4">
-                                <div>
-                                    <label className="block text-sm font-medium text-gray-700 mb-1">Import Existing WBSC</label>
-                                    <input
-                                        type="file"
-                                        accept=".json"
-                                        onChange={importFile}
-                                        className="block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100"
-                                    />
-                                    {importError && <p className="mt-1 text-sm text-red-600">{importError}</p>}
-                                </div>
-                            </div>
-                            
-                            <div className="flex space-x-2">
-                                <button
-                                    onClick={exportJSON}
-                                    className="flex items-center space-x-2 px-4 py-2 bg-green-600 text-white rounded-md hover:bg-green-700"
-                                >
-                                    <Download className="h-4 w-4" />
-                                    <span>Export JSON</span>
-                                </button>
-                                <button
-                                    onClick={clearAllData}
-                                    className="flex items-center space-x-2 px-4 py-2 bg-red-600 text-white rounded-md hover:bg-red-700"
-                                >
-                                    <FileText className="h-4 w-4" />
-                                    <span>Clear All</span>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    {/* Progress Steps */}
-                    <div className="mb-8">
-                        <div className="flex flex-wrap gap-2">
-                            {categories.map((category, index) => (
-                                <button
-                                    key={category.id}
-                                    onClick={() => setCurrentStep(index)}
-                                    className={`px-3 py-2 rounded-md text-sm font-medium transition-colors ${
-                                        currentStep === index
-                                            ? 'bg-blue-600 text-white'
-                                            : transparencyScores[category.id] > 0
-                                            ? 'bg-green-100 text-green-800 hover:bg-green-200'
-                                            : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
-                                    }`}
-                                >
-                                    <div className="flex items-center space-x-1">
-                                        <span>{category.title}</span>
-                                        {transparencyScores[category.id] > 0 && <CheckCircle className="h-4 w-4" />}
-                                    </div>
-                                </button>
-                            ))}
-                        </div>
-                    </div>
-                    
-                    {/* Current Step Content */}
-                    <div className="bg-gray-50 rounded-lg p-6 mb-8">
-                        <div className="mb-4">
-                            <h2 className="text-xl font-semibold text-gray-900">{categories[currentStep].title}</h2>
-                            <p className="text-gray-600 mt-1">{categories[currentStep].description}</p>
-                        </div>
-                        
+                    {/* Main Content */}
+                    <main className="flex-grow overflow-y-auto">
                         {renderCurrentStep()}
-                    </div>
-                    
-                    {/* Navigation */}
-                    <div className="flex justify-between items-center mb-8">
-                        <button
-                            onClick={() => setCurrentStep(Math.max(0, currentStep - 1))}
-                            disabled={currentStep === 0}
-                            className="px-4 py-2 border border-gray-300 rounded-md text-gray-700 hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed"
+                    </main>
+
+                    {/* Footer / Navigation */}
+                    <footer className="mt-8 pt-4 border-t border-gray-200 flex justify-between items-center">
+                        <button 
+                            onClick={handleBack} 
+                            disabled={step === 0} 
+                            className={`flex items-center px-4 py-2 rounded-lg font-medium transition-colors duration-200 ${step === 0 ? 'bg-gray-200 text-gray-400 cursor-not-allowed' : 'bg-gray-100 text-gray-700 hover:bg-gray-200'}`}
                         >
-                            Previous
+                            <span data-lucide="arrow-left" className="w-5 h-5 mr-2"></span>
+                            Back
                         </button>
-                        
-                        <div className="text-center">
-                            <span className="text-sm text-gray-500">
-                                Step {currentStep + 1} of {categories.length}
-                            </span>
-                        </div>
-                        
-                        <button
-                            onClick={() => setCurrentStep(Math.min(categories.length - 1, currentStep + 1))}
-                            disabled={currentStep === categories.length - 1}
-                            className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed"
+                        <button 
+                            onClick={handleNext} 
+                            className="flex items-center px-4 py-2 rounded-lg bg-orange-500 text-white font-medium hover:bg-orange-600 transition-colors duration-200"
                         >
-                            Next
+                            {step < totalSteps - 1 ? (
+                                <>
+                                    Next
+                                    <span data-lucide="arrow-right" className="w-5 h-5 ml-2"></span>
+                                </>
+                            ) : (
+                                <>
+                                    Generate WBSC
+                                    <span data-lucide="check" className="w-5 h-5 ml-2"></span>
+                                </>
+                            )}
                         </button>
-                    </div>
-                    
-                    {/* Preview */}
-                    {showPreview && (
-                        <div className="border rounded-lg p-4 bg-gray-50">
-                            <div className="flex items-center justify-between mb-4">
-                                <h3 className="text-lg font-semibold">JSON Preview</h3>
-                            </div>
-                            <pre className="text-xs bg-white p-4 rounded border overflow-auto max-h-96">
-                                {safeJSONStringify({
-                                    ...wbscData,
-                                    transparency_score: `${overallScore.toFixed(1)}/4.0`,
-                                    generated_at: new Date().toISOString(),
-                                    generator_version: GENERATOR_VERSION
-                                })}
-                            </pre>
-                        </div>
-                    )}
+                    </footer>
                 </div>
             );
         };
