@@ -36,6 +36,7 @@ This directory contains real-world implementation examples of the Worldview Beli
 **Domain**: Cybersecurity & Infrastructure  
 **System**: AI-powered network threat detection  
 **Ethical Framework**: Consequentialist (outcome-focused ethics)
+
 **Key Focus**: Privacy-preserving security, explainable threat analysis
 
 **Highlights**:
@@ -49,7 +50,6 @@ This directory contains real-world implementation examples of the Worldview Beli
 **Domain**: Justice  
 **System**: AI-powered decision support system  
 **Ethical Framework**: Deontological (rule-based constitutional ethics)
-
 **Key Focus**: Due process protection, bias prevention, human judicial authority
 
 **Highlights**:
