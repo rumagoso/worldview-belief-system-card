@@ -212,7 +212,6 @@ This Code of Conduct is adapted from:
 - [Contributor Covenant v2.1](https://www.contributor-covenant.org/version/2/1/code_of_conduct.html)
 - [Mozilla Community Participation Guidelines](https://www.mozilla.org/en-US/about/governance/policies/participation/)
 - [NumFOCUS Code of Conduct](https://numfocus.org/code-of-conduct)
-- [AI Ethics Research Community Guidelines](https://aiethics.org/community-guidelines)
 
 We thank these communities for their leadership in fostering inclusive, productive collaboration environments.
 
