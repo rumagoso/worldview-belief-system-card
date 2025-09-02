@@ -1,0 +1,150 @@
+// Example 1: Financial Services AI - Loan Decision System
+{
+  "wbsc_version": "1.1.0",
+  "metadata": {
+    "system_name": "LoanDecisionAI",
+    "version": "2.1.0",
+    "last_updated": "2025-01-15",
+    "contact": "ai-ethics@bankexample.com",
+    "organization": "Example Financial Services"
+  },
+  "core_values": {
+    "primary_ethical_framework": "deontological",
+    "key_principles": [
+      "Equal opportunity regardless of demographics",
+      "Transparent rejection reasoning",
+      "Human appeal process available",
+      "Fair lending practices"
+    ],
+    "value_hierarchies": [
+      {
+        "higher_priority": "Non-discrimination",
+        "lower_priority": "Profit maximization",
+        "rationale": "Legal compliance and ethical lending take precedence over immediate financial gains"
+      },
+      {
+        "higher_priority": "Transparency",
+        "lower_priority": "Processing speed",
+        "rationale": "Borrowers have right to understand decision factors even if it slows processing"
+      }
+    ]
+  },
+  "stakeholder_input": {
+    "consultation_approach": "comprehensive_consultation",
+    "stakeholder_groups": [
+      "civil_society_organizations",
+      "affected_communities",
+      "regulatory_bodies",
+      "consumer_groups",
+      "advocacy_groups"
+    ],
+    "engagement_timeline": {
+      "consultation_start": "2024-08-01",
+      "consultation_end": "2024-11-30",
+      "duration_weeks": 17,
+      "ongoing_engagement": true
+    },
+    "engagement_methods": [
+      "public_consultations",
+      "community_workshops",
+      "stakeholder_surveys",
+      "expert_advisory_panels"
+    ],
+    "accessibility_measures": {
+      "languages_supported": ["English", "Spanish", "Portuguese"],
+      "accessibility_accommodations": true,
+      "remote_participation": true,
+      "materials_provided_advance": true,
+      "interpretation_services": true
+    },
+    "input_integration": {
+      "changes_made": [
+        "Added explicit bias detection for protected characteristics",
+        "Implemented human review requirement for all rejections",
+        "Enhanced transparency in decision explanations"
+      ],
+      "feedback_addressed": [
+        {
+          "concern": "Lack of transparency in decision-making process",
+          "response": "Implemented detailed decision explanations with key factors",
+          "action_taken": "Added plain-language reasoning for all decisions"
+        },
+        {
+          "concern": "Potential discrimination against minority communities",
+          "response": "Enhanced bias detection and mitigation measures",
+          "action_taken": "Implemented fairness constraints and regular bias audits"
+        }
+      ],
+      "rejected_suggestions": [
+        {
+          "suggestion": "Remove human oversight to increase processing speed",
+          "rationale": "Human oversight is essential for ethical lending and regulatory compliance"
+        }
+      ],
+      "ongoing_mechanisms": [
+        "Quarterly community feedback sessions",
+        "Continuous bias monitoring dashboard",
+        "Annual stakeholder review meetings"
+      ]
+    },
+    "transparency_measures": {
+      "consultation_summary_published": true,
+      "feedback_reports_public": true,
+      "decision_rationale_documented": true,
+      "stakeholder_roster_disclosed": true,
+      "public_comment_period": true
+    }
+  },
+  "cultural_context": {
+    "primary_cultural_context": "Western financial regulatory environment",
+    "geographic_focus": ["United States", "European Union", "Portugal"],
+    "language_assumptions": ["English", "Portuguese", "Spanish"],
+    "social_context_factors": [
+      "Equal opportunity lending requirements",
+      "Consumer protection regulations",
+      "Financial inclusion initiatives"
+    ]
+  },
+  "decision_making": {
+    "ethical_dilemma_approach": "Prioritize non-discrimination and transparency over efficiency",
+    "value_tradeoff_mechanism": "Weighted scoring with fairness constraints",
+    "uncertainty_handling": "Conservative approach favoring additional human review",
+    "conflict_resolution": "Escalation to human underwriters with ethics training"
+  },
+  "bias_limitations": {
+    "known_biases": [
+      {
+        "bias_type": "Historical lending bias",
+        "description": "Training data may reflect past discriminatory lending practices",
+        "mitigation_efforts": "Fairness constraints, bias detection algorithms, and regular audits"
+      },
+      {
+        "bias_type": "Geographic bias",
+        "description": "Limited training data for certain geographic regions",
+        "mitigation_efforts": "Ongoing data collection and model retraining for underrepresented areas"
+      }
+    ],
+    "limitations": [
+      "Limited training data for certain demographics",
+      "May not capture all relevant socioeconomic factors",
+      "Performance varies across different loan types"
+    ],
+    "uncertainty_areas": [
+      "Emerging economic conditions not in training data",
+      "Novel financial products",
+      "Cross-cultural financial behavior patterns"
+    ],
+    "failure_modes": [
+      {
+        "failure_type": "False rejections of qualified applicants",
+        "likelihood": "Low to Medium",
+        "mitigation": "Human review process and appeal mechanism"
+      },
+      {
+        "failure_type": "Biased decisions against protected groups",
+        "likelihood": "Low",
+        "mitigation": "Continuous bias monitoring and fairness constraints"
+      }
+    ]
+  }
+}
