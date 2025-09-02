@@ -1,0 +1,184 @@
+{
+  "wbsc_version": "1.1.0",
+  "metadata": {
+    "system_name": "Guia Prático da Justiça (GPJ)",
+    "version": "4.0",
+    "last_updated": "2025-01-15",
+    "contact": "gpj@dgpj.mj.pt",
+    "organization": "DGPJ - Direção-Geral da Política de Justiça, Ministério da Justiça"
+  },
+  "core_values": {
+    "primary_ethical_framework": "pragmatic_ethics",
+    "key_principles": [
+      "Universal access to justice information",
+      "Citizen empowerment through knowledge",
+      "Privacy by design - no personal data collection",
+      "Accuracy and reliability of legal information",
+      "Simplification of complex legal language",
+      "Equal treatment regardless of legal knowledge level"
+    ],
+    "value_hierarchies": [
+      {
+        "higher_priority": "Legal information accuracy",
+        "lower_priority": "Response speed",
+        "rationale": "Incorrect legal guidance could have serious consequences for citizens' rights"
+      },
+      {
+        "higher_priority": "Citizen privacy protection",
+        "lower_priority": "System personalization",
+        "rationale": "Citizens must access justice information without surveillance or data collection"
+      },
+      {
+        "higher_priority": "Accessible language for all citizens",
+        "lower_priority": "Legal technical precision",
+        "rationale": "Justice information must be understandable by citizens without legal training"
+      }
+    ]
+  },
+  "stakeholder_input": {
+    "consultation_approach": "continuous_dialogue",
+    "stakeholder_groups": [
+      "affected_communities",
+      "user_representatives",
+      "domain_experts",
+      "civil_society_organizations",
+      "advocacy_groups"
+    ],
+    "engagement_timeline": {
+      "consultation_start": "2024-03-01",
+      "consultation_end": "2024-08-30",
+      "duration_weeks": 26,
+      "ongoing_engagement": true
+    },
+    "engagement_methods": [
+      "stakeholder_surveys",
+      "focus_groups",
+      "online_platforms",
+      "community_workshops",
+      "feedback_periods"
+    ],
+    "accessibility_measures": {
+      "languages_supported": ["Portuguese"],
+      "accessibility_accommodations": true,
+      "remote_participation": true,
+      "materials_provided_advance": true,
+      "interpretation_services": false
+    },
+    "input_integration": {
+      "changes_made": [
+        "Implemented continuous feedback collection mechanism for response quality",
+        "Enhanced natural language processing for Portuguese legal terminology",
+        "Added human oversight and learning controls for all responses",
+        "Simplified language output to improve citizen comprehension",
+        "Integrated accessibility features for users with disabilities"
+      ],
+      "feedback_addressed": [
+        {
+          "concern": "Legal information too complex for average citizens",
+          "response": "Implemented plain Portuguese language processing with legal concept explanations",
+          "action_taken": "Developed citizen-friendly glossary integration and step-by-step guidance"
+        },
+        {
+          "concern": "Privacy concerns about data collection from justice seekers",
+          "response": "Adopted privacy-by-design approach with no personal data collection",
+          "action_taken": "System operates without storing user queries or personal information"
+        },
+        {
+          "concern": "Risk of providing incorrect legal advice affecting citizen rights",
+          "response": "Enhanced human oversight and quality control mechanisms",
+          "action_taken": "All responses reviewed and validated against official justice platform information"
+        }
+      ],
+      "rejected_suggestions": [
+        {
+          "suggestion": "Collect user data to personalize legal advice",
+          "rationale": "Privacy protection takes precedence over personalization in justice access"
+        },
+        {
+          "suggestion": "Provide specific legal advice for individual cases",
+          "rationale": "System provides information only, not legal advice, to avoid unauthorized practice of law"
+        }
+      ],
+      "ongoing_mechanisms": [
+        "Continuous user feedback collection on response quality",
+        "Monthly review of response accuracy with legal experts",
+        "Quarterly stakeholder consultation meetings",
+        "Annual accessibility and usability assessments"
+      ]
+    },
+    "transparency_measures": {
+      "consultation_summary_published": true,
+      "feedback_reports_public": true,
+      "decision_rationale_documented": true,
+      "stakeholder_roster_disclosed": false,
+      "public_comment_period": true
+    }
+  },
+  "cultural_context": {
+    "primary_cultural_context": "Portuguese legal system and administrative culture",
+    "geographic_focus": ["Portugal"],
+    "language_assumptions": ["Portuguese", "Legal Portuguese terminology"],
+    "social_context_factors": [
+      "Portuguese Constitution guarantees access to justice",
+      "Strong tradition of bureaucratic formality in legal processes",
+      "Digital divide considerations for older and rural populations",
+      "Expectation of government service accessibility",
+      "Cultural preference for personal interaction in legal matters"
+    ]
+  },
+  "decision_making": {
+    "ethical_dilemma_approach": "Prioritize citizen empowerment while maintaining legal accuracy and privacy protection",
+    "value_tradeoff_mechanism": "Information accuracy takes precedence with human oversight validation",
+    "uncertainty_handling": "Direct users to official sources and legal professionals when system uncertain",
+    "conflict_resolution": "Escalation to DGPJ legal experts for complex information conflicts"
+  },
+  "bias_limitations": {
+    "known_biases": [
+      {
+        "bias_type": "Legal complexity bias",
+        "description": "System may favor formal legal language over citizen-accessible explanations",
+        "mitigation_efforts": "Plain language processing and citizen comprehension testing"
+      },
+      {
+        "bias_type": "Urban-centric bias",
+        "description": "Information may be more relevant to urban legal contexts than rural communities",
+        "mitigation_efforts": "Rural stakeholder consultation and diverse geographic information inclusion"
+      },
+      {
+        "bias_type": "Digital literacy assumption bias",
+        "description": "Interface may assume higher digital literacy than actual user population",
+        "mitigation_efforts": "Simplified interface design and accessibility features implementation"
+      }
+    ],
+    "limitations": [
+      "Cannot provide personalized legal advice for individual cases",
+      "Limited to information available on official justice platform",
+      "May not cover all nuanced legal scenarios or edge cases",
+      "Response quality depends on quality of underlying official information",
+      "Cannot replace professional legal consultation for complex matters"
+    ],
+    "uncertainty_areas": [
+      "Rapidly changing legislation not yet updated in official platform",
+      "Complex legal scenarios requiring professional interpretation",
+      "Local jurisdiction variations not captured in general information",
+      "Cases requiring consideration of specific personal circumstances"
+    ],
+    "failure_modes": [
+      {
+        "failure_type": "Providing outdated legal information",
+        "likelihood": "Medium",
+        "mitigation": "Regular synchronization with official justice platform updates and date-stamped information"
+      },
+      {
+        "failure_type": "Misunderstanding citizen query intent",
+        "likelihood": "Medium",
+        "mitigation": "Natural language processing improvements and clarifying question mechanisms"
+      },
+      {
+        "failure_type": "Citizens treating information as formal legal advice",
+        "likelihood": "High",
+        "mitigation": "Clear disclaimers and guidance to seek professional legal counsel for specific cases"
+      }
+    ]
+  }
+}
