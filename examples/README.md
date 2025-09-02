@@ -18,6 +18,13 @@ We welcome additional examples! Please:
 3. Include transparency score justifications
 4. Clearly mark as estimates vs official declarations
 
+## Real-World Application
+These examples show how existing LLMs might implement WBSC declarations based on their current approaches. Actual implementations would require direct input from the companies and more detailed technical specifications.
+
+## Improvement Opportunities
+All three examples show room for higher transparency scores, particularly in cultural pluralism and detailed procedural documentation - demonstrating the value of the WBSC standard for driving better disclosure.
+
+New stakeholder input category provides community and stakeholder validation.
 
 (*) Notes on the initial examples
 
@@ -26,10 +33,3 @@ We welcome additional examples! Please:
 - GPT-4: Moderate transparency with some procedural details but less philosophical clarity
 - Llama 2: Lower overall but higher on limitations due to open-source nature enabling external validation
 
-## Real-World Application
-These examples show how existing LLMs might implement WBSC declarations based on their current approaches. Actual implementations would require direct input from the companies and more detailed technical specifications.
-
-## Improvement Opportunities
-All three examples show room for higher transparency scores, particularly in cultural pluralism and detailed procedural documentation - demonstrating the value of the WBSC standard for driving better disclosure.
-
-New stakeholder input category provides community and stakeholder validation.
