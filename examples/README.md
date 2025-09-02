@@ -6,7 +6,7 @@ This directory contains example WBSC implementations for real AI systems.
 - [Claude (Anthropic)](./claude-example.yaml) - Constitutional AI approach
 - [GPT-4 (OpenAI)](./gpt4-example.yaml) - RLHF safety framework  
 - [Llama 2 (Meta)](./llama2-example.yaml) - Open source model
-- [Deepseek V3](./deepseek_wbsc_example.json) -
+- [Deepseek V3](./deepseek_wbsc_example.json) - Focuses on providing a cost-effective, high-performance AI model that is accessible to developers and businesses
 - [Evaristo.ai 1.0](./evaristo_wbsc_example.json) - Open source platform for the Portuguese-speaking community to interact with and compare various open-source Large Language Models
 
 These are estimates based on publicly available information (*).
@@ -26,9 +26,7 @@ All three examples show room for higher transparency scores, particularly in cul
 
 New stakeholder input category provides community and stakeholder validation.
 
-(*) Notes on the initial examples
-
-## Transparency Score Differences
+## (*) Notes on the initial examples - Transparency Score Differences
 - Claude: Higher scores due to extensive Constitutional AI documentation and explicit ethical frameworks
 - GPT-4: Moderate transparency with some procedural details but less philosophical clarity
 - Llama 2: Lower overall but higher on limitations due to open-source nature enabling external validation
