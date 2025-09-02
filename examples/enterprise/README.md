@@ -36,7 +36,6 @@ This directory contains real-world implementation examples of the Worldview Beli
 **Domain**: Cybersecurity & Infrastructure  
 **System**: AI-powered network threat detection  
 **Ethical Framework**: Consequentialist (outcome-focused ethics)
-
 **Key Focus**: Privacy-preserving security, explainable threat analysis
 
 **Highlights**:
