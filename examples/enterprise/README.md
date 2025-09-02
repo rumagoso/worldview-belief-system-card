@@ -25,7 +25,6 @@ This directory contains real-world implementation examples of the Worldview Beli
 **Ethical Framework**: Virtue Ethics (medical ethics principles)  
 **Key Focus**: Patient safety, cultural competency, physician authority
 
-
 **Highlights**:
 - "Do no harm" principle as primary value
 - Conservative bias toward additional testing
@@ -39,6 +38,13 @@ This directory contains real-world implementation examples of the Worldview Beli
 **Ethical Framework**: Consequentialist (outcome-focused ethics)  
 **Key Focus**: Privacy-preserving security, explainable threat analysis
 
+**Highlights**:
+- Privacy-first threat detection methodology
+- Balance between security effectiveness and user privacy
+- Continuous learning from evolving threat landscapes
+- Explainable AI for security analyst decision-making
+- Global deployment with regional compliance considerations
+
 ### [Judicial Decision Support](./JudicialDecisionAI_WBSC_example.json)
 **Domain**: Justice  
 **System**: AI-powered decision support system  
@@ -46,11 +52,11 @@ This directory contains real-world implementation examples of the Worldview Beli
 **Key Focus**: Due process protection, bias prevention, human judicial authority
 
 **Highlights**:
-- Privacy-first threat detection methodology
-- Balance between security effectiveness and user privacy
-- Continuous learning from evolving threat landscapes
-- Explainable AI for security analyst decision-making
-- Global deployment with regional compliance considerations
+- Constitutional rights prioritized over administrative efficiency in all value hierarchies
+- Mandatory human review for all AI recommendations with explicit judge authority preservation
+- Appeals process specifically designed for AI-influenced judicial decisions
+- Multi-language support across Council of Europe jurisdictions (Portuguese, English, Spanish, French)
+- Transparency interface providing plain-language decision rationale to all parties (defendants, lawyers, public)
 
 ## 🎯 Implementation Guidance
 
