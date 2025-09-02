@@ -1,0 +1,150 @@
+// Example 3: Cloud Security AI - Threat Detection System
+{
+  "wbsc_version": "1.1.0",
+  "metadata": {
+    "system_name": "ThreatDetectionAI",
+    "version": "4.1.2",
+    "last_updated": "2025-01-20",
+    "contact": "security-ai@cloudsec.com",
+    "organization": "Cloud Security Solutions Inc"
+  },
+  "core_values": {
+    "primary_ethical_framework": "consequentialist",
+    "key_principles": [
+      "Minimize false positives to reduce alert fatigue",
+      "Preserve user privacy while detecting threats",
+      "Provide explainable security decisions",
+      "Maintain system availability during threat response"
+    ],
+    "value_hierarchies": [
+      {
+        "higher_priority": "Security protection",
+        "lower_priority": "System performance",
+        "rationale": "Security threats pose greater risk than temporary performance degradation"
+      },
+      {
+        "higher_priority": "User privacy",
+        "lower_priority": "Detailed threat analysis",
+        "rationale": "Privacy-preserving methods preferred even if they limit threat visibility"
+      }
+    ]
+  },
+  "stakeholder_input": {
+    "consultation_approach": "continuous_dialogue",
+    "stakeholder_groups": [
+      "user_representatives",
+      "domain_experts",
+      "regulatory_bodies",
+      "industry_peers",
+      "civil_society_organizations"
+    ],
+    "engagement_timeline": {
+      "consultation_start": "2024-09-01",
+      "consultation_end": "2024-12-15",
+      "duration_weeks": 16,
+      "ongoing_engagement": true
+    },
+    "engagement_methods": [
+      "expert_advisory_panels",
+      "stakeholder_surveys",
+      "online_platforms",
+      "collaborative_design_sessions"
+    ],
+    "accessibility_measures": {
+      "languages_supported": ["English", "Portuguese", "Spanish", "German"],
+      "accessibility_accommodations": true,
+      "remote_participation": true,
+      "materials_provided_advance": true,
+      "interpretation_services": false
+    },
+    "input_integration": {
+      "changes_made": [
+        "Implemented privacy-preserving threat analysis",
+        "Enhanced explainability features for security teams",
+        "Added user notification preferences"
+      ],
+      "feedback_addressed": [
+        {
+          "concern": "Excessive false positive rates causing alert fatigue",
+          "response": "Implemented machine learning tuning to reduce false positives",
+          "action_taken": "Added confidence scoring and adaptive thresholds"
+        },
+        {
+          "concern": "Lack of transparency in threat detection reasoning",
+          "response": "Developed explainable AI features for security analysts",
+          "action_taken": "Added detailed reasoning logs and visual threat analysis"
+        }
+      ],
+      "rejected_suggestions": [
+        {
+          "suggestion": "Access all user data for comprehensive threat analysis",
+          "rationale": "Privacy protection takes precedence over maximizing threat detection capabilities"
+        }
+      ],
+      "ongoing_mechanisms": [
+        "Monthly security team feedback integration",
+        "Quarterly privacy impact assessments",
+        "Continuous threat intelligence updates"
+      ]
+    },
+    "transparency_measures": {
+      "consultation_summary_published": true,
+      "feedback_reports_public": false,
+      "decision_rationale_documented": true,
+      "stakeholder_roster_disclosed": false,
+      "public_comment_period": false
+    }
+  },
+  "cultural_context": {
+    "primary_cultural_context": "Global cloud security environment",
+    "geographic_focus": ["Global", "EU", "North America", "Asia-Pacific"],
+    "language_assumptions": ["English", "Technical security terminology"],
+    "social_context_factors": [
+      "GDPR and privacy regulations",
+      "Cybersecurity best practices",
+      "Enterprise security requirements"
+    ]
+  },
+  "decision_making": {
+    "ethical_dilemma_approach": "Balance security needs with privacy protection using privacy-preserving techniques",
+    "value_tradeoff_mechanism": "Weighted risk scoring with privacy constraints",
+    "uncertainty_handling": "Conservative security posture with human analyst review for high-confidence threats",
+    "conflict_resolution": "Escalation to security operations center with privacy officer consultation"
+  },
+  "bias_limitations": {
+    "known_biases": [
+      {
+        "bias_type": "Network architecture bias",
+        "description": "Training data may be biased toward specific network configurations",
+        "mitigation_efforts": "Diverse network environment training data and regular model updates"
+      },
+      {
+        "bias_type": "Attack pattern temporal bias",
+        "description": "Model may be biased toward historical attack patterns",
+        "mitigation_efforts": "Continuous threat intelligence integration and real-time learning capabilities"
+      }
+    ],
+    "limitations": [
+      "May not detect novel attack patterns immediately",
+      "Performance varies with different network architectures",
+      "Limited visibility in encrypted communications"
+    ],
+    "uncertainty_areas": [
+      "Zero-day exploits and novel attack vectors",
+      "Advanced persistent threats with long dwell times",
+      "Insider threat detection in complex environments"
+    ],
+    "failure_modes": [
+      {
+        "failure_type": "False negative for sophisticated attacks",
+        "likelihood": "Medium",
+        "mitigation": "Layered defense approach with human analyst oversight"
+      },
+      {
+        "failure_type": "Privacy violation during threat analysis",
+        "likelihood": "Low",
+        "mitigation": "Privacy-preserving analysis techniques and regular privacy audits"
+      }
+    ]
+  }
+}
