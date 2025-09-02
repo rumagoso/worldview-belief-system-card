@@ -58,7 +58,7 @@ This directory contains real-world implementation examples of the Worldview Beli
 - Multi-language support across Council of Europe jurisdictions (Portuguese, English, Spanish, French)
 - Transparency interface providing plain-language decision rationale to all parties (defendants, lawyers, public)
 
-### [Justice Information AI - Guia Prático da Justiça (GPJ) - EXISTING AI SYSTEM](./GPJ-Portugal.Justice_WBSC_example.json)
+### [Justice Information AI - Guia Prático da Justiça (GPJ) - EXISTING AI SYSTEM](./GPJ-Portugal-Justice_WBSC_example.json)
 **Domain**: Government & Public Services 
 **System**: AI-powered citizen information system for justice access
 **Ethical Framework**: Pragmatic Ethics (citizen-focused practical solutions)
