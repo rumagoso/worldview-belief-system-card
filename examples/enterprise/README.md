@@ -36,14 +36,14 @@ This directory contains real-world implementation examples of the Worldview Beli
 ### [Cloud Security - Threat Detection System](./ThreatDetectionAI_WBSC_example.json)
 **Domain**: Cybersecurity & Infrastructure  
 **System**: AI-powered network threat detection  
-**Ethical Framework**: Deontological (rule-based constitutional ethics)
-**Key Focus**: Due process protection, bias prevention, human judicial authority
+**Ethical Framework**: Consequentialist (outcome-focused ethics)  
+**Key Focus**: Privacy-preserving security, explainable threat analysis
 
 ### [Judicial Decision Support](./JudicialDecisionAI_WBSC_example.json)
 **Domain**: Justice  
 **System**: AI-powered decision support system  
-**Ethical Framework**: Consequentialist (outcome-focused ethics)  
-**Key Focus**: Privacy-preserving security, explainable threat analysis
+**Ethical Framework**: Deontological (rule-based constitutional ethics)
+**Key Focus**: Due process protection, bias prevention, human judicial authority
 
 **Highlights**:
 - Privacy-first threat detection methodology
