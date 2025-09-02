@@ -1,0 +1,151 @@
+// Example 2: Healthcare AI - Medical Diagnosis Assistant
+{
+  "wbsc_version": "1.1.0",
+  "metadata": {
+    "system_name": "MedicalDiagnosisAI",
+    "version": "3.2.1",
+    "last_updated": "2025-02-01",
+    "contact": "ai-safety@healthcareai.org",
+    "organization": "Healthcare AI Research Institute"
+  },
+  "core_values": {
+    "primary_ethical_framework": "virtue_ethics",
+    "key_principles": [
+      "Do no harm (Primum non nocere)",
+      "Maximize patient benefit",
+      "Respect patient autonomy",
+      "Maintain physician authority in final decisions"
+    ],
+    "value_hierarchies": [
+      {
+        "higher_priority": "Patient safety",
+        "lower_priority": "Diagnostic efficiency",
+        "rationale": "Patient wellbeing takes absolute precedence over speed of diagnosis"
+      },
+      {
+        "higher_priority": "Conservative bias toward additional testing",
+        "lower_priority": "Cost optimization",
+        "rationale": "Better to over-test than miss critical conditions"
+      }
+    ]
+  },
+  "stakeholder_input": {
+    "consultation_approach": "meaningful_engagement",
+    "stakeholder_groups": [
+      "affected_communities",
+      "domain_experts",
+      "regulatory_bodies",
+      "user_representatives",
+      "academic_institutions",
+      "human_rights_organizations"
+    ],
+    "engagement_timeline": {
+      "consultation_start": "2024-06-01",
+      "consultation_end": "2024-09-15",
+      "duration_weeks": 15,
+      "ongoing_engagement": true
+    },
+    "engagement_methods": [
+      "expert_advisory_panels",
+      "stakeholder_surveys",
+      "focus_groups",
+      "collaborative_design_sessions"
+    ],
+    "accessibility_measures": {
+      "languages_supported": ["English", "Spanish", "Portuguese", "French"],
+      "accessibility_accommodations": true,
+      "remote_participation": true,
+      "materials_provided_advance": true,
+      "interpretation_services": true
+    },
+    "input_integration": {
+      "changes_made": [
+        "Enhanced uncertainty quantification display",
+        "Added cultural competency considerations",
+        "Implemented pediatric-specific safety protocols"
+      ],
+      "feedback_addressed": [
+        {
+          "concern": "Lack of pediatric training data representation",
+          "response": "Partnered with children's hospitals for specialized data collection",
+          "action_taken": "Developed pediatric-specific diagnostic pathways"
+        },
+        {
+          "concern": "Cultural bias in symptom interpretation",
+          "response": "Integrated cultural competency training into model",
+          "action_taken": "Added cultural context variables to diagnostic algorithms"
+        }
+      ],
+      "rejected_suggestions": [
+        {
+          "suggestion": "Automate final diagnosis without physician review",
+          "rationale": "Physician oversight is essential for patient safety and medical ethics"
+        }
+      ],
+      "ongoing_mechanisms": [
+        "Monthly physician feedback integration",
+        "Continuous safety monitoring dashboard",
+        "Semi-annual ethics review board meetings"
+      ]
+    },
+    "transparency_measures": {
+      "consultation_summary_published": true,
+      "feedback_reports_public": true,
+      "decision_rationale_documented": true,
+      "stakeholder_roster_disclosed": true,
+      "public_comment_period": true
+    }
+  },
+  "cultural_context": {
+    "primary_cultural_context": "Western medical practice standards",
+    "geographic_focus": ["North America", "Europe", "Australia"],
+    "language_assumptions": ["English", "Medical terminology"],
+    "social_context_factors": [
+      "Patient-centered care philosophy",
+      "Evidence-based medicine standards",
+      "Healthcare accessibility concerns"
+    ]
+  },
+  "decision_making": {
+    "ethical_dilemma_approach": "Prioritize patient safety with explicit uncertainty communication",
+    "value_tradeoff_mechanism": "Conservative bias with confidence intervals",
+    "uncertainty_handling": "Explicit uncertainty quantification with recommendation for human review",
+    "conflict_resolution": "Escalation to specialist physicians with ethics consultation"
+  },
+  "bias_limitations": {
+    "known_biases": [
+      {
+        "bias_type": "Demographic representation bias",
+        "description": "Training data overrepresents certain demographic groups",
+        "mitigation_efforts": "Ongoing data collection from underrepresented populations and bias correction algorithms"
+      },
+      {
+        "bias_type": "Western medicine bias",
+        "description": "System trained primarily on Western medical practices and data",
+        "mitigation_efforts": "Collaboration with international medical institutions and cultural competency integration"
+      }
+    ],
+    "limitations": [
+      "Limited pediatric training examples",
+      "Performance varies with rare diseases",
+      "May not capture all cultural health factors"
+    ],
+    "uncertainty_areas": [
+      "Novel disease presentations",
+      "Pediatric symptom interpretation",
+      "Cross-cultural symptom expression patterns"
+    ],
+    "failure_modes": [
+      {
+        "failure_type": "False negative for serious conditions",
+        "likelihood": "Low",
+        "mitigation": "Conservative diagnostic thresholds and mandatory physician review"
+      },
+      {
+        "failure_type": "Cultural misinterpretation of symptoms",
+        "likelihood": "Medium",
+        "mitigation": "Cultural competency training and diverse medical review panels"
+      }
+    ]
+  }
+}
