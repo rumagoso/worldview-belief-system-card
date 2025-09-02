@@ -36,6 +36,8 @@ This directory contains real-world implementation examples of the Worldview Beli
 **Domain**: Cybersecurity & Infrastructure  
 **System**: AI-powered network threat detection  
 **Ethical Framework**: Consequentialist (outcome-focused ethics)  
+**Ethical Framework**: Virtue Ethics (medical ethics principles)  
+**Key Focus**: Patient safety, cultural competency, physician authority
 **Key Focus**: Privacy-preserving security, explainable threat analysis
 
 **Highlights**:
