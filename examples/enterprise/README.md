@@ -46,7 +46,7 @@ This directory contains real-world implementation examples of the Worldview Beli
 - Global deployment with regional compliance considerations
 
 ### [Judicial Decision Support](./JudicialDecisionAI_WBSC_example.json)
-**Domain**: Justice  
+**Domain**: Government & Public Services  
 **System**: AI-powered decision support system  
 **Ethical Framework**: Deontological (rule-based constitutional ethics)
 **Key Focus**: Due process protection, bias prevention, human judicial authority
@@ -57,6 +57,19 @@ This directory contains real-world implementation examples of the Worldview Beli
 - Appeals process specifically designed for AI-influenced judicial decisions
 - Multi-language support across Council of Europe jurisdictions (Portuguese, English, Spanish, French)
 - Transparency interface providing plain-language decision rationale to all parties (defendants, lawyers, public)
+
+### [Justice Information AI - Guia Prático da Justiça (GPJ) - EXISTING AI SYSTEM](./GPJ-Portugal.Justice_WBSC_example.json)
+**Domain**: Government & Public Services 
+**System**: AI-powered citizen information system for justice access
+**Ethical Framework**: Pragmatic Ethics (citizen-focused practical solutions)
+**Key Focus**: Universal access to justice, privacy protection, citizen empowerment
+
+**Highlights**:
+- Privacy-by-design approach with zero personal data collection from citizens
+- Plain Portuguese language processing to make legal information accessible to all education levels
+- Integration with official Portuguese Digital Justice Platform for accurate, up-to-date legal information
+- Accessibility features for users with disabilities and digital literacy considerations
+- Clear disclaimers distinguishing information provision from legal advice
 
 ## 🎯 Implementation Guidance
 
