@@ -6,7 +6,7 @@ This directory contains real-world implementation examples of the Worldview Beli
 
 ### IMPORTANT NOTE: The Stakeholder Engagement sections and the whole example are mockups and serve only as demonstrations of WBSC card usage across different enterprise sectors
 
-### [Financial Services - Loan Decision AI](./loan-decision-ai.json)
+### [Financial Services - Loan Decision AI](./LoanDecisionAI_WBSC_example.json)
 **Domain**: Banking & Financial Services  
 **System**: AI-powered loan approval system  
 **Ethical Framework**: Deontological (rule-based ethics)  
@@ -19,7 +19,7 @@ This directory contains real-world implementation examples of the Worldview Beli
 - Multi-language support (English, Spanish, Portuguese)
 - Conservative approach prioritizing fairness over efficiency
 
-### [Healthcare - Medical Diagnosis Assistant](./medical-diagnosis-ai.json)
+### [Healthcare - Medical Diagnosis Assistant](./MedicalDiagnosisAI_WBSC_example.json)
 **Domain**: Healthcare & Medical AI  
 **System**: AI diagnostic support tool for physicians  
 **Ethical Framework**: Virtue Ethics (medical ethics principles)  
@@ -32,7 +32,7 @@ This directory contains real-world implementation examples of the Worldview Beli
 - Cultural competency integration for diverse patient populations
 - Explicit uncertainty quantification for medical decisions
 
-### [Cloud Security - Threat Detection System](./threat-detection-ai.json)
+### [Cloud Security - Threat Detection System](./ThreatDetectionAI_WBSC_example.json)
 **Domain**: Cybersecurity & Infrastructure  
 **System**: AI-powered network threat detection  
 **Ethical Framework**: Consequentialist (outcome-focused ethics)  
