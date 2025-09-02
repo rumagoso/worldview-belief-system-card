@@ -25,6 +25,7 @@ This directory contains real-world implementation examples of the Worldview Beli
 **Ethical Framework**: Virtue Ethics (medical ethics principles)  
 **Key Focus**: Patient safety, cultural competency, physician authority
 
+
 **Highlights**:
 - "Do no harm" principle as primary value
 - Conservative bias toward additional testing
@@ -35,6 +36,12 @@ This directory contains real-world implementation examples of the Worldview Beli
 ### [Cloud Security - Threat Detection System](./ThreatDetectionAI_WBSC_example.json)
 **Domain**: Cybersecurity & Infrastructure  
 **System**: AI-powered network threat detection  
+**Ethical Framework**: Deontological (rule-based constitutional ethics)
+**Key Focus**: Due process protection, bias prevention, human judicial authority
+
+### [Judicial Decision Support](./JudicialDecisionAI_WBSC_example.json)
+**Domain**: Justice  
+**System**: AI-powered decision support system  
 **Ethical Framework**: Consequentialist (outcome-focused ethics)  
 **Key Focus**: Privacy-preserving security, explainable threat analysis
 
