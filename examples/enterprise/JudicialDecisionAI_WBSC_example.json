@@ -1,0 +1,208 @@
+{
+  "wbsc_version": "1.1.0",
+  "metadata": {
+    "system_name": "JudicialDecisionAI",
+    "version": "2.3.1",
+    "last_updated": "2025-02-15",
+    "contact": "ai-governance@justice.ministry.gov",
+    "organization": "Ministry of Justice - Digital Transformation Office"
+  },
+  "core_values": {
+    "primary_ethical_framework": "deontological",
+    "key_principles": [
+      "Equal treatment before the law (Article 20 ECHR)",
+      "Presumption of innocence until proven guilty",
+      "Right to fair trial and due process",
+      "Transparency in judicial decision-making",
+      "Human judge retains ultimate authority",
+      "Protection of fundamental rights and freedoms"
+    ],
+    "value_hierarchies": [
+      {
+        "higher_priority": "Due process rights",
+        "lower_priority": "Administrative efficiency",
+        "rationale": "Constitutional rights cannot be compromised for operational convenience"
+      },
+      {
+        "higher_priority": "Equal treatment under law",
+        "lower_priority": "Historical precedent patterns",
+        "rationale": "AI must not perpetuate historical biases or discriminatory practices"
+      },
+      {
+        "higher_priority": "Human judicial authority",
+        "lower_priority": "AI recommendation confidence",
+        "rationale": "Judges must retain full decision-making authority regardless of AI confidence levels"
+      },
+      {
+        "higher_priority": "Transparency and explainability",
+        "lower_priority": "System performance optimization",
+        "rationale": "Citizens have right to understand reasoning behind judicial decisions affecting them"
+      }
+    ]
+  },
+  "stakeholder_input": {
+    "consultation_approach": "comprehensive_consultation",
+    "stakeholder_groups": [
+      "affected_communities",
+      "domain_experts",
+      "regulatory_bodies",
+      "civil_society_organizations",
+      "human_rights_organizations",
+      "advocacy_groups"
+    ],
+    "engagement_timeline": {
+      "consultation_start": "2024-04-01",
+      "consultation_end": "2024-09-30",
+      "duration_weeks": 26,
+      "ongoing_engagement": true
+    },
+    "engagement_methods": [
+      "public_consultations",
+      "expert_advisory_panels",
+      "community_workshops",
+      "stakeholder_surveys",
+      "focus_groups"
+    ],
+    "accessibility_measures": {
+      "languages_supported": ["Portuguese", "English", "Spanish", "French"],
+      "accessibility_accommodations": true,
+      "remote_participation": true,
+      "materials_provided_advance": true,
+      "interpretation_services": true
+    },
+    "input_integration": {
+      "changes_made": [
+        "Added explicit bias detection for protected characteristics (race, gender, socioeconomic status)",
+        "Implemented mandatory human review for all sentencing recommendations",
+        "Enhanced transparency features showing decision factors to all parties",
+        "Added appeals process specifically for AI-influenced decisions",
+        "Integrated fundamental rights impact assessment in all recommendations"
+      ],
+      "feedback_addressed": [
+        {
+          "concern": "Risk of perpetuating historical judicial biases against minorities",
+          "response": "Implemented comprehensive bias detection and fairness constraints",
+          "action_taken": "Added real-time bias monitoring with automatic alerts and mandatory review triggers"
+        },
+        {
+          "concern": "Lack of transparency in AI reasoning could violate due process rights",
+          "response": "Developed comprehensive explanation interface accessible to all parties",
+          "action_taken": "Created plain-language decision rationale available to defendants, lawyers, and public"
+        },
+        {
+          "concern": "Potential for AI to override human judicial discretion",
+          "response": "Reinforced AI's advisory-only role with clear human authority",
+          "action_taken": "Implemented system safeguards preventing AI recommendations from auto-executing"
+        },
+        {
+          "concern": "Risk to presumption of innocence through algorithmic prejudgment",
+          "response": "Added explicit presumption of innocence protocols",
+          "action_taken": "System cannot access prior convictions until guilt determination phase"
+        }
+      ],
+      "rejected_suggestions": [
+        {
+          "suggestion": "Use AI for automated sentencing without human review",
+          "rationale": "Violates fundamental principle of human authority in judicial decisions and due process rights"
+        },
+        {
+          "suggestion": "Include social media data in decision-making algorithms",
+          "rationale": "Privacy concerns and potential for irrelevant/prejudicial information incompatible with fair trial rights"
+        }
+      ],
+      "ongoing_mechanisms": [
+        "Monthly judicial review board meetings",
+        "Quarterly bias monitoring reports",
+        "Semi-annual public accountability sessions",
+        "Annual comprehensive system audit with public results",
+        "Continuous legal scholar and civil rights organization engagement"
+      ]
+    },
+    "transparency_measures": {
+      "consultation_summary_published": true,
+      "feedback_reports_public": true,
+      "decision_rationale_documented": true,
+      "stakeholder_roster_disclosed": true,
+      "public_comment_period": true
+    }
+  },
+  "cultural_context": {
+    "primary_cultural_context": "European continental legal system with strong human rights tradition",
+    "geographic_focus": ["European Union", "Council of Europe member states"],
+    "language_assumptions": ["Portuguese", "European languages", "Legal terminology"],
+    "social_context_factors": [
+      "European Convention on Human Rights framework",
+      "EU Charter of Fundamental Rights compliance",
+      "Constitutional court oversight traditions",
+      "Public trust in judicial independence",
+      "Civil law system with written legal codes",
+      "Strong data protection and privacy expectations"
+    ]
+  },
+  "decision_making": {
+    "ethical_dilemma_approach": "Prioritize fundamental rights and due process with mandatory human oversight for all ethical conflicts",
+    "value_tradeoff_mechanism": "Constitutional hierarchy with fundamental rights taking precedence over efficiency or convenience",
+    "uncertainty_handling": "Conservative approach favoring individual rights with explicit uncertainty communication to judges",
+    "conflict_resolution": "Escalation to judicial ethics committee with documented reasoning and constitutional law review"
+  },
+  "bias_limitations": {
+    "known_biases": [
+      {
+        "bias_type": "Historical judicial bias",
+        "description": "Training data may reflect past discriminatory sentencing patterns against minorities, women, and socioeconomically disadvantaged groups",
+        "mitigation_efforts": "Implemented fairness constraints, bias detection algorithms, historical bias correction factors, and ongoing monitoring with automatic alerts"
+      },
+      {
+        "bias_type": "Linguistic and cultural bias",
+        "description": "System may favor native speakers and dominant cultural expressions in language processing",
+        "mitigation_efforts": "Multi-language training, cultural competency integration, and interpretation service coordination"
+      },
+      {
+        "bias_type": "Socioeconomic status bias",
+        "description": "System may inadvertently correlate economic indicators with guilt or risk assessments",
+        "mitigation_efforts": "Explicit socioeconomic blind algorithms and equal treatment protocols regardless of economic status"
+      },
+      {
+        "bias_type": "Geographic jurisdiction bias",
+        "description": "Training primarily on urban court data may not reflect rural or regional legal contexts",
+        "mitigation_efforts": "Multi-jurisdictional training data collection and regional legal context adaptation"
+      }
+    ],
+    "limitations": [
+      "Cannot process complex constitutional law questions requiring novel legal interpretation",
+      "Limited effectiveness with cases involving emerging technologies not in training data",
+      "Requires human interpretation for cases with significant cultural or religious considerations",
+      "Performance varies significantly across different types of legal proceedings",
+      "Cannot account for unique individual circumstances not captured in legal documentation"
+    ],
+    "uncertainty_areas": [
+      "Novel legal precedents or constitutional questions",
+      "Cases involving emerging technologies (AI, cryptocurrency, biotechnology)",
+      "Cross-jurisdictional legal conflicts",
+      "Cases requiring cultural or religious sensitivity beyond system training",
+      "Appeals processes with complex procedural considerations"
+    ],
+    "failure_modes": [
+      {
+        "failure_type": "False bias alerts overwhelming human reviewers",
+        "likelihood": "Medium",
+        "mitigation": "Calibrated alert thresholds with priority ranking and human review capacity management"
+      },
+      {
+        "failure_type": "System recommendations influencing human judgment despite advisory role",
+        "likelihood": "Medium",
+        "mitigation": "Judge training on AI limitations, randomized AI-off control periods, and cognitive bias awareness programs"
+      },
+      {
+        "failure_type": "Discriminatory outcomes despite bias mitigation efforts",
+        "likelihood": "Low but high impact",
+        "mitigation": "Continuous monitoring, external audits, and immediate system suspension protocols if discrimination detected"
+      },
+      {
+        "failure_type": "System unavailability affecting court operations",
+        "likelihood": "Low",
+        "mitigation": "Manual fallback procedures, redundant systems, and judge training for non-AI decision-making"
+      }
+    ]
+  }
+}
