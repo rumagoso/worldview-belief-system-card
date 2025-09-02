@@ -6,8 +6,8 @@ This directory contains example WBSC implementations for real AI systems.
 - [Claude (Anthropic)](./claude-example.yaml) - Constitutional AI approach
 - [GPT-4 (OpenAI)](./gpt4-example.yaml) - RLHF safety framework  
 - [Llama 2 (Meta)](./llama2-example.yaml) - Open source model
-- [Deepseek](./deepseek_wbsc_example.json) -
-- [Evaristo](./evaristo_wbsc_example.json) - Portuguese LLM
+- [Deepseek V3](./deepseek_wbsc_example.json) -
+- [Evaristo.ai 1.0](./evaristo_wbsc_example.json) - Open source platform for the Portuguese-speaking community to interact with and compare various open-source Large Language Models
 
 These are estimates based on publicly available information (*).
 
