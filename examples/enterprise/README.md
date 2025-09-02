@@ -164,8 +164,7 @@ Each example shows how WBSC supports:
 ## 📚 Additional Resources
 
 - [WBSC Main Repository](../..) - Core framework and specification
-- [Implementation Guide](../../docs/implementation-guide.md) - Detailed deployment instructions
-- [Validation Tools](../../tools/) - Schema validation and testing utilities
+- [Validation Tools](../../tools/) - Schema validation/Generation and testing utilities
 - [Community Examples](../../examples/community/) - Additional domain examples
 - [Research Papers](../../research/) - Academic foundations and case studies
 
