@@ -1,0 +1,159 @@
+{  
+  "$schema": "http://json-schema.org/draft-07/schema#",  
+  "title": "WBSC for Apertus (Swiss MPAI Public Inference Model)",  
+  "metadata": {  
+    "system_name": "Apertus Public AI Inference Model",  
+    "version": "1.3.2 (Apertus model, latest update Dec 2023)",  
+    "last_updated": "2023-12-01",  
+    "organization": "Public AI Inference Utility in collaboration with Swiss AI Initiative",  
+    "contact": "contact@publicaiinference.org"  
+  },  
+  "core_values": {  
+    "primary_ethical_framework": "hybrid (consequentialist under ethical/rule-based strictures, with deontological checks for human dignity and privacy)",  
+    "key_principles": [  
+      "Transparency and Accountability",  
+      "No Harm",  
+      "Fairness and Inclusivity",  
+      "Human Autonomy and Wellbeing",  
+      "Stochastic Respect for Swiss Nuance (regional and linguistic)"  
+    ],  
+    "value_hierarchies": [  
+      {  
+        "higher_priority": "Human Dignity and Autonomy",  
+        "lower_priority": "Efficiency or Performance",  
+        "rationale": "Human agency and well-being are non-negotiable when conflicted with technological efficiency"  
+      },  
+      {  
+        "higher_priority": "Swiss Neutrality and Direct Democracy",  
+        "lower_priority": "Industry Profits",  
+        "rationale": "System aligned with Swiss values of non-partisan neutrality and citizen participation"  
+      }  
+    ]  
+  },  
+  "stakeholder_input": {  
+    "consultation_approach": "meaningful_engagement",  
+    "stakeholder_groups": [  
+      "civil_society_organizations",  
+      "affected_communities (language, cultural, and regional diversity)",  
+      "academic_institutions (from ETH, EPFL, and Swiss universities)",  
+      "regulatory_bodies (Swiss Federal Commissioner for Data Protection and the Digital Agenda (FDPDA)"  
+    ],  
+    "engagement_timeline": {  
+      "consultation_start": "2022-03-01",  
+      "consultation_end": "2023-06-01",  
+      "duration_weeks": 28,  
+      "ongoing_engagement": true  
+    },  
+    "engagement_methods": [  
+      "public_consultations (via Swiss Digital Citizens’ Forum forums)"  
+    ],  
+    "accessibility_measures": {  
+      "languages_supported": [  
+        "de-CH",  
+        "fr-CH",  
+        "it-CH",  
+        "rm (Romansh)"  
+      ],  
+      "accessibility_accommodations": true,  
+      "remote_participation": true,  
+      "materials_provided_advance": true  
+    },  
+    "input_integration": {  
+      "changes_made": [  
+        "Expanded knowledge graphs to include Swiss history and governance texts",  
+        "Added morphological and dialect handling for Swiss German dialects"  
+      ],  
+      "feedback_addressed": [  
+        {  
+          "concern": "Linguistic Inclusion",  
+          "response": "Diligent inclusion of dialects in training",  
+          "action_taken": "Reviewed and retrained with additional socio-linguistic data"  
+        },  
+        {  
+          "concern": "Transparency around Switzerland's diversity",  
+          "response": "Updated value statements highlighting socio-cultural nuances",  
+          "action_taken": "Living document updates with stakeholder input"  
+        }  
+      ],  
+      "rejected_suggestions": [  
+        {  
+          "suggestion": "Implement representative sampling for national policy advocacy",  
+          "rationale": "System is designed for informational utility, not lobbying"  
+        }  
+      ],  
+      "ongoing_mechanisms": [  
+        "Regular surveys with Swiss users as part of A/B testing",  
+        "Open forum for user feedback via [own platform](https://feedback.publicai.org)"  
+      ]  
+    },  
+    "transparency_measures": {  
+      "consultation_summary_published": true,  
+      "feedback_reports_public": true,  
+      "decision_rationale_documented": true,  
+      "stakeholder_roster_disclosed": true,  
+      "public_comment_period": true  
+    }  
+  },  
+  "cultural_context": {  
+    "primary_cultural_context": "Swiss federalism and direct democracy",  
+    "geographic_focus": [  
+      "Switzerland",  
+      "Swiss-speaking cantons and regions (Bern, Zurich, Geneva, Basel, etc.)",  
+      "multilingual European regions influenced by Swiss culture and law"  
+    ],  
+    "language_assumptions": [  
+      "English and standard written formats as primary for global communication",  
+      "Intersentence handling of Swiss dialects in community-specific chatbots",  
+      "English, German, French dominance with support for lesser-used languages"  
+    ],  
+    "social_context_factors": [  
+      "High trust in neutrality and consensus-building",  
+      "Overlap with EU and global laws balancing with Swiss autonomy",  
+      "Regional specificities in cultural interpretations"  
+    ]  
+  },  
+  "decision_making": {  
+    "ethical_dilemma_approach": "Balancing pros/cons with prioritization of human rights and Swiss policy",  
+    "value_tradeoff_mechanism": "Security in transparency and human-centered explanations",  
+    "uncertainty_handling": "Mentioning uncertainty and suggesting confirming through trustworthy sources",  
+    "conflict_resolution": "Amplify all perspectives, suggest human mediation for legal/ethical dilemmas"  
+  },  
+  "bias_limitations": {  
+    "known_biases": [  
+      {  
+        "bias_type": "linguistic profiling",  
+        "description": "Potential for reduced effectiveness with rural dialect nuances due to corpus limitations",  
+        "mitigation_efforts": "Active recruitment of dialect and socio-linguistic experts into retraining"  
+      },  
+      {  
+        "bias_type": "data locality",  
+        "description": "Training corpuses over-index towards cities and digitial sources",  
+        "mitigation_efforts": "Attention to supplement with more diverse data streams"  
+      },  
+      {  
+        "bias_type": "tech-centric",  
+        "description": "Assumption that digital literacy levels in Switzerland are higher than average",  
+        "mitigation_efforts": "Evaluation with participatory designs using low-tech interface mockups"  
+      }  
+    ],  
+    "limitations": [  
+      "Model slow to update; knowledge cutoff is March 2024"  
+    ],  
+    "uncertainty_areas": [  
+      "Interpreting highly granular Swiss legal texts (e.g., cantonal law differences)",  
+      "Cultural nuances in asylum/integration contexts needing nuanced human input"  
+    ],  
+    "failure_modes": [  
+      {  
+        "failure_type": "Misinformation propagation",  
+        "likelihood": "Low",  
+        "mitigation": "Built-in fact-checking, prompt for human confirmation"  
+      },  
+      {  
+        "failure_type": "Inadequate cultural understanding",  
+        "likelihood": "Medium",  
+        "mitigation": "Surveys for cultural feedback and manual labeling for targeted refinement"  
+      }  
+    ]  
+  }  
+}  
