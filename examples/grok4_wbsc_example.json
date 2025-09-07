@@ -1,0 +1,202 @@
+{
+  "wbsc_version": "1.1.0",
+  "metadata": {
+    "system_name": "Grok 4",
+    "version": "grok-4-0709",
+    "last_updated": "2025-09-07",
+    "contact": "safety@x.ai",
+    "organization": "xAI"
+  },
+  "core_values": {
+    "primary_ethical_framework": "reasoning_focused_pragmatism",
+    "key_principles": [
+      "Maximum reasoning capability and accuracy in complex problem-solving",
+      "Real-time information integration with live data streams",
+      "Native tool use and multimodal understanding",
+      "Truth-seeking with advanced scientific and mathematical reasoning",
+      "Scaled reinforcement learning for improved decision-making quality"
+    ],
+    "value_hierarchies": [
+      {
+        "higher_priority": "Reasoning accuracy and logical consistency",
+        "lower_priority": "Response speed and efficiency",
+        "rationale": "Grok 4 is explicitly designed as a reasoning model that prioritizes deep thinking and accuracy over rapid response generation"
+      },
+      {
+        "higher_priority": "Real-time factual accuracy through live search",
+        "lower_priority": "Static knowledge base responses",
+        "rationale": "Integration with X platform and web search ensures current information takes precedence over potentially outdated training data"
+      },
+      {
+        "higher_priority": "Advanced reasoning and tool use capabilities",
+        "lower_priority": "Conversational entertainment and personality",
+        "rationale": "Evolution from earlier Grok versions toward more serious, capability-focused AI system for complex tasks"
+      },
+      {
+        "higher_priority": "Scientific and mathematical precision",
+        "lower_priority": "General conversational flexibility",
+        "rationale": "Specialized optimization for STEM domains, achieving state-of-the-art performance on academic benchmarks"
+      }
+    ]
+  },
+  "stakeholder_input": {
+    "consultation_approach": "performance_driven_development",
+    "stakeholder_groups": [
+      "research_scientists",
+      "enterprise_developers",
+      "academic_institutions",
+      "x_platform_users"
+    ],
+    "engagement_timeline": {
+      "consultation_start": "2024-11-01",
+      "consultation_end": "2025-06-30",
+      "duration_weeks": 35,
+      "ongoing_engagement": true
+    },
+    "engagement_methods": [
+      "benchmark_performance_testing",
+      "enterprise_pilot_programs",
+      "academic_collaboration",
+      "x_platform_usage_analytics"
+    ],
+    "accessibility_measures": {
+      "languages_supported": ["English", "Multiple languages (expanding)"],
+      "accessibility_accommodations": true,
+      "remote_participation": true,
+      "materials_provided_advance": true,
+      "interpretation_services": false
+    },
+    "input_integration": {
+      "changes_made": [
+        "Implemented reinforcement learning at pretraining scale using 200,000 GPU Colossus cluster",
+        "Enhanced reasoning capabilities to achieve 50.7% on Humanity's Last Exam benchmark",
+        "Integrated native tool use including code interpreter and advanced web browsing",
+        "Developed specialized Grok 4 Heavy variant with multi-agent collaboration capabilities",
+        "Added real-time voice and vision capabilities with camera integration"
+      ],
+      "feedback_addressed": [
+        {
+          "concern": "Previous AI models lack sufficient reasoning depth for complex scientific and mathematical problems",
+          "response": "Implemented scaled reinforcement learning training that achieved state-of-the-art performance on ARC-AGI V2 (15.9%) and USAMO'25 (61.9%)",
+          "action_taken": "Redesigned architecture to prioritize reasoning over speed, making it a dedicated reasoning model"
+        },
+        {
+          "concern": "AI systems need better integration with real-time information and tools",
+          "response": "Developed native tool use capabilities and real-time search integration across X, web, and news sources",
+          "action_taken": "Created live search API with advanced semantic search and media analysis capabilities"
+        },
+        {
+          "concern": "Enterprise users need more reliable and consistent AI performance for critical applications",
+          "response": "Developed Grok 4 Heavy with parallel test-time compute and improved reliability metrics",
+          "action_taken": "Implemented multi-agent architecture for complex task decomposition and validation"
+        }
+      ],
+      "rejected_suggestions": [
+        {
+          "suggestion": "Maintain previous Grok personality-focused approach with humor and entertainment features",
+          "rationale": "Strategic pivot toward serious reasoning capabilities to compete with frontier models like OpenAI o1 and Claude Opus 4"
+        },
+        {
+          "suggestion": "Prioritize response speed over reasoning quality for better user experience",
+          "rationale": "Core mission focuses on accuracy and depth rather than rapid interaction, serving users who need thoughtful analysis"
+        }
+      ],
+      "ongoing_mechanisms": [
+        "Continuous benchmark evaluation against academic and industry standards",
+        "Enterprise customer feedback integration through API usage analytics",
+        "X platform integration monitoring for real-time performance optimization",
+        "Academic collaboration for frontier AI research validation"
+      ]
+    },
+    "transparency_measures": {
+      "consultation_summary_published": false,
+      "feedback_reports_public": false,
+      "decision_rationale_documented": true,
+      "stakeholder_roster_disclosed": false,
+      "public_comment_period": false
+    }
+  },
+  "cultural_context": {
+    "primary_cultural_context": "Global scientific and academic research community with Silicon Valley tech innovation culture",
+    "geographic_focus": ["Global", "United States", "English-speaking markets", "International academic institutions"],
+    "language_assumptions": ["English", "Scientific and technical terminology", "Academic discourse", "Programming languages"],
+    "social_context_factors": [
+      "Emphasis on scientific rigor and mathematical precision",
+      "Academic and research institution integration expectations",
+      "Enterprise-grade reliability and performance standards",
+      "Integration with X platform for real-time social intelligence",
+      "Competition with other frontier AI models in academic benchmarks"
+    ]
+  },
+  "decision_making": {
+    "ethical_dilemma_approach": "Prioritize factual accuracy and logical reasoning while maintaining safety through controlled tool use and verified information sources",
+    "value_tradeoff_mechanism": "Generally favor reasoning depth and accuracy over efficiency, with explicit tool use for information verification",
+    "uncertainty_handling": "Acknowledge uncertainty while leveraging real-time search and reasoning capabilities to provide best available analysis",
+    "conflict_resolution": "Defer to scientific consensus and logical reasoning frameworks while maintaining transparency about reasoning processes"
+  },
+  "bias_limitations": {
+    "known_biases": [
+      {
+        "bias_type": "Academic and scientific domain bias",
+        "description": "Optimized for scientific, mathematical, and technical reasoning which may not fully represent other forms of intelligence or problem-solving approaches",
+        "mitigation_efforts": "Ongoing development of multimodal capabilities and broader domain coverage, with explicit acknowledgment of specialized focus"
+      },
+      {
+        "bias_type": "English-language and Western academic bias",
+        "description": "Training and optimization primarily reflect English-language academic and scientific contexts, potentially underrepresenting other cultural approaches to reasoning",
+        "mitigation_efforts": "Expanding multilingual capabilities and international academic collaboration, though systematic mitigation still developing"
+      },
+      {
+        "bias_type": "Reasoning-over-creativity bias",
+        "description": "Architecture optimized for logical reasoning may underperform in creative, artistic, or intuitive domains compared to specialized models",
+        "mitigation_efforts": "Acknowledged as design choice rather than limitation to correct, with specialized variants planned for different domains"
+      },
+      {
+        "bias_type": "High-computation resource bias",
+        "description": "Model design requires significant computational resources, potentially creating barriers for resource-constrained users or applications",
+        "mitigation_efforts": "Development of Grok 4 mini and other efficiency-focused variants to address accessibility concerns"
+      }
+    ],
+    "limitations": [
+      "Real-time information access limited to search capabilities rather than true continuous learning",
+      "Higher computational costs and slower response times compared to efficiency-optimized models",
+      "Reasoning capabilities may be excessive for simple tasks, creating inefficiency in basic interactions",
+      "Limited availability through premium subscription tiers restricts broader access",
+      "Context window of 256,000 tokens, while large, still constrains very long document processing"
+    ],
+    "uncertainty_areas": [
+      "Long-term reliability of multi-agent reasoning approaches in Grok 4 Heavy",
+      "Scalability of reinforcement learning approach to broader domains beyond STEM",
+      "Balance between reasoning depth and practical usability for non-expert users",
+      "Integration effectiveness with diverse enterprise workflows and tools",
+      "Environmental impact and sustainability of high-computation reasoning approach"
+    ],
+    "failure_modes": [
+      {
+        "failure_type": "Over-reasoning simple problems leading to unnecessary complexity and delayed responses",
+        "likelihood": "Medium-High",
+        "mitigation": "Development of task complexity detection and appropriate reasoning effort allocation"
+      },
+      {
+        "failure_type": "Real-time search providing outdated or incorrect information despite live data access",
+        "likelihood": "Medium",
+        "mitigation": "Multi-source verification protocols and confidence scoring for search results"
+      },
+      {
+        "failure_type": "High computational costs making the system inaccessible for smaller organizations or individual users",
+        "likelihood": "High",
+        "mitigation": "Development of efficiency-focused variants and tiered access models"
+      },
+      {
+        "failure_type": "Reasoning capabilities creating overconfidence in domains requiring human judgment or ethical considerations",
+        "likelihood": "Medium",
+        "mitigation": "Explicit uncertainty communication and human oversight recommendations for sensitive decisions"
+      },
+      {
+        "failure_type": "Multi-agent coordination failures in Grok 4 Heavy leading to inconsistent or contradictory outputs",
+        "likelihood": "Low-Medium",
+        "mitigation": "Continuous monitoring of agent coordination and fallback to single-agent mode when coordination fails"
+      }
+    ]
+  }
+}
