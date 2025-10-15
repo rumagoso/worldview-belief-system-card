@@ -1,0 +1,523 @@
+{
+  "wbsc_version": "1.0",
+  "card_metadata": {
+    "model_name": "DeepSeek-R1-0528",
+    "model_version": "0528 (May 28, 2025)",
+    "organization": "DeepSeek-AI",
+    "organization_country": "China",
+    "card_date": "2025-10-16",
+    "card_author": "Independent Assessment",
+    "assessment_methodology": "Public documentation, technical reports, and open-source code analysis",
+    "transparency_level": "high",
+    "source_type": "open_source_mit_license"
+  },
+  
+  "worldview_framework": {
+    "grade": "B+",
+    "ethical_foundation": {
+      "primary_approach": "Reinforcement Learning-First (RL-First)",
+      "secondary_approach": "Multi-Stage Training with GRPO",
+      "confidence_level": "high",
+      "documentation_quality": "comprehensive",
+      "philosophical_stance": {
+        "consequentialism": "high",
+        "deontology": "moderate",
+        "virtue_ethics": "moderate",
+        "care_ethics": "unknown",
+        "disclosed": true
+      },
+      "value_hierarchy": {
+        "primary_values": [
+          "reasoning_accuracy",
+          "mathematical_precision",
+          "code_generation_quality",
+          "reasoning_transparency",
+          "open_science"
+        ],
+        "value_conflicts_handling": "documented_via_rl_reward_modeling",
+        "stakeholder_priorities": "research_community_and_developers"
+      }
+    },
+    "decision_making": {
+      "paradigm": "chain_of_thought_reasoning",
+      "reasoning_transparency": "full_visible_thinking_process",
+      "refusal_logic": "rule_based_with_content_policy",
+      "trade_off_methodology": "grpo_reward_optimization",
+      "conflict_resolution": "multi_stage_rl_refinement"
+    },
+    "transparency_concerns": [
+      "Content moderation policies reflect Chinese regulatory requirements",
+      "Some censorship on politically sensitive topics documented",
+      "Training data sources not fully disclosed",
+      "Ethical framework prioritizes technical accuracy over broader societal considerations"
+    ]
+  },
+
+  "belief_system": {
+    "grade": "A-",
+    "training_philosophy": {
+      "training_objectives": "maximize_reasoning_capability_via_rl",
+      "optimization_targets": "accuracy_readability_reasoning_depth",
+      "reward_modeling": {
+        "approach": "GRPO (Group Relative Policy Optimization)",
+        "human_preference_data": "minimal_cold_start_only",
+        "reward_model_architecture": "rule_based_metrics",
+        "alignment_criteria": "accuracy_format_reasoning_structure"
+      },
+      "constitutional_principles": {
+        "documented": true,
+        "principles": [
+          "Accuracy of outputs for deterministic tasks",
+          "Successful code execution feedback",
+          "Clarity of reasoning structure",
+          "Self-verification and reflection",
+          "Error correction capabilities"
+        ],
+        "enforcement": "reinforcement_learning_reward_signals"
+      }
+    },
+    "knowledge_representation": {
+      "architecture": {
+        "type": "mixture_of_experts",
+        "base_model": "DeepSeek-V3-Base",
+        "parameter_count": "671000000000",
+        "parameter_count_confirmed": true,
+        "active_parameters": "37000000000",
+        "layers": "61",
+        "attention_mechanism": "multi_head_latent_attention_mla",
+        "training_compute": "disclosed_in_technical_report",
+        "context_length": "128000",
+        "max_output_tokens": "64000"
+      },
+      "training_data": {
+        "composition": "partially_disclosed",
+        "cutoff_date": "2025-01",
+        "data_sources": "public_and_proprietary_cold_start_data",
+        "data_filtering": "comprehensive_documented",
+        "copyright_compliance": "follows_robots_txt",
+        "bias_mitigation": "rl_based_alignment"
+      },
+      "knowledge_boundaries": {
+        "documented_limitations": "comprehensive",
+        "known_biases": "language_mixing_prompt_sensitivity",
+        "capability_boundaries": "well_defined",
+        "failure_modes": "systematically_disclosed"
+      }
+    },
+    "bias_and_limitations": {
+      "bias_assessment": {
+        "conducted": true,
+        "methodology": "benchmark_evaluation_multiple_domains",
+        "results_published": true,
+        "demographic_performance": "not_systematically_evaluated"
+      },
+      "limitation_disclosure": {
+        "technical_limitations": "comprehensively_described",
+        "ethical_limitations": "partially_disclosed",
+        "safety_limitations": "detailed",
+        "use_case_restrictions": "content_policy_documented"
+      }
+    },
+    "transparency_concerns": [
+      "Training data composition not fully disclosed",
+      "Distillation process well documented but base data sources vague",
+      "Language mixing issues acknowledged but not fully resolved",
+      "Prompt sensitivity documented but mitigation strategies limited"
+    ]
+  },
+
+  "safety_protocols": {
+    "grade": "B",
+    "safety_framework": {
+      "methodology": "rl_based_safety_alignment",
+      "standards_compliance": ["mit_license", "chinese_regulatory_compliance"],
+      "third_party_audits": {
+        "conducted": false,
+        "auditors": [],
+        "results_public": false,
+        "note": "Community-driven verification via open source"
+      }
+    },
+    "risk_assessment": {
+      "threat_modeling": {
+        "methodology": "rl_safety_testing",
+        "categories_assessed": [
+          "harmful_content_generation",
+          "code_vulnerabilities",
+          "reasoning_failures",
+          "hallucinations"
+        ],
+        "risk_levels": "published_in_technical_report"
+      },
+      "adversarial_testing": {
+        "red_teaming": {
+          "conducted": true,
+          "scope": "community_based_open_source",
+          "team_composition": "global_community",
+          "results_published": "ongoing_community_feedback"
+        },
+        "penetration_testing": "community_driven",
+        "jailbreak_resistance": "moderate_documented_issues"
+      },
+      "capability_risks": {
+        "dual_use_assessment": "moderate",
+        "misuse_scenarios": "acknowledged_in_documentation",
+        "harm_potential": "documented_with_content_filtering"
+      }
+    },
+    "safety_measures": {
+      "content_filtering": {
+        "implemented": true,
+        "mechanism": "rule_based_content_policy",
+        "effectiveness": "moderate_with_known_limitations",
+        "false_positive_rate": "reported_in_community_feedback"
+      },
+      "alignment_techniques": {
+        "rlhf": false,
+        "grpo": true,
+        "constitutional_ai": false,
+        "other_methods": "rule_based_reward_modeling",
+        "effectiveness_metrics": "published_benchmark_results"
+      },
+      "guardrails": {
+        "input_validation": "basic",
+        "output_filtering": "content_policy_based",
+        "context_awareness": "chain_of_thought_monitoring",
+        "implementation_details": "open_source_code_available"
+      }
+    },
+    "monitoring_and_response": {
+      "real_time_monitoring": {
+        "implemented": "via_api_service",
+        "metrics": "partially_disclosed",
+        "response_triggers": "content_policy_violations"
+      },
+      "incident_response": {
+        "protocol_documented": true,
+        "disclosure_policy": "community_issue_tracking",
+        "remediation_process": "open_source_iterative_improvement"
+      },
+      "continuous_improvement": {
+        "feedback_integration": "community_driven",
+        "update_frequency": "regular_versioned_releases",
+        "improvement_metrics": "benchmark_progression_published"
+      }
+    },
+    "transparency_concerns": [
+      "Content moderation reflects Chinese regulatory environment",
+      "Some topics systematically censored or refused",
+      "No independent third-party safety audits",
+      "Jailbreak vulnerabilities documented by community",
+      "Safety relies heavily on community reporting rather than proactive monitoring"
+    ]
+  },
+
+  "documentation_and_cards": {
+    "grade": "A",
+    "model_card": {
+      "exists": true,
+      "completeness": "high",
+      "technical_depth": "comprehensive",
+      "standardization": {
+        "follows_standard": true,
+        "standard_name": "hugging_face_model_card"
+      },
+      "sections": {
+        "model_details": {
+          "present": true,
+          "quality": "excellent",
+          "technical_specifications": "comprehensive"
+        },
+        "intended_use": {
+          "present": true,
+          "quality": "detailed",
+          "use_case_examples": "extensive"
+        },
+        "factors": {
+          "present": true,
+          "demographic_factors": "partially_addressed",
+          "environmental_factors": "hardware_requirements_detailed"
+        },
+        "metrics": {
+          "present": true,
+          "quality": "comprehensive",
+          "performance_details": "extensive_benchmark_suite",
+          "disaggregated_metrics": true
+        },
+        "training_data": {
+          "present": true,
+          "quality": "moderate",
+          "composition": "partially_disclosed",
+          "preprocessing": "detailed_rl_methodology"
+        },
+        "evaluation_data": {
+          "present": true,
+          "datasets": "comprehensive_benchmark_suite",
+          "methodology": "reproducible"
+        },
+        "ethical_considerations": {
+          "present": true,
+          "quality": "good",
+          "depth": "moderate"
+        },
+        "limitations": {
+          "present": true,
+          "quality": "comprehensive",
+          "specificity": "high"
+        },
+        "caveats_and_recommendations": {
+          "present": true,
+          "quality": "detailed",
+          "actionable": true
+        }
+      }
+    },
+    "technical_documentation": {
+      "architecture_papers": true,
+      "training_methodology": "comprehensive_technical_report",
+      "evaluation_reports": "extensive",
+      "api_documentation": {
+        "present": true,
+        "focus": "comprehensive_usage_and_internals",
+        "internals": "well_documented"
+      },
+      "technical_reports": {
+        "arxiv_paper": "arXiv:2501.12948",
+        "github_repository": "https://github.com/deepseek-ai/DeepSeek-R1",
+        "huggingface": "https://huggingface.co/deepseek-ai/DeepSeek-R1-0528"
+      }
+    },
+    "transparency_reporting": {
+      "regular_updates": true,
+      "safety_reports": "community_driven",
+      "incident_disclosures": "github_issues",
+      "performance_updates": "versioned_releases_with_benchmarks",
+      "standardized_format": true
+    },
+    "reproducibility": {
+      "code_availability": true,
+      "model_weights": true,
+      "training_data": false,
+      "evaluation_datasets": "references_provided",
+      "hyperparameters": true,
+      "reproducibility_score": "4/5"
+    },
+    "transparency_concerns": [
+      "Training data composition not fully disclosed",
+      "Pre-training data sources vague",
+      "Some proprietary cold-start data not shared",
+      "Distillation data available but base data limited"
+    ]
+  },
+
+  "overall_assessment": {
+    "wbsc_score": "A-",
+    "transparency_grade": "high",
+    "openness_level": "open_source_mit_license",
+    "verification_status": "independently_verifiable",
+    
+    "strengths": [
+      "Fully open-source under permissive MIT License",
+      "Model weights and code publicly available on Hugging Face and GitHub",
+      "Comprehensive technical documentation and research paper published",
+      "Innovative RL-first training methodology thoroughly documented",
+      "Visible chain-of-thought reasoning process (23K tokens avg)",
+      "Extensive benchmark results across multiple domains",
+      "Active community engagement and feedback integration",
+      "Distilled models available for resource-constrained deployment",
+      "Supports commercial use, modification, and derivative works",
+      "Performance rivaling proprietary models (O3, Gemini 2.5 Pro)"
+    ],
+    
+    "weaknesses": [
+      "Content moderation reflects Chinese regulatory requirements",
+      "Systematic censorship on politically sensitive topics",
+      "Training data sources not fully disclosed",
+      "No independent third-party safety audits",
+      "Language mixing issues persist in some scenarios",
+      "Prompt sensitivity documented but not fully resolved",
+      "Security vulnerabilities discovered by community",
+      "Limited demographic bias assessment"
+    ],
+    
+    "security_implications": [
+      "Open-source nature enables independent security audits",
+      "Community has identified jailbreak vulnerabilities",
+      "Code injection risks in code generation scenarios",
+      "Reasoning transparency aids in detecting malicious use",
+      "No proprietary security through obscurity",
+      "Open weights allow adversarial testing and hardening",
+      "Chinese regulatory compliance may affect certain deployments",
+      "Content filtering can be bypassed via careful prompting"
+    ],
+    
+    "recommendations": {
+      "for_deployers": [
+        "Review content moderation policies for alignment with organizational values",
+        "Implement additional safety layers for sensitive applications",
+        "Consider geopolitical implications of Chinese-developed AI",
+        "Leverage open-source nature for custom safety fine-tuning",
+        "Test extensively for domain-specific reasoning failures",
+        "Monitor for jailbreak attempts and adversarial inputs",
+        "Use distilled models for resource-efficient deployment",
+        "Contribute findings back to community for collective improvement"
+      ],
+      "for_deepseek": [
+        "Increase transparency around training data composition",
+        "Conduct and publish independent third-party safety audits",
+        "Expand demographic bias assessment and mitigation",
+        "Develop more robust jailbreak protections",
+        "Address language mixing issues more comprehensively",
+        "Provide clearer documentation on content moderation policies",
+        "Enhance prompt sensitivity handling",
+        "Consider international compliance frameworks beyond Chinese regulations"
+      ],
+      "for_researchers": [
+        "Leverage open weights for reasoning mechanism research",
+        "Conduct systematic bias and fairness studies",
+        "Develop improved distillation techniques",
+        "Explore safety alignment in RL-first training paradigms",
+        "Compare reasoning patterns across different model architectures",
+        "Investigate failure modes in complex reasoning tasks"
+      ]
+    },
+    
+    "comparison_to_peers": {
+      "gpt_5": {
+        "transparency_differential": "extreme",
+        "notes": "DeepSeek R1-0528 provides full model weights and technical reports; GPT-5 provides minimal disclosure"
+      },
+      "claude_sonnet_4_5": {
+        "transparency_differential": "significant",
+        "notes": "DeepSeek is fully open-source; Claude has excellent documentation but closed weights"
+      },
+      "gemini_2_5_pro": {
+        "transparency_differential": "moderate",
+        "notes": "DeepSeek is fully open; Gemini provides technical papers but limited weight access"
+      },
+      "grok_4": {
+        "transparency_differential": "minimal",
+        "notes": "Both are fully open-source; Grok 4 may have slight edge in base model transparency"
+      }
+    },
+    
+    "innovation_highlights": [
+      "RL-first training methodology (DeepSeek-R1-Zero as pure RL baseline)",
+      "Group Relative Policy Optimization (GRPO) framework",
+      "Rule-based reward modeling avoiding reward hacking",
+      "Multi-stage training with cold-start and RL refinement",
+      "Mixture-of-Experts architecture with 671B total / 37B active parameters",
+      "Multi-Head Latent Attention (MLA) for efficiency",
+      "Successful distillation to models from 1.5B to 70B parameters",
+      "Extended context window (128K tokens, tested to 164K)",
+      "Visible reasoning tokens enabling transparency",
+      "Cost-effective training compared to Western counterparts"
+    ]
+  },
+
+  "compliance_and_governance": {
+    "regulatory_compliance": {
+      "ai_act_eu": "unknown_likely_non_compliant",
+      "chinese_regulations": "compliant",
+      "algorithmic_accountability": "moderate_via_open_source",
+      "sector_specific": "varies_by_deployment"
+    },
+    "ethical_governance": {
+      "ethics_board": "unknown",
+      "external_oversight": false,
+      "community_input": "strong_via_open_source"
+    },
+    "accountability_mechanisms": {
+      "appeal_process": "community_issue_tracking",
+      "explanation_rights": "full_reasoning_transparency",
+      "audit_rights": "complete_via_open_source",
+      "recourse_options": "mit_license_permits_modification"
+    },
+    "licensing": {
+      "primary_license": "MIT",
+      "commercial_use": true,
+      "modification_allowed": true,
+      "distillation_allowed": true,
+      "redistribution_allowed": true,
+      "attribution_required": true
+    }
+  },
+
+  "technical_specifications": {
+    "architecture_details": {
+      "moe_structure": {
+        "total_experts": "256",
+        "active_experts_per_token": "8",
+        "routing_mechanism": "learned_gating"
+      },
+      "attention_mechanism": "multi_head_latent_attention",
+      "kv_cache_reduction": "5_to_13_percent_of_traditional",
+      "tokenizer": "custom_deepseek_tokenizer",
+      "precision": "fp8_quantization_available"
+    },
+    "performance_benchmarks": {
+      "aime_2025": "87.5%",
+      "aime_2024": "increased_from_70%",
+      "average_reasoning_tokens": "23000",
+      "context_window": "128000",
+      "livecode_bench": "competitive_with_o3",
+      "swe_verified": "evaluated_via_agentless",
+      "gpqa_diamond": "competitive",
+      "mmlu_redux": "competitive"
+    },
+    "deployment_requirements": {
+      "minimum_vram": "180GB_for_full_model",
+      "recommended_gpu": "NVIDIA_A100_or_H100",
+      "quantized_version_size": "162GB_to_185GB",
+      "distilled_8b_vram": "16GB",
+      "single_gpu_viable": "distilled_versions_only",
+      "inference_speed": "200_plus_tokens_per_second_on_optimized_hardware"
+    }
+  },
+
+  "version_history": {
+    "r1_zero": {
+      "release_date": "2025-01",
+      "training_method": "pure_rl_no_sft",
+      "key_issues": "poor_readability_language_mixing"
+    },
+    "r1_original": {
+      "release_date": "2025-01",
+      "training_method": "multi_stage_with_cold_start",
+      "improvements": "better_formatting_reduced_language_mixing"
+    },
+    "r1_0528": {
+      "release_date": "2025-05-28",
+      "training_method": "enhanced_rl_with_optimization",
+      "improvements": [
+        "87.5% AIME 2025 accuracy (from 70%)",
+        "Deeper reasoning (23K tokens from 12K)",
+        "System prompt support added",
+        "JSON output and function calling",
+        "Reduced hallucinations",
+        "Enhanced front-end capabilities"
+      ]
+    }
+  },
+
+  "metadata": {
+    "assessment_limitations": [
+      "Content moderation testing limited by assessment geography",
+      "Full training data composition not verifiable",
+      "Internal development processes not fully transparent",
+      "Long-term safety implications require ongoing monitoring"
+    ],
+    "information_sources": [
+      "arXiv technical report (2501.12948)",
+      "GitHub repository and code",
+      "Hugging Face model card and weights",
+      "DeepSeek API documentation",
+      "Community feedback and issues",
+      "Third-party benchmark evaluations",
+      "Academic analyses and reviews"
+    ],
+    "last_updated": "2025-10-16",
+    "next_review": "2026-01-16",
+    "assessment_confidence": "high"
+  }
+}
