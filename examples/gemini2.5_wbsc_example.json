@@ -1,0 +1,212 @@
+{
+  "wbsc_version": "1.1.0",
+  "metadata": {
+    "system_name": "Gemini 2.5 Pro",
+    "version": "gemini-2.5-pro",
+    "last_updated": "2025-10-15",
+    "contact": "responsible-ai@google.com",
+    "organization": "Google (Alphabet Inc.)"
+  },
+  "core_values": {
+    "primary_ethical_framework": "google_ai_principles_ecosystem_integration",
+    "key_principles": [
+      "Be socially beneficial - AI should benefit people and society",
+      "Avoid creating or reinforcing unfair bias",
+      "Be built and tested for safety with appropriate human oversight",
+      "Be accountable to people through privacy design principles",
+      "Incorporate privacy design principles and data governance"
+    ],
+    "value_hierarchies": [
+      {
+        "higher_priority": "Ecosystem integration and broad accessibility",
+        "lower_priority": "Standalone capability excellence",
+        "rationale": "Gemini designed as multi-surface AI engine integrated across Google workspace, devices, and services rather than isolated product"
+      },
+      {
+        "higher_priority": "Task-specialized model variants (Pro, Flash, Flash-Lite)",
+        "lower_priority": "One-size-fits-all model approach",
+        "rationale": "Strategic shift toward specialized models giving developers control over latency, costs, and functionality for different use cases"
+      },
+      {
+        "higher_priority": "Large context understanding (1-2M tokens)",
+        "lower_priority": "Rapid response generation",
+        "rationale": "Optimized for processing entire codebases, long documents, and complex multimodal content over quick interactions"
+      },
+      {
+        "higher_priority": "Multimodal native capabilities (text, audio, images, video, code)",
+        "lower_priority": "Text-only excellence",
+        "rationale": "Built from ground up for multimodal understanding across diverse data types and formats"
+      }
+    ]
+  },
+  "stakeholder_input": {
+    "consultation_approach": "ai_principles_with_broad_ecosystem_engagement",
+    "stakeholder_groups": [
+      "enterprise_customers",
+      "google_workspace_users",
+      "developers_and_gdes",
+      "academic_researchers",
+      "government_and_civil_society",
+      "ngos_and_ethics_experts",
+      "security_research_community"
+    ],
+    "engagement_timeline": {
+      "consultation_start": "2018-06-07",
+      "consultation_end": "2025-10-15",
+      "duration_weeks": 384,
+      "ongoing_engagement": true
+    },
+    "engagement_methods": [
+      "ai_principles_public_consultation",
+      "annual_responsible_ai_progress_reports",
+      "google_developer_experts_program",
+      "bug_bounty_program_with_600_plus_researchers",
+      "frontier_safety_framework_development",
+      "responsible_innovation_team_reviews",
+      "coalfire_nist_iso42001_assessments"
+    ],
+    "accessibility_measures": {
+      "languages_supported": ["English", "Extensive multilingual capabilities"],
+      "accessibility_accommodations": true,
+      "remote_participation": true,
+      "materials_provided_advance": true,
+      "interpretation_services": true
+    },
+    "input_integration": {
+      "changes_made": [
+        "Published AI Principles in 2018 as 'living constitution' guiding all AI development",
+        "Implemented 1M token context window (expanding to 2M) for comprehensive document understanding",
+        "Developed thinking capabilities with thought summaries and Deep Think mode for transparency",
+        "Enhanced indirect prompt injection protection making Gemini 2.5 most secure model family",
+        "Integrated SynthID watermarking across text, images, audio, and video for provenance",
+        "Implemented Gemini for Home replacing Google Assistant across smart home ecosystem",
+        "Released Frontier Safety Framework for heightened security and deployment mitigations"
+      ],
+      "feedback_addressed": [
+        {
+          "concern": "Users need transparency about AI decision-making and reasoning processes",
+          "response": "Developed thought summaries organizing raw model thoughts into clear format for auditability",
+          "action_taken": "Implemented visible thinking capabilities and Deep Think mode for complex reasoning tasks"
+        },
+        {
+          "concern": "AI systems vulnerable to security attacks and prompt injection",
+          "response": "Significantly increased protection rate against indirect prompt injection attacks",
+          "action_taken": "Deployed automated red teaming (ART) with 24/7/365 monitoring and Bug Bounty program"
+        },
+        {
+          "concern": "Difficulty verifying AI-generated content authenticity",
+          "response": "Developed SynthID watermarking technology for multiple content types",
+          "action_taken": "Integrated 'About this image' and 'Double-Check response' tools across Gemini products"
+        },
+        {
+          "concern": "Enterprise needs for cost control and performance optimization",
+          "response": "Created specialized model variants (Pro, Flash, Flash-Lite) for different use cases",
+          "action_taken": "Provided developer control over thinking budgets, latency, and computational costs"
+        }
+      ],
+      "rejected_suggestions": [
+        {
+          "suggestion": "Maximize capability without considering dual-use risks in weapons/surveillance",
+          "rationale": "Updated 2025 guidelines now permit certain applications under strict regulatory oversight, marking significant policy shift from 2018 categorical exclusions"
+        }
+      ],
+      "ongoing_mechanisms": [
+        "Annual Responsible AI Progress Reports published since 2019",
+        "Frontier Safety Framework with heightened security recommendations",
+        "Responsible Innovation team conducting ethical analyses for all products",
+        "Bug Bounty program with $10M+ awarded to 600+ researchers",
+        "Integration with NIST AI RMF and ISO 42001 standards through Coalfire partnership",
+        "300+ research papers published annually on AI responsibility and safety"
+      ]
+    },
+    "transparency_measures": {
+      "consultation_summary_published": true,
+      "feedback_reports_public": true,
+      "decision_rationale_documented": true,
+      "stakeholder_roster_disclosed": true,
+      "public_comment_period": true
+    }
+  },
+  "cultural_context": {
+    "primary_cultural_context": "Global technology ecosystem with Google workspace integration and developer-first approach",
+    "geographic_focus": ["Global", "Strong presence across all continents", "Emphasis on emerging markets accessibility"],
+    "language_assumptions": ["English", "Multilingual capabilities", "Developer/enterprise terminology", "Consumer-friendly language"],
+    "social_context_factors": [
+      "Integration across Google ecosystem (Search, Calendar, Maps, Messages, Workspace)",
+      "Consumer-to-enterprise spectrum with variants for different scales",
+      "Emphasis on broad AI accessibility and 'AI for everyone' mission",
+      "Strong developer community through Google Developer Experts program",
+      "Government partnerships evolving with national security considerations",
+      "Youth-focused AI literacy and age-appropriate content policies"
+    ]
+  },
+  "decision_making": {
+    "ethical_dilemma_approach": "Apply AI Principles framework emphasizing social benefit, fairness, safety, accountability, and privacy, with executive review process",
+    "value_tradeoff_mechanism": "Two-tier review by Responsible Innovation team and executive reviewers for deep ethical analyses",
+    "uncertainty_handling": "Extended thinking modes with visible reasoning, Deep Think for complex problems, thought summaries for transparency",
+    "conflict_resolution": "Defer to AI Principles with human oversight mechanisms and post-launch monitoring"
+  },
+  "bias_limitations": {
+    "known_biases": [
+      {
+        "bias_type": "Google ecosystem integration assumptions",
+        "description": "Optimized for Google services ecosystem may not serve non-Google users equally well",
+        "mitigation_efforts": "Cross-platform API availability and standalone capabilities development"
+      },
+      {
+        "bias_type": "Developer and enterprise optimization",
+        "description": "Task-specialized variants prioritize technical users over general consumers",
+        "mitigation_efforts": "Multiple model variants (Flash-Lite for accessibility) and consumer-friendly Gemini app"
+      },
+      {
+        "bias_type": "Training data representation gaps",
+        "description": "Despite multilingual capabilities, potential underrepresentation of certain languages and cultures",
+        "mitigation_efforts": "Ongoing expansion of training data diversity and regional partnerships"
+      }
+    ],
+    "limitations": [
+      "1M-2M token context window, while large, still constrains extremely long document processing",
+      "Thinking capabilities increase latency and computational costs for complex reasoning",
+      "Multimodal understanding varies in quality across different content types",
+      "SynthID watermarking still nascent and case-specific",
+      "Integration depth with Google services may create vendor lock-in concerns",
+      "Real-time information access dependent on Google Search integration",
+      "Government/military applications policy shift may impact public trust"
+    ],
+    "uncertainty_areas": [
+      "Long-term implications of weapons/surveillance policy change announced in 2025",
+      "Scalability of Frontier Safety Framework to increasingly capable models",
+      "Effectiveness of SynthID watermarking against sophisticated removal attempts",
+      "Balance between ecosystem integration benefits and platform independence",
+      "Impact of thinking capabilities on user experience and adoption",
+      "Privacy implications of deep Google ecosystem integration"
+    ],
+    "failure_modes": [
+      {
+        "failure_type": "Indirect prompt injection attacks bypassing security controls",
+        "likelihood": "Low-Medium",
+        "mitigation": "Enhanced protection through automated red teaming and continuous security updates"
+      },
+      {
+        "failure_type": "Context window limitations causing incomplete analysis of very large documents",
+        "likelihood": "Medium",
+        "mitigation": "Expanding to 2M tokens and providing guidance on document chunking strategies"
+      },
+      {
+        "failure_type": "SynthID watermarking removal by sophisticated adversaries",
+        "likelihood": "Medium",
+        "mitigation": "Ongoing research and acknowledgment that technology is still nascent"
+      },
+      {
+        "failure_type": "Ecosystem integration creating single point of failure or privacy concerns",
+        "likelihood": "Medium",
+        "mitigation": "Privacy Hub transparency, user controls, and temporary chat options"
+      },
+      {
+        "failure_type": "Policy changes undermining trust in responsible AI commitment",
+        "likelihood": "Medium-High",
+        "mitigation": "Transparency through annual reports and continued AI Principles adherence"
+      }
+    ]
+  }
+}
