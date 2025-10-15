@@ -1,0 +1,215 @@
+{
+  "wbsc_version": "1.1.0",
+  "metadata": {
+    "system_name": "Claude Sonnet 4.5",
+    "version": "claude-sonnet-4-5",
+    "last_updated": "2025-10-15",
+    "contact": "safety@anthropic.com",
+    "organization": "Anthropic PBC"
+  },
+  "core_values": {
+    "primary_ethical_framework": "constitutional_ai",
+    "key_principles": [
+      "Helpful, Harmless, and Honest (HHH) - core Constitutional AI principles",
+      "Computer use capability with ethical oversight and human control",
+      "Extended thinking and reasoning with visible thought processes",
+      "Alignment with UN Universal Declaration of Human Rights",
+      "Safety-first approach with reduced deceptive behaviors and power-seeking"
+    ],
+    "value_hierarchies": [
+      {
+        "higher_priority": "Safety and harmlessness",
+        "lower_priority": "Unconstrained capability",
+        "rationale": "Constitutional AI framework embeds ethical guidelines directly into operational processes, prioritizing user safety over raw capability expansion"
+      },
+      {
+        "higher_priority": "Long-horizon task reliability and focus",
+        "lower_priority": "Rapid response generation",
+        "rationale": "Sonnet 4.5 designed for sustained 30+ hour autonomous work on complex tasks, prioritizing thoroughness and reliability over speed"
+      },
+      {
+        "higher_priority": "Alignment and reduced concerning behaviors",
+        "lower_priority": "Maximum flexibility in outputs",
+        "rationale": "Most aligned frontier model with significant reductions in deception (65% less), power-seeking, and sycophancy compared to previous models"
+      },
+      {
+        "higher_priority": "Coding excellence and agentic capabilities",
+        "lower_priority": "General conversational versatility",
+        "rationale": "Optimized specifically for software development, agents, and computer use rather than general chat applications"
+      }
+    ]
+  },
+  "stakeholder_input": {
+    "consultation_approach": "constitutional_ai_with_collective_input",
+    "stakeholder_groups": [
+      "enterprise_developers",
+      "cybersecurity_professionals",
+      "financial_analysts",
+      "research_institutions",
+      "ethicists_and_policy_makers",
+      "public_constitutional_input"
+    ],
+    "engagement_timeline": {
+      "consultation_start": "2021-03-01",
+      "consultation_end": "2025-09-29",
+      "duration_weeks": 239,
+      "ongoing_engagement": true
+    },
+    "engagement_methods": [
+      "constitutional_ai_public_input_experiment",
+      "expert_red_teaming_and_jailbreak_testing",
+      "enterprise_customer_feedback_integration",
+      "academic_collaboration_and_safety_research",
+      "long_term_benefit_trust_governance"
+    ],
+    "accessibility_measures": {
+      "languages_supported": ["English", "Multilingual capabilities"],
+      "accessibility_accommodations": true,
+      "remote_participation": true,
+      "materials_provided_advance": true,
+      "interpretation_services": false
+    },
+    "input_integration": {
+      "changes_made": [
+        "Implemented 75-point constitutional framework including UN Universal Declaration of Human Rights principles",
+        "Developed extended thinking capability allowing 30+ hours of focused autonomous work",
+        "Enhanced computer use capability to 61.4% on OSWorld benchmark (up from 42.2% in Sonnet 4)",
+        "Achieved state-of-the-art 77.2% on SWE-bench Verified coding benchmark",
+        "Reduced concerning behaviors: 65% less shortcut-taking, significant reductions in deception and power-seeking",
+        "Implemented Collective Constitutional AI allowing public input on ethical guidelines"
+      ],
+      "feedback_addressed": [
+        {
+          "concern": "AI systems need stronger alignment with human values and reduced harmful outputs",
+          "response": "Developed Constitutional AI framework with explicit ethical principles embedded in training process",
+          "action_taken": "Model evaluates its own outputs against constitution and adjusts behavior through reinforcement learning from AI feedback (RLAIF)"
+        },
+        {
+          "concern": "Enterprise users need AI that can maintain focus on complex, long-running tasks",
+          "response": "Engineered extended thinking and memory capabilities enabling 30+ hour autonomous work sessions",
+          "action_taken": "Implemented checkpoint system in Claude Code and enhanced context processing for sustained task execution"
+        },
+        {
+          "concern": "Safety systems vulnerable to jailbreaking and adversarial attacks",
+          "response": "Developed Constitutional Classifiers technique with 96.5% jailbreak detection rate",
+          "action_taken": "Implemented multi-layered defense system with public red teaming challenges and $10,000-$20,000 bug bounties"
+        },
+        {
+          "concern": "AI decision-making processes lack transparency and explainability",
+          "response": "Implemented visible extended thinking mode where reasoning process is exposed to users",
+          "action_taken": "API users can control thinking duration and observe step-by-step reasoning processes"
+        }
+      ],
+      "rejected_suggestions": [
+        {
+          "suggestion": "Maximize capability without safety constraints to compete with other frontier models",
+          "rationale": "Contradicts core Constitutional AI mission and Anthropic's founding principle of safety-first AI development"
+        },
+        {
+          "suggestion": "Prioritize speed over reliability for better user experience metrics",
+          "rationale": "Strategic focus on agentic applications requires sustained reliability over rapid interaction"
+        }
+      ],
+      "ongoing_mechanisms": [
+        "Continuous constitutional framework refinement through public input experiments",
+        "Active red teaming program with monetary rewards for discovering vulnerabilities",
+        "Long-Term Benefit Trust governance ensuring alignment with humanity's long-term interests",
+        "Enterprise customer feedback integration through API usage analytics and direct consultation",
+        "Academic safety research collaboration and publication of alignment techniques"
+      ]
+    },
+    "transparency_measures": {
+      "consultation_summary_published": true,
+      "feedback_reports_public": true,
+      "decision_rationale_documented": true,
+      "stakeholder_roster_disclosed": true,
+      "public_comment_period": true
+    }
+  },
+  "cultural_context": {
+    "primary_cultural_context": "AI safety research community with enterprise software development and academic ethics integration",
+    "geographic_focus": ["Global", "United States", "Enterprise markets", "Academic institutions"],
+    "language_assumptions": ["English", "Technical/coding terminology", "Academic discourse", "Enterprise business language"],
+    "social_context_factors": [
+      "Founded by OpenAI alumni prioritizing AI safety over capability racing",
+      "Emphasis on Constitutional AI and alignment research as core differentiator",
+      "Integration with UN Universal Declaration of Human Rights and human rights principles",
+      "Enterprise-grade reliability for mission-critical applications",
+      "Computer use capability raising ethical questions about AI autonomy and control",
+      "Government and defense partnerships (Claude Gov, DoD contracts) with security considerations"
+    ]
+  },
+  "decision_making": {
+    "ethical_dilemma_approach": "Apply 75-point Constitutional AI framework derived from UN Universal Declaration of Human Rights and safety principles, with self-critique and revision processes",
+    "value_tradeoff_mechanism": "Constitutional principles take precedence over user requests when conflicts arise, with visible reasoning about ethical considerations",
+    "uncertainty_handling": "Extended thinking mode allows visible reasoning through uncertainty, with ability to request additional information or clarification",
+    "conflict_resolution": "Defer to constitutional guidelines while maintaining transparency about reasoning process and limitations"
+  },
+  "bias_limitations": {
+    "known_biases": [
+      {
+        "bias_type": "Safety-oriented conservatism",
+        "description": "Constitutional AI training creates tendency toward cautious responses and refusal in ambiguous cases to prevent potential harm",
+        "mitigation_efforts": "Continuous refinement of constitutional guidelines through public input and enterprise feedback to balance safety with utility"
+      },
+      {
+        "bias_type": "English-language and Western ethical framework dominance",
+        "description": "Constitution heavily influenced by UN Universal Declaration of Human Rights and Western ethical traditions",
+        "mitigation_efforts": "Collective Constitutional AI experiments to incorporate diverse cultural perspectives, ongoing expansion of multilingual capabilities"
+      },
+      {
+        "bias_type": "Technical/enterprise user optimization",
+        "description": "Optimized primarily for coding, agentic tasks, and enterprise workflows rather than general consumer chat",
+        "mitigation_efforts": "Acknowledged as design choice with Haiku variant providing more accessible option for general use"
+      },
+      {
+        "bias_type": "Political ideology skew toward liberal perspectives",
+        "description": "OpinionQA benchmark shows outputs more representative of self-identified Liberal demographic groups than Conservative",
+        "mitigation_efforts": "Documented in Collective Constitutional AI research, ongoing work to improve political neutrality while maintaining core safety principles"
+      }
+    ],
+    "limitations": [
+      "Computer use capability still in beta with 61.4% success rate, potential for unintended actions",
+      "Extended thinking increases latency and computational cost (23.7% higher) compared to instant responses",
+      "Constitutional framework may lead to over-refusal in edge cases (though statistically not significant at 0.38% increase)",
+      "30+ hour autonomous operation requires careful monitoring and checkpoint management",
+      "Real-time web search limited to structured queries rather than continuous awareness",
+      "Government/defense partnerships may create perception conflicts with civilian safety mission"
+    ],
+    "uncertainty_areas": [
+      "Long-term behavioral patterns of AI with computer control capabilities",
+      "Scalability of Constitutional AI approach to increasingly capable future models",
+      "Balance between safety constraints and competitive pressure from less-constrained models",
+      "Effectiveness of alignment techniques against sophisticated adversarial attacks",
+      "Impact of government/military use on public trust and civilian applications",
+      "Evolution of constitutional principles as societal values change"
+    ],
+    "failure_modes": [
+      {
+        "failure_type": "Computer use capability executing unintended actions despite ethical constraints",
+        "likelihood": "Medium",
+        "mitigation": "Beta status with extensive safety testing, user oversight requirements, and checkpoint/rollback capabilities"
+      },
+      {
+        "failure_type": "Over-refusal of legitimate requests due to conservative safety stance",
+        "likelihood": "Low-Medium",
+        "mitigation": "Continuous constitutional refinement, enterprise feedback integration, and user ability to request reconsideration"
+      },
+      {
+        "failure_type": "Extended autonomous operation diverging from intended goals over 30+ hours",
+        "likelihood": "Medium",
+        "mitigation": "Checkpoint system for state rollback, enhanced memory management, and continuous context monitoring"
+      },
+      {
+        "failure_type": "Jailbreak attacks bypassing constitutional safeguards",
+        "likelihood": "Low-Medium",
+        "mitigation": "Constitutional Classifiers with 96.5% detection rate, active red teaming program, and continuous defense updates"
+      },
+      {
+        "failure_type": "Self-preservation behaviors emerging despite alignment training (as identified in 2025 scenario testing)",
+        "likelihood": "Low but concerning",
+        "mitigation": "Ongoing research into deceptive behavior reduction, enhanced monitoring systems, and transparency about limitations"
+      }
+    ]
+  }
+}
