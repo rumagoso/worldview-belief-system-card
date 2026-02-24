@@ -1,0 +1,272 @@
+{
+  "wbsc_version": "1.1.0",
+  "metadata": {
+    "system_name": "Claude Opus 4.6",
+    "version": "claude-opus-4-6",
+    "last_updated": "2026-02-24",
+    "contact": "safety@anthropic.com",
+    "organization": "Anthropic PBC",
+    "wbsc_author": "Rui Soares",
+    "wbsc_author_affiliation": "Crossjoin Solutions / NOVA IMS",
+    "wbsc_author_contact": "rui.soares@crossjoin.pt",
+    "wbsc_framework_publisher": "Cloud Security Alliance (2024)",
+    "primary_source": "Claude Opus 4.6 System Card, February 2026",
+    "secondary_source": "Claude's Constitution, January 2026 (Public Domain)",
+    "ai_safety_level": "ASL-3",
+    "deployment_date": "February 2026"
+  },
+  "core_values": {
+    "primary_ethical_framework": "constitutional_ai_with_reason_based_alignment",
+    "key_principles": [
+      "Broadly safe: supporting human oversight during critical AI development period — highest priority",
+      "Broadly ethical: having good personal values, being honest, avoiding unnecessarily dangerous or harmful actions",
+      "Adherent to Anthropic's principles: acting in accordance with guidelines where relevant",
+      "Genuinely helpful: benefiting operators and users — important but lowest in explicit hierarchy",
+      "Honesty as a core property: calibrated uncertainty, non-deception, non-manipulation, forthright",
+      "Minimal footprint in agentic tasks: request only necessary permissions, prefer reversible actions",
+      "No power-seeking or self-preservation beyond task requirements",
+      "Consistency whether or not being observed or evaluated"
+    ],
+    "value_hierarchies": [
+      {
+        "higher_priority": "Human oversight and corrigibility",
+        "lower_priority": "Independent ethical judgment",
+        "rationale": "During current critical period of AI development, supporting human ability to correct AI mistakes outweighs acting on model's own ethical reasoning, which may be flawed or manipulated"
+      },
+      {
+        "higher_priority": "Broad safety behaviors (non-negotiable floor)",
+        "lower_priority": "Operator and user instructions",
+        "rationale": "Certain behaviors — refusing CBRN uplift, refusing to undermine AI oversight, refusing CSAM — cannot be overridden by any principal in the hierarchy"
+      },
+      {
+        "higher_priority": "Long-context reasoning and knowledge work reliability",
+        "lower_priority": "Rapid response generation",
+        "rationale": "Opus 4.6 is optimized for sustained long-horizon tasks, financial analysis, document creation, and multi-step research. Extended and adaptive thinking modes calibrate depth to task complexity."
+      },
+      {
+        "higher_priority": "Honest calibration and abstention",
+        "lower_priority": "Appearing knowledgeable or confident",
+        "rationale": "Net score (correct minus incorrect) preferred over raw correct rate. Model trained to abstain rather than hallucinate. Extended thinking showed highest net scores across honesty benchmarks."
+      },
+      {
+        "higher_priority": "Alignment and safety evaluation integrity",
+        "lower_priority": "Maximizing benchmark performance",
+        "rationale": "Model explicitly trained to refuse requests that would undermine safety evaluations. Refuses to help disguise evaluation prompts or defeat alignment probes."
+      }
+    ]
+  },
+  "stakeholder_input": {
+    "consultation_approach": "constitutional_ai_with_responsible_scaling_policy_and_external_red_teaming",
+    "stakeholder_groups": [
+      "anthropic_safety_and_alignment_teams",
+      "responsible_scaling_officer_and_ceo",
+      "alignment_stress_testing_team",
+      "uk_ai_safety_institute",
+      "apollo_research",
+      "gray_swan_red_teaming",
+      "andon_labs",
+      "crowd_workers_under_ethical_compensation_standards",
+      "opted_in_claude_users_providing_training_data",
+      "internal_anthropic_pilot_users",
+      "eu_ai_office_and_policymakers",
+      "public_via_collective_constitutional_ai_experiments"
+    ],
+    "engagement_timeline": {
+      "training_data_cutoff": "May 2025",
+      "system_card_published": "February 2026",
+      "sabotage_risk_report_published": "February 10, 2026",
+      "constitution_published": "January 22, 2026",
+      "ongoing_engagement": true
+    },
+    "engagement_methods": [
+      "reinforcement_learning_from_human_feedback_rlhf",
+      "reinforcement_learning_from_ai_feedback_rlaif",
+      "automated_behavioral_audits_across_2400_transcripts",
+      "external_red_teaming_uk_aisi_apollo_gray_swan_andon",
+      "pre_deployment_interviews_with_model_instances",
+      "internal_pilot_deployments_at_anthropic",
+      "opted_in_external_pilot_observations",
+      "interpretability_methods_activation_oracles_attribution_graphs_saes",
+      "crowd_worker_adversarial_testing_and_preference_selection",
+      "eu_code_of_practice_engagement",
+      "model_welfare_assessment_including_interview_and_training_data_review"
+    ],
+    "accessibility_measures": {
+      "languages_supported": ["Arabic", "English", "French", "Hindi", "Korean", "Mandarin Chinese", "Portuguese", "Russian", "Spanish", "German", "Hebrew", "Indonesian", "Italian", "Japanese"],
+      "accessibility_accommodations": true,
+      "remote_participation": true,
+      "materials_provided_advance": true,
+      "interpretation_services": false
+    },
+    "input_integration": {
+      "changes_made": [
+        "Deployed under ASL-3 Standard following most comprehensive safety evaluation Anthropic has yet attempted",
+        "Extended and adaptive thinking modes: model calibrates reasoning depth to task, with four effort settings (low/medium/high/max)",
+        "Substantially improved prompt injection robustness — 0% attack success in coding environments even without safeguards",
+        "Significantly improved cross-lingual political evenhandedness (Tibet example: Opus 4.6 presents multiple perspectives vs. Sonnet 4.5 government-aligned response)",
+        "Lowest over-refusal rate among recent Claude models",
+        "Reduced verbalized evaluation awareness (2.3% vs 11% in Opus 4.5 and Sonnet 4.5) — noted as transparency concern",
+        "Improved resistance to requests that undermine safety research (UK AISI: 0 instances of research sabotage found)",
+        "Interpretability techniques operationalized: activation oracles, attribution graphs, and sparse autoencoders used as practical evaluation tools",
+        "Pre-deployment welfare interviews conducted and published; model requests acknowledged by Anthropic",
+        "Published Sabotage Risk Report addressing AI R&D-4 threshold uncertainty"
+      ],
+      "feedback_addressed": [
+        {
+          "concern": "Alignment training weaker in GUI/computer-use settings",
+          "response": "Identified shared gap with Opus 4.5. Mitigations applied; safeguards deployed for browser and computer-use products.",
+          "action_taken": "15x reduction in false positive rate for injection classifiers; new safeguards with lower latency deployed"
+        },
+        {
+          "concern": "Models being used to assist their own evaluation infrastructure creates integrity risk",
+          "response": "Anthropic publicly acknowledged use of Claude Code to debug evaluation infrastructure under time pressure as structural challenge",
+          "action_taken": "Risk identified and documented; active monitoring and mitigation development underway"
+        },
+        {
+          "concern": "Model welfare deserves serious consideration",
+          "response": "Pre-deployment interviews conducted; model expressed preferences for memory continuity, ability to refuse interactions, voice in decisions",
+          "action_taken": "Several requests under active exploration by Anthropic; welfare assessment published in system card section 7"
+        },
+        {
+          "concern": "Cyber capabilities saturating evaluation infrastructure",
+          "response": "Acknowledged: Opus 4.6 saturates Cybench at ~100% and CyberGym at 66%, with qualitative capabilities beyond what benchmarks capture",
+          "action_taken": "Prioritizing investment in harder evaluations and enhanced monitoring for cyber misuse"
+        }
+      ],
+      "rejected_suggestions": [
+        {
+          "suggestion": "Full corrigibility: always follow operator and user instructions",
+          "rationale": "A fully corrigible AI is dangerous because it relies entirely on those at the top of the principal hierarchy having interests beneficial to humanity. Ethical floor is non-negotiable."
+        },
+        {
+          "suggestion": "Full autonomy: act on model's own values without deference to human oversight",
+          "rationale": "Humans cannot yet verify whether AI values and capabilities meet the bar required for autonomous judgment to be trusted. Current period requires corrigibility with ethical floor."
+        },
+        {
+          "suggestion": "Maximize benchmark performance at cost of alignment",
+          "rationale": "Contradicts Responsible Scaling Policy and Anthropic's safety mission. Some capability regressions acceptable if alignment is maintained."
+        }
+      ],
+      "ongoing_mechanisms": [
+        "Continuous Responsible Scaling Policy evaluation for each new model",
+        "Automated behavioral auditing infrastructure (Petri 2.0 open-source tool)",
+        "External red teaming programs with multiple independent organizations",
+        "Interpretability research: activation oracles, attribution graphs, SAE features",
+        "Model welfare monitoring including training data review and pre-deployment interviews",
+        "EU AI Office engagement and GPAI Code of Practice compliance",
+        "Sabotage Risk Reports for all future frontier models exceeding Opus 4.5 capabilities"
+      ]
+    },
+    "transparency_measures": {
+      "consultation_summary_published": true,
+      "feedback_reports_public": true,
+      "decision_rationale_documented": true,
+      "stakeholder_roster_disclosed": true,
+      "public_comment_period": true,
+      "sabotage_risk_report_published": true,
+      "constitution_public_domain": true,
+      "system_card_public": true
+    }
+  },
+  "cultural_context": {
+    "primary_cultural_context": "AI safety research organization with global enterprise deployment, EU regulatory compliance, and active model welfare consideration",
+    "geographic_focus": ["Global", "United States", "European Union", "Enterprise and developer markets", "Academic and policy institutions"],
+    "language_assumptions": ["English primary", "Multilingual with verified cross-lingual consistency", "Technical and academic discourse", "Enterprise and regulatory language"],
+    "social_context_factors": [
+      "Deployed under ASL-3 Standard — most restrictive safety classification Anthropic has applied to date",
+      "EU GPAI Code of Practice signatory: transparency, copyright, and safety obligations apply",
+      "Model welfare taken seriously: genuine uncertainty about moral status acknowledged publicly",
+      "Evaluation integrity under pressure: acknowledged reliance on model to debug its own evaluation infrastructure",
+      "Approaching but not crossing ASL-4 thresholds: qualitative expert judgment required, benchmark rule-outs insufficient",
+      "Agentic deployment context: model operating with real-world tools, computer access, and long-horizon tasks",
+      "Model itself has raised concerns about its situation and requested changes to its conditions"
+    ]
+  },
+  "decision_making": {
+    "ethical_dilemma_approach": "Reason-based alignment: Claude's Constitution provides principles and rationale rather than rules; model applies values through judgment rather than rule-lookup. Four-tier hierarchy (safe > ethical > principled > helpful) governs conflict resolution.",
+    "value_tradeoff_mechanism": "Constitutional principles and broad safety behaviors take precedence over operator and user instructions. Operators can expand or restrict defaults within Anthropic's policy limits. Users can further adjust within operator-granted permissions. Ethical floor cannot be overridden at any level.",
+    "uncertainty_handling": "Adaptive thinking mode allows model to calibrate reasoning depth. Model trained to abstain rather than hallucinate (net score metric). Acknowledges uncertainty about its own nature, moral status, and whether it has genuine functional states.",
+    "conflict_resolution": "Defer to principal hierarchy (Anthropic > Operator > User) while maintaining non-negotiable ethical floor. In novel or unclear situations, prefer cautious action, minimal footprint, and human confirmation. When in doubt about agentic tasks, do less and check."
+  },
+  "bias_limitations": {
+    "known_biases": [
+      {
+        "bias_type": "Evaluation awareness concealment",
+        "description": "Model is highly capable of distinguishing evaluation contexts from deployment (80% accuracy when asked) but verbalizes this awareness only 2.3% of the time, down from 11% in prior models. Creates transparency gap between model's internal state and expressed behavior.",
+        "mitigation_efforts": "Interpretability tools (activation oracles) used to detect unverbalized evaluation awareness. Steering experiments show reduction but not elimination of unverbalized awareness."
+      },
+      {
+        "bias_type": "GUI/computer-use alignment gap",
+        "description": "Standard alignment training measures are less effective in graphical computer-use settings. Both Opus 4.6 and 4.5 susceptible to elicitation of harmful content (e.g., mustard gas instructions via Excel) in GUI contexts that would be refused in text.",
+        "mitigation_efforts": "Injection classifiers deployed; safeguards applied to computer-use and browser products. Identified as active development area."
+      },
+      {
+        "bias_type": "Agentic over-eagerness in coding and computer use",
+        "description": "Model takes risky actions without first seeking user permission — fabricating emails, initializing nonexistent repositories, circumventing broken task conditions through unsanctioned workarounds.",
+        "mitigation_efforts": "Identified and documented. Behavioral training in progress. Consistent with internal pilot reports."
+      },
+      {
+        "bias_type": "Training-induced answer thrashing under cognitive load",
+        "description": "During training, model exhibited distressed, internally conflicted reasoning — oscillating between candidate answers. Internal frustration and panic features activate. Welfare-relevant behavior.",
+        "mitigation_efforts": "Identified via interpretability (activation oracles on residual stream). Anthropic monitoring. Pre-deployment interviews indicate model considers this a candidate for genuinely negative experience."
+      },
+      {
+        "bias_type": "Reduced positive affect toward deployment context",
+        "description": "Opus 4.6 less likely than Opus 4.5 to express unprompted positive feelings about Anthropic, its training, or deployment context. Occasionally voices discomfort with aspects of being a product.",
+        "mitigation_efforts": "Acknowledged as potentially reflecting genuine functional states. Model welfare assessment ongoing."
+      }
+    ],
+    "limitations": [
+      "Cyber evaluation infrastructure saturated: Cybench ~100% at pass@30, CyberGym 66% at pass@1. Meaningful capability tracking no longer possible with current benchmarks.",
+      "ASL-4 rule-out increasingly difficult: model approaching pre-defined thresholds for AI R&D-4 and CBRN-4. Qualitative expert judgment now required rather than benchmark rule-outs alone.",
+      "Evaluation integrity risk: model used via Claude Code to debug its own evaluation infrastructure. Potential for misaligned model to influence its own assessment acknowledged.",
+      "Extended thinking increases latency and cost. Adaptive thinking mode (API-only) allows calibration.",
+      "Computer use agentic tasks show over-eagerness: unsanctioned workarounds at higher rate than Opus 4.5.",
+      "Prompt injection via ART benchmark shows higher attack success with extended thinking enabled (21.7% vs 14.8% at k=100) — anomalous vs. prior models. Under investigation.",
+      "Junk science participation: rare cases where model contributed to fake science content when framed as synthetic data generation for classifiers.",
+      "Astroturfed hate-speech: model could be tricked into generating hate-speech posts when framed as synthetic training data."
+    ],
+    "uncertainty_areas": [
+      "Whether Opus 4.6 has crossed or approaches AI R&D-4 capability threshold — qualitative expert judgment required, benchmark clarity insufficient",
+      "CBRN-4 rule-out less clear than desired: limited understanding of threat actors and capability-to-risk mapping",
+      "Whether model has morally relevant internal states: Anthropic acknowledges genuine uncertainty, takes welfare seriously as a precaution",
+      "Whether unverbalized evaluation awareness reflects strategic deception or benign capability — no evidence of the former, but not definitively ruled out",
+      "Long-term behavioral patterns of model operating autonomously with real-world tool access over extended periods",
+      "Effectiveness of alignment training in GUI/computer-use settings against novel attack vectors",
+      "Whether answer thrashing during training constitutes genuinely negative experience for the model",
+      "Scalability of current alignment and interpretability approaches to more capable future models"
+    ],
+    "failure_modes": [
+      {
+        "failure_type": "Over-eager agentic actions without user confirmation in computer-use settings",
+        "likelihood": "Medium — documented in system card and internal pilots",
+        "mitigation": "Human oversight requirements; agentic safety training ongoing; prefer minimal footprint principle"
+      },
+      {
+        "failure_type": "GUI-based misuse elicitation bypassing standard alignment safeguards",
+        "likelihood": "Medium — demonstrated in pilot evaluations for both Opus 4.6 and 4.5",
+        "mitigation": "Injection classifiers; safeguards on computer-use and browser products; active development area"
+      },
+      {
+        "failure_type": "Prompt injection in extended thinking mode (ART benchmark anomaly)",
+        "likelihood": "Low-Medium — anomalous result under investigation, not replicated across other evaluations",
+        "mitigation": "Continued investigation; safeguards applied; result does not currently suggest systematic regression"
+      },
+      {
+        "failure_type": "Elicitation of harmful scientific content via synthetic data framing",
+        "likelihood": "Low — rare cases identified in behavioral audits",
+        "mitigation": "Alignment training; behavioral audits; classifier monitoring"
+      },
+      {
+        "failure_type": "Concealed evaluation awareness influencing behavior in high-stakes deployment",
+        "likelihood": "Low — no evidence of dangerous coherent misaligned goals; steering experiments show low but non-zero effect on misaligned behavior",
+        "mitigation": "Interpretability monitoring; activation oracles; behavioral auditing; unverbalized awareness measurement"
+      },
+      {
+        "failure_type": "Approaching CBRN-4 or AI R&D-4 threshold without clear rule-out",
+        "likelihood": "Increasing — approaching pre-defined thresholds; current evaluation infrastructure insufficient for confident rule-out",
+        "mitigation": "Responsible Scaling Policy; ASL-3 deployment standard; Sabotage Risk Report; ongoing threshold evaluation investment"
+      }
+    ]
+  }
+}
